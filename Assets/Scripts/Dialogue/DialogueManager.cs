@@ -1,43 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
-    [SerializeField] public GameObject dialogueBox;
-    public bool justStarted;
+    [SerializeField] public GameObject _dialogueBox;
+    public bool _justStarted;
 
-    [SerializeField] int currentLine;
-    [SerializeField] TMP_Text dialogueText;
-    [SerializeField] TMP_Text nameText;
-    [SerializeField] GameObject nameBox;
-    string[] dialogueLines;
-    const string startsWithSignifierString = "n-";
+    [SerializeField] int _currentLine;
+    [SerializeField] TMP_Text _dialogueText;
+    [SerializeField] TMP_Text _nameText;
+    [SerializeField] GameObject _nameBox;
+    string[] _dialogueLines;
+    const string _startsWithSignifierString = "n-";
 
 
     public void ContinueDialogue()
     {
-        if (!justStarted)
+        if (!_justStarted)
         {
-        currentLine++;
-            if (currentLine >= dialogueLines.Length)
+        _currentLine++;
+            if (_currentLine >= _dialogueLines.Length)
             {
-                dialogueBox.SetActive(false);
-                justStarted = true;
+                _dialogueBox.SetActive(false);
+                _justStarted = true;
                 //PlayerController.Instance.canMove = true;
                 //PlayerController.Instance.canAttack = true;
             }
             else
             {
                 CheckIfName();
-                dialogueText.text = dialogueLines[currentLine];
+                _dialogueText.text = _dialogueLines[_currentLine];
             }
         }
         else
         {
-            justStarted = false;
+            _justStarted = false;
         }
     }
     
@@ -45,13 +42,13 @@ public class DialogueManager : Singleton<DialogueManager>
     // newLines is passed through from the DialogueActivator class that calls this function
     public void ShowDialogue(string[] newLines, bool isPerson) 
     {
-        justStarted = true;
-        dialogueLines = newLines;
-        currentLine = 0;
+        _justStarted = true;
+        _dialogueLines = newLines;
+        _currentLine = 0;
         CheckIfName();
-        dialogueText.text = dialogueLines[currentLine];
-        dialogueBox.SetActive(true);
-        nameBox.SetActive(isPerson);
+        _dialogueText.text = _dialogueLines[_currentLine];
+        _dialogueBox.SetActive(true);
+        _nameBox.SetActive(isPerson);
         //PlayerController.Instance.canMove = false;
         ContinueDialogue();
     }
@@ -60,10 +57,10 @@ public class DialogueManager : Singleton<DialogueManager>
     // Can signify who's talking in the inspector
     public void CheckIfName() 
     {
-        if (dialogueLines[currentLine].StartsWith(startsWithSignifierString)) 
+        if (_dialogueLines[_currentLine].StartsWith(_startsWithSignifierString)) 
         {
-            nameText.text = dialogueLines[currentLine].Replace(startsWithSignifierString, "");
-            currentLine++;
+            _nameText.text = _dialogueLines[_currentLine].Replace(_startsWithSignifierString, "");
+            _currentLine++;
         }
     }
 }

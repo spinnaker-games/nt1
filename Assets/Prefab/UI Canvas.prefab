@@ -115,12 +115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1052a850fe87afc4dbeb514398fde069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueBox: {fileID: 8415401704372981299}
-  justStarted: 0
-  currentLine: 0
-  dialogueText: {fileID: 8016754339447350750}
-  nameText: {fileID: 2716948810630349751}
-  nameBox: {fileID: 484071691852829050}
+  _dialogueBox: {fileID: 8415401704372981299}
+  _justStarted: 0
+  _currentLine: 0
+  _dialogueText: {fileID: 8016754339447350750}
+  _nameText: {fileID: 2716948810630349751}
+  _nameBox: {fileID: 484071691852829050}
 --- !u!1 &484071691852829050
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -526,7 +526,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1

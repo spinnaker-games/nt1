@@ -5,11 +5,11 @@ using UnityEngine;
 // Put on gameobjects that can be toggled with opening the dialogue window (currently spacebar).  If isPerson isn't toggled true, the name box window will not appear.
 public class DialogueActivator : MonoBehaviour
 {
-    public string[] lines;
-    public bool isPerson;
+    public string[] _lines;
+    public bool _isPerson;
 
-    [SerializeField] GameObject buttonUI;
-    bool canActivate;
+    [SerializeField] GameObject _buttonUI;
+    bool _canActivate;
     InputActions _inputActions;
     const string playerString = "Player";
 
@@ -40,11 +40,11 @@ public class DialogueActivator : MonoBehaviour
 
     void OpenDialogue() 
     {
-        if (canActivate) 
+        if (_canActivate) 
         {
-            if(!DialogueManager.Instance.dialogueBox.activeInHierarchy) 
+            if(!DialogueManager.Instance._dialogueBox.activeInHierarchy) 
             {
-                DialogueManager.Instance.ShowDialogue(lines, isPerson);
+                DialogueManager.Instance.ShowDialogue(_lines, _isPerson);
                 //PlayerController.Instance.canAttack = false;
                 //PlayerController.Instance.DialogueStopMove();
             } 
@@ -60,8 +60,8 @@ public class DialogueActivator : MonoBehaviour
     {
         if(other.tag == playerString) 
         {
-            buttonUI.SetActive(true);
-            canActivate = true;
+            _buttonUI.SetActive(true);
+            _canActivate = true;
         }
     }
 
@@ -70,8 +70,8 @@ public class DialogueActivator : MonoBehaviour
     {
         if(other.tag == playerString) 
         {
-            buttonUI.SetActive(false);
-            canActivate = false;
+            _buttonUI.SetActive(false);
+            _canActivate = false;
         }
     }
 }
