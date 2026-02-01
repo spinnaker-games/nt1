@@ -64,8 +64,7 @@ MeshRenderer:
   m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 7ff6aafae179de7459d0820dcec12465, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,8 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 8
-  _snapTurning: 1
-  _turnRotationSpeed: 20
   _animator: {fileID: 1254727919652989186}
 --- !u!114 &2749839744413689882
 MonoBehaviour:
@@ -831,6 +828,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 24ddbb2eac2c9f54e969eca8e0037694, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3560749817943622751}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 24ddbb2eac2c9f54e969eca8e0037694, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2973391407147687946}
   m_SourcePrefab: {fileID: 100100000, guid: 24ddbb2eac2c9f54e969eca8e0037694, type: 3}
 --- !u!4 &4936332371087509131 stripped
 Transform:
@@ -878,3 +878,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StopMotionEffect
   _animator: {fileID: 1254727919652989186}
   _stepFPS: 10
+--- !u!114 &2973391407147687946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5749602005293112369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c171c0229044e614e9d7cb2c6cc90fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRotation
+  _snapTurning: 0
+  _turnRotationSpeed: 10

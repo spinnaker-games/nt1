@@ -7,10 +7,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] float _speed = 10f;
 
-    [Header("Rotation Settings")]
-    [SerializeField] bool _snapTurning = false;
-    [SerializeField] float _turnRotationSpeed = 10f;
-
     [Header("Player Animation")]
     [SerializeField] Animator _animator;
 
@@ -24,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
         _inputActions = new InputActions();
         _rb = GetComponent<Rigidbody>();
 
-        // Lock rotation so physics doesn't tip the player
         _rb.freezeRotation = true;
     }
 
@@ -37,50 +32,33 @@ public class PlayerMovement : MonoBehaviour
 
     void OnDisable()
     {
-        _inputActions.Player.Disable();
         _inputActions.Player.Move.performed -= OnMove;
         _inputActions.Player.Move.canceled -= OnMove;
+        _inputActions.Player.Disable();
     }
 
-    void OnMove(InputAction.CallbackContext context)
+    void OnMove( InputAction.CallbackContext context )
     {
         _moveInputValue = context.ReadValue<Vector2>();
     }
 
     void FixedUpdate()
     {
-        // Convert 2D input to 3D horizontal movement
-        Vector3 horizontal = new Vector3(_moveInputValue.x, 0f, _moveInputValue.y);
+        Vector3 horizontal = new Vector3( _moveInputValue.x, 0f, _moveInputValue.y );
 
-        // Handle rotation
-        if (horizontal.sqrMagnitude > 0.001f)
+        if ( horizontal.sqrMagnitude > 0.001f )
         {
-            Quaternion targetRotation = Quaternion.LookRotation(horizontal);
+            Vector3 move = horizontal.normalized;
 
-            transform.rotation = _snapTurning
-                ? targetRotation
-                : Quaternion.Slerp(
-                    transform.rotation,
-                    targetRotation,
-                    _turnRotationSpeed * Time.fixedDeltaTime
-                );
-        }
+            _rb.MovePosition(
+                _rb.position + move * _speed * Time.fixedDeltaTime
+            );
 
-        // Apply movement
-        if (horizontal.sqrMagnitude > 0.001f)
-        {
-            // Transform direction relative to player rotation
-            Vector3 move = transform.forward * horizontal.magnitude;
-
-            // Move the Rigidbody
-            _rb.MovePosition(_rb.position + move * _speed * Time.fixedDeltaTime);
-
-            // Animate Player
-            _animator.SetBool("IsRunning", true);
+            _animator.SetBool( "IsRunning", true );
         }
         else
         {
-            _animator.SetBool("IsRunning", false);
+            _animator.SetBool( "IsRunning", false );
         }
     }
 }
