@@ -44,21 +44,34 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 horizontal = new Vector3( _moveInputValue.x, 0f, _moveInputValue.y );
+        Vector3 camForward = Camera.main.transform.forward;
+        Vector3 camRight   = Camera.main.transform.right;
 
-        if ( horizontal.sqrMagnitude > 0.001f )
+        // Flatten the camera vectors
+        camForward.y = 0f;
+        camRight.y = 0f;
+        camForward.Normalize();
+        camRight.Normalize();
+
+        // Camera-relative move direction
+        Vector3 moveDir = camForward * _moveInputValue.y +
+                        camRight * _moveInputValue.x;
+
+        if (moveDir.sqrMagnitude > 0.001f)
         {
-            Vector3 move = horizontal.normalized;
+            Vector3 direction = moveDir.normalized;
 
-            _rb.MovePosition(
-                _rb.position + move * _speed * Time.fixedDeltaTime
-            );
+            // Move
+            _rb.MovePosition(_rb.position + direction * _speed * Time.fixedDeltaTime);
 
-            _animator.SetBool( "IsRunning", true );
+            // Rotate instantly to match move direction
+            _rb.rotation = Quaternion.LookRotation(direction);
+
+            _animator.SetBool("IsRunning", true);
         }
         else
         {
-            _animator.SetBool( "IsRunning", false );
+            _animator.SetBool("IsRunning", false);
         }
     }
 }

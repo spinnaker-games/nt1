@@ -36,12 +36,27 @@ public class PlayerRotation : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 horizontal = new Vector3( _moveInputValue.x, 0f, _moveInputValue.y );
-
-        if ( horizontal.sqrMagnitude <= 0.001f )
+        if (_moveInputValue.sqrMagnitude <= 0.001f)
             return;
 
-        Quaternion targetRotation = Quaternion.LookRotation( horizontal );
+        Transform cam = Camera.main.transform;
+
+        Vector3 camForward = cam.forward;
+        Vector3 camRight   = cam.right;
+
+        camForward.y = 0f;
+        camRight.y   = 0f;
+        camForward.Normalize();
+        camRight.Normalize();
+
+        Vector3 moveDir =
+            camForward * _moveInputValue.y +
+            camRight   * _moveInputValue.x;
+
+        if (moveDir.sqrMagnitude <= 0.001f)
+            return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(moveDir);
 
         transform.rotation = _snapTurning
             ? targetRotation

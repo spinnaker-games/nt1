@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1274519015847259100}
   - component: {fileID: 562858124153613547}
   - component: {fileID: 2749839744413689882}
-  - component: {fileID: 5592935957880348260}
   - component: {fileID: 1267342573149187275}
   - component: {fileID: 1977960084575097088}
   m_Layer: 0
@@ -108,7 +107,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2.1697867
+  m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: -0.07802791, z: 0}
 --- !u!114 &562858124153613547
@@ -149,21 +148,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _animator: {fileID: 1254727919652989186}
---- !u!114 &5592935957880348260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395996550702383421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab4c0ac41b231e40ac6939a345be274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerDash
-  _dashDistance: 10
-  _dashDuration: 0.2
-  _dashCooldown: 1
 --- !u!114 &1267342573149187275
 MonoBehaviour:
   m_ObjectHideFlags: 0

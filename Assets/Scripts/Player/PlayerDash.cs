@@ -92,9 +92,17 @@ public class PlayerDash : MonoBehaviour
 
     void StartDash()
     {
-        // Use input direction if available; fallback to facing forward
-        Vector3 inputDir = new Vector3(_latestMoveInput.x, 0f, _latestMoveInput.y);
-        _dashDirection = inputDir.sqrMagnitude > 0.01f ? inputDir.normalized : transform.forward;
+        // Build direction relative to player orientation
+        Vector3 inputDir =
+            transform.right * _latestMoveInput.x +
+            transform.forward * _latestMoveInput.y;
+
+        // Remove vertical influence just in case the player is tilted
+        inputDir.y = 0f;
+
+        _dashDirection = inputDir.sqrMagnitude > 0.01f
+            ? inputDir.normalized
+            : transform.forward;
 
         _isDashing = true;
         _dashTime = 0f;
