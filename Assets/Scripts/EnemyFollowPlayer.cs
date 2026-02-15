@@ -16,6 +16,11 @@ public class EnemyChase : MonoBehaviour
     [SerializeField] float _repathMin = 0.4f;
     [SerializeField] float _repathMax = 1.2f;
 
+    [Header( "Roaming" )]
+    [SerializeField] float _roamRadius = 8f;
+    [SerializeField] float _roamDelayMin = 1.5f;
+    [SerializeField] float _roamDelayMax = 4f;
+
     [Header( "Unpredictability" )]
     [SerializeField] float _playerOffsetRadius = 1.8f;
     [SerializeField] float _hesitationChance = 0.15f;
@@ -23,21 +28,28 @@ public class EnemyChase : MonoBehaviour
 
     NavMeshAgent _agent;
 
-    enum State { Idle, Chase }
+    enum State { Roam, Chase }
     State _state;
 
     float _repathTimer;
     float _hesitationTimer;
+    float _roamTimer;
     float _mySpeed;
+
+    Vector3 _spawnPoint;
 
     void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _agent.stoppingDistance = _stopBuffer;
 
-        // each enemy has a slightly different base speed
+        _spawnPoint = transform.position;
+
         _mySpeed = _baseSpeed + Random.Range( -_speedVariance, _speedVariance );
         _agent.speed = _mySpeed;
+
+        _state = State.Roam;
+        _roamTimer = Random.Range( _roamDelayMin, _roamDelayMax );
     }
 
     void Update()
@@ -48,15 +60,20 @@ public class EnemyChase : MonoBehaviour
 
         switch ( _state )
         {
-            case State.Idle:
+            case State.Roam:
                 if ( distance <= _detectDistance )
+                {
                     EnterChase();
+                    break;
+                }
+
+                RoamUpdate();
                 break;
 
             case State.Chase:
                 if ( distance >= _loseDistance )
                 {
-                    ExitChase();
+                    EnterRoam();
                     break;
                 }
 
@@ -69,12 +86,33 @@ public class EnemyChase : MonoBehaviour
     {
         _state = State.Chase;
         _repathTimer = 0f;
+        _agent.isStopped = false;
     }
 
-    void ExitChase()
+    void EnterRoam()
     {
-        _state = State.Idle;
+        _state = State.Roam;
         _agent.ResetPath();
+        _roamTimer = Random.Range( _roamDelayMin, _roamDelayMax );
+    }
+
+    void RoamUpdate()
+    {
+        _agent.isStopped = false;
+
+        _roamTimer -= Time.deltaTime;
+        if ( _roamTimer > 0f ) return;
+
+        _roamTimer = Random.Range( _roamDelayMin, _roamDelayMax );
+
+        Vector3 randomDir = Random.insideUnitSphere * _roamRadius;
+        randomDir += _spawnPoint;
+
+        NavMeshHit hit;
+        if ( NavMesh.SamplePosition( randomDir, out hit, _roamRadius, NavMesh.AllAreas ) )
+        {
+            _agent.SetDestination( hit.position );
+        }
     }
 
     void ChaseUpdate()
@@ -93,7 +131,6 @@ public class EnemyChase : MonoBehaviour
 
         _repathTimer = Random.Range( _repathMin, _repathMax );
 
-        // occasional hesitation burst
         if ( Random.value < _hesitationChance )
         {
             _hesitationTimer = _hesitationTime;
