@@ -34,7 +34,27 @@ public class EnemyStateMachine : MonoBehaviour
     float _roamTimer;
     float _mySpeed;
 
+    bool _playerIsInvisible = false; // new flag
+
     IEnemyState _currentState;
+
+    void OnEnable()
+    {
+        InvisibilityMask.OnInvisibilityMaskToggled += HandleInvisibilityToggled;
+    }
+
+    void OnDisable()
+    {
+        InvisibilityMask.OnInvisibilityMaskToggled -= HandleInvisibilityToggled;
+    }
+
+    void HandleInvisibilityToggled(bool isInvisible)
+    {
+        _playerIsInvisible = isInvisible;
+
+        if (_playerIsInvisible)
+            SwitchState(new RoamState(this)); // immediately start roaming
+    }
 
     void Awake()
     {
@@ -45,7 +65,6 @@ public class EnemyStateMachine : MonoBehaviour
         _mySpeed = _baseSpeed + Random.Range(-_speedVariance, _speedVariance);
         _agent.speed = _mySpeed;
 
-        // Start in roam state
         _currentState = new RoamState(this);
     }
 
@@ -61,7 +80,6 @@ public class EnemyStateMachine : MonoBehaviour
         _currentState = newState;
     }
 
-    // State interface
     public interface IEnemyState
     {
         void UpdateState();
@@ -80,11 +98,15 @@ public class EnemyStateMachine : MonoBehaviour
 
         public void UpdateState()
         {
-            float distance = Vector3.Distance(_enemy.transform.position, _enemy._player.position);
-            if (distance <= _enemy._detectDistance)
+            // Only switch to chase if player is not invisible
+            if (!_enemy._playerIsInvisible)
             {
-                _enemy.SwitchState(new ChaseState(_enemy));
-                return;
+                float distance = Vector3.Distance(_enemy.transform.position, _enemy._player.position);
+                if (distance <= _enemy._detectDistance)
+                {
+                    _enemy.SwitchState(new ChaseState(_enemy));
+                    return;
+                }
             }
 
             _enemy._roamTimer -= Time.deltaTime;
@@ -115,6 +137,13 @@ public class EnemyStateMachine : MonoBehaviour
 
         public void UpdateState()
         {
+            // If player becomes invisible, immediately roam
+            if (_enemy._playerIsInvisible)
+            {
+                _enemy.SwitchState(new RoamState(_enemy));
+                return;
+            }
+
             float distance = Vector3.Distance(_enemy.transform.position, _enemy._player.position);
             if (distance >= _enemy._loseDistance)
             {
