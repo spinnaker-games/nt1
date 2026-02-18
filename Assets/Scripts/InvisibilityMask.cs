@@ -4,47 +4,60 @@ using System;
 
 public class InvisibilityMask : MonoBehaviour
 {
-    [SerializeField] private Renderer[] renderers;
-    [SerializeField] private Material invisibilityMaterial;
+    [SerializeField] Renderer[] _renderers;
+    [SerializeField] Material _invisibilityMaterial;
 
-    private Material[][] originalMaterials;
-    private bool _isInvisible = false;
+    Material[][] _originalMaterials;
+    bool _isInvisible = false;
+
+    InputActions _inputActions;
 
     // Event: listeners get the current invisibility state
     public static event Action<bool> OnInvisibilityMaskToggled;
 
-    private void Awake()
+    void Awake()
     {
-        originalMaterials = new Material[renderers.Length][];
-        for (int i = 0; i < renderers.Length; i++)
-            originalMaterials[i] = renderers[i].materials;
+        _inputActions = new InputActions();
+
+        _originalMaterials = new Material[_renderers.Length][];
+        for (int i = 0; i < _renderers.Length; i++)
+            _originalMaterials[i] = _renderers[i].materials;
     }
 
-    private void Update()
+    void OnEnable()
     {
-        if (Keyboard.current != null && Keyboard.current.digit2Key.wasPressedThisFrame)
-        {
-            ToggleInvisibility();
-        }
+        _inputActions.Player.Enable();
+        _inputActions.Player.UseMask.performed += OnUseMaskPerformed;
     }
 
-    private void ToggleInvisibility()
+    void OnDisable()
+    {
+        _inputActions.Player.UseMask.performed -= OnUseMaskPerformed;
+        _inputActions.Player.Disable();
+    }
+
+    void OnUseMaskPerformed(InputAction.CallbackContext context)
+    {
+        ToggleInvisibility();
+    }
+
+    void ToggleInvisibility()
     {
         _isInvisible = !_isInvisible;
         Debug.Log("Invisibility toggled: " + _isInvisible);
 
-        for (int i = 0; i < renderers.Length; i++)
+        for (int i = 0; i < _renderers.Length; i++)
         {
             if (_isInvisible)
             {
-                Material[] invisMats = new Material[renderers[i].materials.Length];
+                Material[] invisMats = new Material[_renderers[i].materials.Length];
                 for (int j = 0; j < invisMats.Length; j++)
-                    invisMats[j] = invisibilityMaterial;
-                renderers[i].materials = invisMats;
+                    invisMats[j] = _invisibilityMaterial;
+                _renderers[i].materials = invisMats;
             }
             else
             {
-                renderers[i].materials = originalMaterials[i];
+                _renderers[i].materials = _originalMaterials[i];
             }
         }
 

@@ -8,8 +8,15 @@ public class SeerMask : MonoBehaviour
     [SerializeField] Volume _postProcessVolume;
     bool _isActive = false;
 
-    // Public static action for other scripts to subscribe to
+    InputActions _inputActions;
+
     public static Action<bool> OnMaskToggled;
+
+    void Awake()
+    {
+        _inputActions = new InputActions();
+        _inputActions.Player.UseMask.performed += OnMaskAbilityPerformed;
+    }
 
     void Start()
     {
@@ -20,18 +27,36 @@ public class SeerMask : MonoBehaviour
             return;
         }
 
-        _postProcessVolume.enabled = false; // start off
+        _postProcessVolume.enabled = false;
     }
 
-    void Update()
+    void OnEnable()
     {
-        if (Keyboard.current != null && Keyboard.current.digit1Key.wasPressedThisFrame) //TODO: Replace with proper input action
-        {
-            _isActive = !_isActive;
-            _postProcessVolume.enabled = _isActive;
+        // Enable the input only if this mask is active
+        _inputActions.Player.Enable();
+    }
 
-            // Invoke the action for subscribers
-            OnMaskToggled?.Invoke(_isActive);
+    void OnDisable()
+    {
+        // Disable the input so it cannot trigger while component is off
+        _inputActions.Player.Disable();
+
+        if (_isActive)
+        {
+            _isActive = false;
+            _postProcessVolume.enabled = false;
+            OnMaskToggled?.Invoke(false);
         }
+    }
+
+    void OnMaskAbilityPerformed(InputAction.CallbackContext context)
+    {
+        // Only toggle if the GameObject is active and input is enabled
+        if (!_inputActions.Player.enabled || !isActiveAndEnabled)
+            return;
+
+        _isActive = !_isActive;
+        _postProcessVolume.enabled = _isActive;
+        OnMaskToggled?.Invoke(_isActive);
     }
 }
