@@ -33,16 +33,19 @@ Shader "Hidden/Shader/ToonShadingPP"
         return output;
     }
 
-    // --- CLEAN ANTI-CRAWLING MATH (NO NOISE) ---
-    float posterize(float In, float steps)
+    // --- UPGRADED POSTERIZE MATH ---
+    // Now accepts a "softness" parameter to blend the color bands
+    float posterize(float In, float steps, float softness)
     {
         float scaled = In * steps;
         float base = floor(scaled);
         float fractional = frac(scaled);
         
-        // Microscopic smooth gradient instead of static noise
-        float bandSmoothness = 0.05; 
-        float transition = smoothstep(1.0 - bandSmoothness, 1.0, fractional);
+        // Clamp softness to prevent math errors
+        softness = clamp(softness, 0.001, 0.999); 
+        
+        // A wider smoothstep creates a visual gradient between color bands
+        float transition = smoothstep(1.0 - softness, 1.0, fractional);
         
         return (base + transition) / steps;
     }
@@ -57,27 +60,50 @@ Shader "Hidden/Shader/ToonShadingPP"
     {
         UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
+        // ==========================================
+        // 🛠️ TWEAK THESE VALUES TO CHANGE THE LOOK 🛠️
+        // ==========================================
+        
+        // 1. BAND SOFTNESS (0.01 to 0.99)
+        // 0.01 = Sharp, harsh anime bands
+        // 0.50 = Soft, painted gradients
+        float bandSoftness = 0.4; 
+        
+        // 2. HIGHLIGHT THRESHOLD (0.8 to 3.0+)
+        // Any brightness above this number will ignore the toon effect and stay smooth.
+        // Lower this if highlights aren't showing up. Raise it if everything looks too smooth.
+        float highlightThreshold = 1.2; 
+        
+        // 3. SHADOW MINIMUM (0.0 to 1.0)
+        // Prevents shadows from becoming pure black.
+        float shadowMinimum = 0.05;
+        // ==========================================
+
         uint2 positionSS = uint2(input.positionCS.xy);
         float3 sourceColor = LOAD_TEXTURE2D_X(_InputTexture, positionSS).xyz;
 
         // --- COLOR SEPARATION MATH ---
-        // 1. Get the actual brightness of the pixel
         float luminance = Luminance(sourceColor);
-        
-        // 2. Separate the raw color from the HDR brightness
         float3 normalizedColor = sourceColor / (luminance + 0.0001);
 
-        // 3. Posterize ONLY the luminance using the clean math
-        float posterizedLuma = posterize(luminance, max(_PosterizeAmount, 2.0));
+        // Posterize the luminance using our new Softness variable
+        float posterizedLuma = posterize(luminance, max(_PosterizeAmount, 2.0), bandSoftness);
         
-        // 4. Shadow Lift: Prevent pure black shadows
-        posterizedLuma = max(posterizedLuma, 0.05); 
+        // Shadow Lift
+        posterizedLuma = max(posterizedLuma, shadowMinimum); 
 
-        // 5. Recombine the posterized brightness with the pure color
+        // --- HIGHLIGHT PROTECTION ---
+        // Create a smooth mask based on how bright the pixel is.
+        // If the pixel is brighter than our threshold, it smoothly blends back to its original un-banded brightness!
+        float highlightMask = smoothstep(highlightThreshold * 0.8, highlightThreshold * 1.2, luminance);
+        posterizedLuma = lerp(posterizedLuma, luminance, highlightMask);
+        // ----------------------------
+
+        // Recombine the protected brightness with the pure color
         sourceColor = normalizedColor * posterizedLuma;
 
         // --- DEPTH OUTLINES ---
-        uint t = (uint)max(0.0, _OutlineThickness);
+        uint t = (uint)max(1.0, _OutlineThickness);
 
         float dUp    = Linear01Depth(LoadCameraDepth(positionSS + uint2(0, t)), _ZBufferParams);
         float dDown  = Linear01Depth(LoadCameraDepth(positionSS - uint2(0, t)), _ZBufferParams);
@@ -87,14 +113,12 @@ Shader "Hidden/Shader/ToonShadingPP"
         float depthDifference = abs(dUp - dDown) + abs(dLeft - dRight);
         float centerDepth = Linear01Depth(LoadCameraDepth(positionSS), _ZBufferParams);
 
-        // Dynamic Threshold
         float nearThreshold = 0.003; 
         float farThreshold = 0.01;
         float currentThreshold = lerp(nearThreshold, farThreshold, centerDepth);
         
         float isEdge = step(currentThreshold, depthDifference); 
         
-        // Distance Fade
         float outlineFade = 1.0 - smoothstep(0.05, 0.3, centerDepth);
         float rawDepth = LoadCameraDepth(positionSS);
         float isNotSkybox = step(0.000001, rawDepth);
@@ -104,7 +128,6 @@ Shader "Hidden/Shader/ToonShadingPP"
         float3 outlineColor = float3(0.05, 0.05, 0.05); 
         sourceColor = lerp(sourceColor, outlineColor, isEdge);
 
-        // Final saturate
         sourceColor = saturate(sourceColor);
         return float4(sourceColor, 1);
     }

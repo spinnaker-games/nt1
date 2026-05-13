@@ -46,7 +46,7 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: 11.81906
+    m_Value: 11.903323
   compensation:
     m_OverrideState: 0
     m_Value: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   active: 1
   _posterizeAmount:
     m_OverrideState: 1
-    m_Value: 5.91
+    m_Value: 3.26
   _isEnabled:
     m_OverrideState: 1
     m_Value: 1
