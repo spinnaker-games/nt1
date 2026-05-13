@@ -36,13 +36,7 @@ public class PlayerFreeLookState : PlayerBaseState
     }
 
     public override void Tick(float deltaTime)
-    {
-        if (_stateMachine.InputReader.IsAttacking)
-        {
-            _stateMachine.SwitchState(new PlayerAttackState(_stateMachine, 0));
-            return;
-        }
-    
+    {    
         Vector3 movement = CalculateMovement();
         Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
 
@@ -124,6 +118,6 @@ public class PlayerFreeLookState : PlayerBaseState
 
     void OnJump()
     {
-            _stateMachine.SwitchState(new PlayerJumpingState(_stateMachine));
+        _stateMachine.SwitchState(new PlayerJumpingState(_stateMachine));
     }
 }
