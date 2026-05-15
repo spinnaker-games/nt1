@@ -43,6 +43,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "MorphB",
+                    "type": "Button",
+                    "id": "d9007693-0217-4328-b99e-c1a13e8cb6cc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Crouch",
                     "type": "Button",
                     "id": "27c5f898-bc57-4ee1-8800-db469aca5fe3",
@@ -400,6 +409,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Morph",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c254ddba-5469-43db-9bc2-3fecc289073f",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MorphB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

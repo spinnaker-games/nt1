@@ -23,6 +23,7 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
     public event Action ChaseCameraActivateEvent;
     public event Action ChaseCameraCancelEvent;
     public event Action MorphActivateEvent;
+    public event Action MorphActivateBEvent;
 
     InputActions _inputActions;
 
@@ -76,6 +77,13 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
         if (!context.performed) { return; }
 
         MorphActivateEvent?.Invoke();
+    }
+
+    public void OnMorphB(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+
+        MorphActivateBEvent?.Invoke();
     }
 
     public void OnDodge(InputAction.CallbackContext context)
