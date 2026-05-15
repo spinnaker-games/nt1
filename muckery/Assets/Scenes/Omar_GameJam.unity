@@ -276,7 +276,7 @@ Transform:
   m_GameObject: {fileID: 643777782}
   serializedVersion: 2
   m_LocalRotation: {x: 0.038492385, y: 0.8937731, z: 0.07819503, w: -0.43996996}
-  m_LocalPosition: {x: 28.687714, y: 0.9473593, z: 116.68569}
+  m_LocalPosition: {x: 28.687714, y: 0.9473593, z: -86.74431}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -463,7 +463,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2947465341419418595, guid: 423d8054ab6db0f42a724e17ad747356, type: 3}
       propertyPath: m_Name
-      value: Omar
+      value: Omar_Layer
       objectReference: {fileID: 0}
     - target: {fileID: 6816926984244322428, guid: 423d8054ab6db0f42a724e17ad747356, type: 3}
       propertyPath: m_LocalPosition.y
@@ -568,7 +568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3964450381108438314, guid: 7e3cab61915330c46804bc50eae842e7, type: 3}
       propertyPath: m_Name
-      value: Nikita
+      value: Nikita_Layer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -593,7 +593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 890332022355524757, guid: d54931614431a3b4d81ab545a4a8416e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 117.8
+      value: -85.63
       objectReference: {fileID: 0}
     - target: {fileID: 890332022355524757, guid: d54931614431a3b4d81ab545a4a8416e, type: 3}
       propertyPath: m_LocalRotation.w
