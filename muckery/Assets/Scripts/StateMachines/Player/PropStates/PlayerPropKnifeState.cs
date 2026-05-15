@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class PlayerFreeLookState : PlayerBaseState
+public class PlayerPropKnifeState : PlayerBaseState
 {
     bool _shouldFadeAnim;
-    readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed"); //integers are processed faster than strings.
-    readonly int FreeLookBlendTreeHash = Animator.StringToHash("FreeLookBlendTree");
+    readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
+    readonly int FreeLookZoomBlendTreeHash = Animator.StringToHash("FreeLookZoomBlendTree");
     const float AnimatorDampTime = 0.075f;
     const float CrossFadeDuration = 0.2f;
 
-    public PlayerFreeLookState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
+    public PlayerPropKnifeState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
     {
         this._shouldFadeAnim = shouldFadeAnim;
     }
@@ -24,18 +24,17 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.InputReader.JumpActivateEvent += OnJump;
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
 
-        _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0f); //prevents player from being in the middle of another animation when this state begins
-
         if (_shouldFadeAnim)
         {
-            _stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
+            _stateMachine.Animator.CrossFadeInFixedTime(FreeLookZoomBlendTreeHash, CrossFadeDuration);
         }
         else
         {
-            _stateMachine.Animator.Play(FreeLookBlendTreeHash);
+            _stateMachine.Animator.Play(FreeLookZoomBlendTreeHash);
         }
 
-        _stateMachine.PlayerModel.SetActive(true);
+        _stateMachine.PlayerModel.SetActive(false);
+        _stateMachine.Knife.SetActive(true);
     }
 
     public override void Tick(float deltaTime)
@@ -64,6 +63,8 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent -= OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent -= OnJump;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+
+        _stateMachine.Knife.SetActive(false);
     }
 
     Vector3 CalculateMovement()//TODO: Investigate adding this to base class
@@ -127,6 +128,6 @@ public class PlayerFreeLookState : PlayerBaseState
 
     void OnMorph()
     {
-        _stateMachine.SwitchState( new PlayerPropKnifeState( _stateMachine ) );//TODO: Create Pre-Morph State
+        _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );//TODO: Create Pre-Morph State
     }
 }

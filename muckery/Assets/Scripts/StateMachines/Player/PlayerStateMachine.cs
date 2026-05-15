@@ -9,6 +9,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public ForceReceiver ForceReceiver { get; set; }
     [field: SerializeField] public Health Health { get; set; }
     [field: SerializeField] public Ragdoll Ragdoll { get; set; }
+    [field: SerializeField] public GameObject PlayerModel { get; set; }
     [field: SerializeField] public LedgeDetector LedgeDetector { get; set; }
     [field: SerializeField] public WeaponDamage Weapon { get; set; }
     [field: SerializeField] public float FreeLookMovementSpeed { get; set; }
@@ -18,6 +19,12 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float DodgeDistance { get; set; }
     [field: SerializeField] public float JumpForce { get; set; }
     [field: SerializeField] public Attack[] Attacks { get; set; }
+
+    [Header("Prop Settings")]
+    [field: SerializeField] public GameObject Knife { get; set; }
+    [field: SerializeField] public GameObject PropaneTank { get; set; }
+    [field: SerializeField] public GameObject Safe { get; set; }
+
 
     public float PreviousDodgeTime { get; set; } = Mathf.NegativeInfinity; //prevents the first dodge from having strange behaviour
     public Transform MainCameraTransform { get; set; }

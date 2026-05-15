@@ -151,7 +151,7 @@ Transform:
   m_GameObject: {fileID: 958994097944946240}
   serializedVersion: 2
   m_LocalRotation: {x: -0.07910274, y: -0.39179623, z: 0.033833466, w: 0.9160207}
-  m_LocalPosition: {x: 0, y: 0.0000013113022, z: 4.2720017}
+  m_LocalPosition: {x: 0, y: 0, z: 4.2720017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -290,7 +290,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
-    Value: 143.88893
+    Value: -64.7573
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -659,8 +659,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7364263274956044104}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.0000000102611, z: -0, w: 1}
-  m_LocalPosition: {x: -10.75715, y: -4.86921, z: -82.365585}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.757149, y: -4.8692102, z: -82.365585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -782,8 +782,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7381423984789751166}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.038492385, y: 0.8937731, z: 0.07819503, w: -0.43996996}
-  m_LocalPosition: {x: -7.5549164, y: -6.009451, z: -78.36246}
+  m_LocalRotation: {x: -0.085287064, y: 0.20518352, z: 0.017951243, w: 0.9748352}
+  m_LocalPosition: {x: -13.4420395, y: -6.009451, z: -85.87184}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -866,7 +866,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 1
   HorizontalAxis:
-    Value: -127.58151
+    Value: 23.772251
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -1021,7 +1021,7 @@ Transform:
   m_GameObject: {fileID: 7416775138254628668}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5606288, y: -0, z: -0, w: 0.82806724}
-  m_LocalPosition: {x: -11.4571495, y: 4.8587894, z: -85.365585}
+  m_LocalPosition: {x: -11.4571495, y: 4.8587904, z: -85.365585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1271,7 +1271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9010747258249366409}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17842495, y: -0, z: -0, w: 0.98395354}
+  m_LocalRotation: {x: 0.17842482, y: -0, z: -0, w: 0.98395354}
   m_LocalPosition: {x: -11.4571495, y: -3.64121, z: -85.365585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1403,6 +1403,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1634540510957267430, guid: a0f1f7de2b21a0742a5b3844189199a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1848580225192294119, guid: a0f1f7de2b21a0742a5b3844189199a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.545481
@@ -1447,6 +1451,26 @@ PrefabInstance:
       propertyPath: _cinemachineTargetGroup
       value: 
       objectReference: {fileID: 5830207283280868505}
+    - target: {fileID: 4572522169700020235, guid: a0f1f7de2b21a0742a5b3844189199a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029647437710644984, guid: a0f1f7de2b21a0742a5b3844189199a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5046965239100303846, guid: a0f1f7de2b21a0742a5b3844189199a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6697230246784605862, guid: a0f1f7de2b21a0742a5b3844189199a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830863057717950253, guid: a0f1f7de2b21a0742a5b3844189199a0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7408650662654824565, guid: a0f1f7de2b21a0742a5b3844189199a0, type: 3}
       propertyPath: <InputReader>k__BackingField
       value: 
