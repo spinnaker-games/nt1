@@ -123,7 +123,7 @@ public class PlayerPropKnifeState : PlayerBaseState
 
     void OnJump()
     {
-        _stateMachine.SwitchState(new PlayerJumpingState(_stateMachine));
+        _stateMachine.SwitchState(new PlayerPropKnifeJumpingState(_stateMachine));
     }
 
     void OnMorph()
