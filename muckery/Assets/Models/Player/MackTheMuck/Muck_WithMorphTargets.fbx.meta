@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: b04041002102e9742afb6ee8d67d7da2
+guid: 78fea541fc9d5b442a74702f323be90a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Muck_MainCharacter_SlimeState
-    second: {fileID: 2100000, guid: fcbae7c1fa30ddc438faea7296c7d75d, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -81,7 +76,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
-    blendShapeNormalImportMode: 0
+    blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
   importAnimation: 1
