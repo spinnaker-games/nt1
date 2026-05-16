@@ -25,6 +25,7 @@ public class PlayerStateMachine : StateMachine
     public Interactable LastInteractable { get; set; }
     [field: SerializeField] public GameObject Knife { get; set; }
     [field: SerializeField] public GameObject PropaneTank { get; set; }
+    [field: SerializeField] public GameObject BananaPeel { get; set; }
     [field: SerializeField] public GameObject Safe { get; set; }
 
 
