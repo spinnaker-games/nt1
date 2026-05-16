@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a932fef12d432d74aa15c3d905c78204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStateMachine
-  <InputReader>k__BackingField: {fileID: 0}
+  <InputReader>k__BackingField: {fileID: 3730049834243752415}
   <CharacterController>k__BackingField: {fileID: 4123771200341800996}
   <Animator>k__BackingField: {fileID: 5299276467586087753}
   <Targeter>k__BackingField: {fileID: 2294870588811280927}
@@ -196,13 +196,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2.14
+  m_Height: 1
   m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.214
+  m_SkinWidth: 0.1
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 1.07, z: 0}
+  m_Center: {x: 0, y: 0.51, z: 0}
 --- !u!114 &4913471925215069970
 MonoBehaviour:
   m_ObjectHideFlags: 0
