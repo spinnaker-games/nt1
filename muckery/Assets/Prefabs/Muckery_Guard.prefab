@@ -1438,7 +1438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1828aff4f0a84e4486562d1a0086a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDamage
-  _playerCollider: {fileID: 0}
+  _playerCollider: {fileID: 2352455989084319521}
 --- !u!54 &6192648165163128757
 Rigidbody:
   m_ObjectHideFlags: 0
