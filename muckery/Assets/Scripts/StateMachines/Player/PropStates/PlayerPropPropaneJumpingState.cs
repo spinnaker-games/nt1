@@ -32,7 +32,7 @@ public class PlayerPropPropaneJumpingState : PlayerBaseState
 
         if (_stateMachine.CharacterController.velocity.y <= 0)
         {
-            _stateMachine.SwitchState(new PlayerPropKnifeFallingState(_stateMachine));
+            _stateMachine.SwitchState(new PlayerPropPropaneFallingState(_stateMachine));
             return;
         }
 

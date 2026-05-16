@@ -21,6 +21,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Attack[] Attacks { get; set; }
 
     [Header("Prop Settings")]
+    public Interactable CurrentInteractable { get; set; }
+    public Interactable LastInteractable { get; set; }
     [field: SerializeField] public GameObject Knife { get; set; }
     [field: SerializeField] public GameObject PropaneTank { get; set; }
     [field: SerializeField] public GameObject Safe { get; set; }

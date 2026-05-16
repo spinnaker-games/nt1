@@ -23,7 +23,6 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent += OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent += OnJump;
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
-        _stateMachine.InputReader.MorphActivateBEvent += OnMorphB;
 
         _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0f); //prevents player from being in the middle of another animation when this state begins
 
@@ -65,7 +64,6 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent -= OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent -= OnJump;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
-        _stateMachine.InputReader.MorphActivateBEvent -= OnMorphB;
     }
 
     Vector3 CalculateMovement()//TODO: Investigate adding this to base class
@@ -129,11 +127,28 @@ public class PlayerFreeLookState : PlayerBaseState
 
     void OnMorph()
     {
-        _stateMachine.SwitchState( new PlayerPropKnifeState( _stateMachine ) );//TODO: Create Pre-Morph State
-    }
+        Interactable target = _stateMachine.CurrentInteractable;
 
-    void OnMorphB()
-    {
-        _stateMachine.SwitchState( new PlayerPropPropaneState( _stateMachine ) );//TODO: Create Pre-Morph State
+        if (target == null)
+            target = _stateMachine.LastInteractable;
+
+        if (target == null)
+            return;
+
+        // switch based on cached interactable type
+        switch (target.Type)
+        {
+            case Interactable.InteractableType.Knife:
+                _stateMachine.SwitchState(new PlayerPropKnifeState(_stateMachine));
+                break;
+
+            case Interactable.InteractableType.PropaneTank:
+                _stateMachine.SwitchState(new PlayerPropPropaneState(_stateMachine));
+                break;
+
+            case Interactable.InteractableType.BananaPeel:
+                // whatever your banana state is
+                break;
+        }
     }
 }

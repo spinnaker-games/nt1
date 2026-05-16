@@ -129,15 +129,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MorphB"",
-                    ""type"": ""Button"",
-                    ""id"": ""d9007693-0217-4328-b99e-c1a13e8cb6cc"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Crouch"",
                     ""type"": ""Button"",
                     ""id"": ""27c5f898-bc57-4ee1-8800-db469aca5fe3"",
@@ -495,17 +486,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Morph"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c254ddba-5469-43db-9bc2-3fecc289073f"",
-                    ""path"": ""<Keyboard>/g"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""MorphB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1394,7 +1374,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Morph = m_Player.FindAction("Morph", throwIfNotFound: true);
-        m_Player_MorphB = m_Player.FindAction("MorphB", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Target = m_Player.FindAction("Target", throwIfNotFound: true);
@@ -1505,7 +1484,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Morph;
-    private readonly InputAction m_Player_MorphB;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Target;
@@ -1546,10 +1524,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Morph".
         /// </summary>
         public InputAction @Morph => m_Wrapper.m_Player_Morph;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/MorphB".
-        /// </summary>
-        public InputAction @MorphB => m_Wrapper.m_Player_MorphB;
         /// <summary>
         /// Provides access to the underlying input action "Player/Crouch".
         /// </summary>
@@ -1640,9 +1614,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Morph.started += instance.OnMorph;
             @Morph.performed += instance.OnMorph;
             @Morph.canceled += instance.OnMorph;
-            @MorphB.started += instance.OnMorphB;
-            @MorphB.performed += instance.OnMorphB;
-            @MorphB.canceled += instance.OnMorphB;
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
@@ -1705,9 +1676,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Morph.started -= instance.OnMorph;
             @Morph.performed -= instance.OnMorph;
             @Morph.canceled -= instance.OnMorph;
-            @MorphB.started -= instance.OnMorphB;
-            @MorphB.performed -= instance.OnMorphB;
-            @MorphB.canceled -= instance.OnMorphB;
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
@@ -2075,13 +2043,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMorph(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "MorphB" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMorphB(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Crouch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

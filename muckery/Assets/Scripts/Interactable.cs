@@ -15,6 +15,8 @@ public class Interactable : MonoBehaviour
 
     [SerializeField] InteractableType _interactableType;
 
+    public InteractableType Type => _interactableType;
+
     [Header( "Visuals" )]
     [SerializeField] GameObject _knife;
     [SerializeField] GameObject _propaneTank;
@@ -31,11 +33,26 @@ public class Interactable : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if ( _interactButton != null ) _interactButton.SetActive(true);
+
+        PlayerStateMachine player = other.GetComponent<PlayerStateMachine>();
+
+        if (player != null)
+        {
+            player.CurrentInteractable = this;
+            player.LastInteractable = this;
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
         if ( _interactButton != null ) _interactButton.SetActive(false);
+
+        PlayerStateMachine player = other.GetComponent<PlayerStateMachine>();
+
+        if (player != null && player.CurrentInteractable == this)
+        {
+            player.CurrentInteractable = null;
+        }
     }
 
 #if UNITY_EDITOR

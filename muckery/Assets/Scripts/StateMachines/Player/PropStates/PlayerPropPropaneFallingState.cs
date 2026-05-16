@@ -34,7 +34,7 @@ public class PlayerPropPropaneFallingState : PlayerBaseState
             }
             else
             {
-                _stateMachine.SwitchState(new PlayerPropKnifeState(_stateMachine));//TODO: Add support for returning to other camera states by caching lastKnownCameraState
+                _stateMachine.SwitchState(new PlayerPropPropaneState(_stateMachine));//TODO: Add support for returning to other camera states by caching lastKnownCameraState
             }
         }
 

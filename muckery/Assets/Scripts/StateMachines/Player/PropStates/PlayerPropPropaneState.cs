@@ -22,7 +22,7 @@ public class PlayerPropPropaneState : PlayerBaseState
         _stateMachine.InputReader.SideScrollActivateEvent += OnSideScrollActivate;
         _stateMachine.InputReader.ChaseCameraActivateEvent += OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent += OnJump;
-        _stateMachine.InputReader.MorphActivateBEvent += OnMorph;
+        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
 
         if (_shouldFadeAnim)
         {
@@ -62,7 +62,7 @@ public class PlayerPropPropaneState : PlayerBaseState
         _stateMachine.InputReader.SideScrollActivateEvent -= OnSideScrollActivate;
         _stateMachine.InputReader.ChaseCameraActivateEvent -= OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent -= OnJump;
-        _stateMachine.InputReader.MorphActivateBEvent -= OnMorph;
+        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
 
         _stateMachine.PropaneTank.SetActive(false);
     }
@@ -123,7 +123,7 @@ public class PlayerPropPropaneState : PlayerBaseState
 
     void OnJump()
     {
-        _stateMachine.SwitchState(new PlayerPropKnifeJumpingState(_stateMachine));
+        _stateMachine.SwitchState(new PlayerPropPropaneJumpingState(_stateMachine));
     }
 
     void OnMorph()
