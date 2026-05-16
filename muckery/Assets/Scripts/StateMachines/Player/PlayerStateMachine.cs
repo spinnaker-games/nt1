@@ -11,21 +11,24 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Ragdoll Ragdoll { get; set; }
     [field: SerializeField] public GameObject PlayerModel { get; set; }
     [field: SerializeField] public LedgeDetector LedgeDetector { get; set; }
-    [field: SerializeField] public WeaponDamage Weapon { get; set; }
     [field: SerializeField] public float FreeLookMovementSpeed { get; set; }
     [field: SerializeField] public float TargetingMovementSpeed { get; set; }
     [field: SerializeField] public float RotationDamping { get; set; }
     [field: SerializeField] public float DodgeDuration { get; set; }
     [field: SerializeField] public float DodgeDistance { get; set; }
     [field: SerializeField] public float JumpForce { get; set; }
-    [field: SerializeField] public Attack[] Attacks { get; set; }
 
     [Header("Prop Settings")]
     public Interactable CurrentInteractable { get; set; }
     public Interactable LastInteractable { get; set; }
     [field: SerializeField] public GameObject Knife { get; set; }
+    [field: SerializeField] public int KnifeDamageAmount { get; set; }
+    [field: SerializeField] public int KnifeKnockback { get; set; }
+
     [field: SerializeField] public GameObject PropaneTank { get; set; }
+
     [field: SerializeField] public GameObject BananaPeel { get; set; }
+
     [field: SerializeField] public GameObject Safe { get; set; }
 
 

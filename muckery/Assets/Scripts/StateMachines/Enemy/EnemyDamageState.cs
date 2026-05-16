@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyImpactState : EnemyBaseState
+public class EnemyDamageState : EnemyBaseState
 {
     readonly int ImpactAnimHash = Animator.StringToHash("Impact");
 
@@ -8,7 +8,7 @@ public class EnemyImpactState : EnemyBaseState
 
     float _duration = 1f;
 
-    public EnemyImpactState(EnemyStateMachine stateMachine) : base(stateMachine)
+    public EnemyDamageState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
     }
 

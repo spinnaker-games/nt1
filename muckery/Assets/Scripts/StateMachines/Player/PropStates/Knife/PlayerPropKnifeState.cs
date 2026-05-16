@@ -35,6 +35,9 @@ public class PlayerPropKnifeState : PlayerBaseState
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.Knife.SetActive(true);
+
+        WeaponDamage weapon = _stateMachine.Knife.GetComponent<WeaponDamage>();
+        weapon.SetAttack(_stateMachine.KnifeDamageAmount, _stateMachine.KnifeKnockback);
     }
 
     public override void Tick(float deltaTime)
