@@ -32,6 +32,8 @@ public class Interactable : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag("Player")) return;
+
         if ( _interactButton != null ) _interactButton.SetActive(true);
 
         PlayerStateMachine player = other.GetComponent<PlayerStateMachine>();
@@ -45,6 +47,8 @@ public class Interactable : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        if (!other.CompareTag("Player")) return;
+
         if ( _interactButton != null ) _interactButton.SetActive(false);
 
         PlayerStateMachine player = other.GetComponent<PlayerStateMachine>();
