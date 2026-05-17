@@ -1,0 +1,118 @@
+using UnityEngine;
+
+public class EnemyPatrolState : EnemyBaseState
+{
+    readonly int LocomotionBlendTreeHash = Animator.StringToHash("Locomotion");
+    readonly int SpeedHash = Animator.StringToHash("Speed");
+
+    const float CrossFadeDuration = 0.2f;
+    const float AnimatorDampTime = 0.1f;
+    const float WaypointReachThreshold = 1.2f;
+
+    Transform CurrentWaypoint => _stateMachine.Waypoints[_stateMachine.CurrentWaypointIndex];
+
+    public EnemyPatrolState(EnemyStateMachine stateMachine) : base(stateMachine)
+    {
+    }
+
+    public override void Enter()
+    {
+        _stateMachine.Animator.CrossFadeInFixedTime(LocomotionBlendTreeHash, CrossFadeDuration);
+        SetDestination();
+    }
+
+    public override void Tick(float deltaTime)
+    {
+        MoveToWaypoint(deltaTime);
+
+        if (CanSeePlayer(10f, 90f) && IsInChaseRange())
+        {
+            _stateMachine.SwitchState(new EnemyChasingState(_stateMachine));
+            return;
+        }
+
+        if (HasReachedWaypoint())
+        {
+            AdvanceWaypoint();
+            SetDestination();
+        }
+
+        _stateMachine.Animator.SetFloat(SpeedHash, 1f, AnimatorDampTime, deltaTime);
+    }
+
+    public override void Exit()
+    {
+        _stateMachine.NavMeshAgent.ResetPath();
+        _stateMachine.NavMeshAgent.velocity = Vector3.zero;
+    }
+
+    void MoveToWaypoint(float deltaTime)
+    {
+        if (!_stateMachine.NavMeshAgent.isOnNavMesh)
+            return;
+
+        Vector3 desiredVelocity = _stateMachine.NavMeshAgent.desiredVelocity;
+
+        Move(desiredVelocity.normalized * _stateMachine.MovementSpeed, deltaTime);
+
+        _stateMachine.NavMeshAgent.velocity = _stateMachine.CharacterController.velocity;
+
+        FaceMovementDirection( desiredVelocity, deltaTime );
+    }
+
+    void SetDestination()
+    {
+        if (_stateMachine.Waypoints == null || _stateMachine.Waypoints.Length == 0)
+            return;
+
+        _stateMachine.NavMeshAgent.destination = CurrentWaypoint.position;
+    }
+
+    bool HasReachedWaypoint()
+    {
+        if (_stateMachine.Waypoints == null || _stateMachine.Waypoints.Length == 0)
+            return false;
+
+        float distance = Vector3.Distance(
+            _stateMachine.transform.position,
+            CurrentWaypoint.position
+        );
+
+        return distance <= WaypointReachThreshold;
+    }
+
+    void AdvanceWaypoint()
+    {
+        if (_stateMachine.Waypoints.Length <= 1)
+            return;
+
+        _stateMachine.CurrentWaypointIndex += _stateMachine.WaypointDirection;
+
+        if (_stateMachine.CurrentWaypointIndex >= _stateMachine.Waypoints.Length)
+        {
+            _stateMachine.CurrentWaypointIndex = _stateMachine.Waypoints.Length - 2;
+            _stateMachine.WaypointDirection = -1;
+        }
+        else if (_stateMachine.CurrentWaypointIndex < 0)
+        {
+            _stateMachine.CurrentWaypointIndex = 1;
+            _stateMachine.WaypointDirection = 1;
+        }
+}
+
+    void FaceMovementDirection( Vector3 direction, float deltaTime )
+    {
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude < 0.01f)
+            return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
+
+        _stateMachine.transform.rotation = Quaternion.Slerp(
+            _stateMachine.transform.rotation,
+            targetRotation,
+            deltaTime * 10f
+        );
+    }
+}

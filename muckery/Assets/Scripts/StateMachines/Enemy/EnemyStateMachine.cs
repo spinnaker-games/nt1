@@ -18,6 +18,11 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float EyeHeight { get; set; }
     [field: SerializeField] public float PlayerChasingRange { get; set; }
     [field: SerializeField] public float PlayerAttackRange { get; set; }
+    [field: SerializeField] public Transform[] Waypoints { get; set; }
+    [field: SerializeField] public float WaypointIdleTime { get; set; }
+    
+    public int CurrentWaypointIndex { get; set; }
+    public int WaypointDirection { get; set; } = 1;
 
     public GameObject Player { get; set; }
 
@@ -26,7 +31,7 @@ public class EnemyStateMachine : StateMachine
         Player = GameObject.FindGameObjectWithTag("Player"); //TODO: Evaluate if there is a better way to get player component
         NavMeshAgent.updatePosition = false;//by default, we do not want the agent to move
         NavMeshAgent.updateRotation = false;
-        SwitchState(new EnemyIdleState(this));
+        SwitchState(new EnemyPatrolState(this));
     }
 
     void OnEnable()
