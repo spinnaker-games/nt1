@@ -14,7 +14,7 @@ public abstract class PlayerBaseState : State
         Move(Vector3.zero, deltaTime);
     }
 
-    protected void Move(Vector3 movement, float deltaTime)
+    protected void Move(Vector3 movement, float deltaTime) //TODO: Possibly rename this to something else. View PlayerDeathState for ambiguity problem
     {
         _stateMachine.CharacterController.Move((movement + _stateMachine.ForceReceiver.Movement) * deltaTime);
     }

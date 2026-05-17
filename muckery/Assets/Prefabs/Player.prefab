@@ -2403,6 +2403,10 @@ PrefabInstance:
       propertyPath: 'm_BlendShapeWeights.Array.data[4]'
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 78fea541fc9d5b442a74702f323be90a, type: 3}
+      propertyPath: 'm_BlendShapeWeights.Array.data[5]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 78fea541fc9d5b442a74702f323be90a, type: 3}
       propertyPath: m_Name
       value: Muck_WithMorphTargets
