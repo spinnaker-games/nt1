@@ -46,4 +46,43 @@ public abstract class EnemyBaseState : State
 
         return playerDistanceSqr <= _stateMachine.PlayerAttackRange * _stateMachine.PlayerAttackRange;
     }
+
+    protected bool CanSeePlayer( float viewDistance, float viewAngle )
+    {
+        if ( _stateMachine.Player == null ) { return false; }
+
+        Transform playerTransform = _stateMachine.Player.transform;
+
+        Vector3 origin = _stateMachine.transform.position + Vector3.up * _stateMachine.EyeHeight;//TODO: Understand Vector math that creates the raycast
+        Vector3 target = playerTransform.position + Vector3.up * _stateMachine.EyeHeight;
+
+        Vector3 toPlayer = target - origin;
+
+        float distanceSqr = toPlayer.sqrMagnitude;
+        if ( distanceSqr > viewDistance * viewDistance ) { return false; }
+
+        Vector3 forward = _stateMachine.transform.forward;
+        forward.y = 0;
+        forward.Normalize();
+
+        Vector3 toPlayerDir = toPlayer;
+        toPlayerDir.y = 0;
+
+        if ( toPlayerDir.sqrMagnitude < 0.0001f ) { return true; }
+
+        toPlayerDir.Normalize();
+
+        float angle = Vector3.Angle( forward, toPlayerDir );
+        if ( angle > viewAngle * 0.5f ) { return false; }
+
+        if ( Physics.Raycast( origin, toPlayerDir, out RaycastHit hit, viewDistance ) )
+        {
+            if ( hit.transform != playerTransform )
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

@@ -23,13 +23,11 @@ public class EnemyIdleState : EnemyBaseState
     {
         Move(deltaTime);
     
-        if (_stateMachine.ChasePlayer && IsInChaseRange())
+        if (CanSeePlayer(10f, 90f) && IsInChaseRange()) //TODO: Magic numbers 
         {
             _stateMachine.SwitchState(new EnemyChasingState(_stateMachine));
             return;
         }
-
-        FacePlayer();
 
         _stateMachine.Animator.SetFloat(SpeedHash, 0, AnimatorDampTime, deltaTime);
     }
