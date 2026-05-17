@@ -7,7 +7,7 @@ public class EnemyPatrolState : EnemyBaseState
 
     const float CrossFadeDuration = 0.2f;
     const float AnimatorDampTime = 0.1f;
-    const float WaypointReachThreshold = 1.2f;
+    const float WaypointReachThreshold = 1.5f; //TODO: Expose in state Machine???
 
     Transform CurrentWaypoint => _stateMachine.Waypoints[_stateMachine.CurrentWaypointIndex];
 
