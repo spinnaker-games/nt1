@@ -25,6 +25,12 @@ public class EnemyPatrolState : EnemyBaseState
     {
         MoveToWaypoint(deltaTime);
 
+        if (CanSeePlayer(10f, 90f) && _stateMachine.IsTarget)
+        {
+            _stateMachine.SwitchState(new EnemyEscapeState(_stateMachine));
+            return;
+        }
+
         if (CanSeePlayer(10f, 90f) && IsInChaseRange())
         {
             _stateMachine.SwitchState(new EnemyChasingState(_stateMachine));

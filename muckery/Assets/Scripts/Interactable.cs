@@ -4,18 +4,18 @@ using UnityEditor;
 
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public class Morphable : MonoBehaviour
 {
-    public enum InteractableType
+    public enum MorphableType
     {
         Knife,
         PropaneTank,
         BananaPeel
     }
 
-    [SerializeField] InteractableType _interactableType;
+    [SerializeField] MorphableType _morphableType;
 
-    public InteractableType Type => _interactableType;
+    public MorphableType Type => _morphableType;
 
     [Header( "Visuals" )]
     [SerializeField] GameObject _knife;
@@ -23,7 +23,7 @@ public class Interactable : MonoBehaviour
     [SerializeField] GameObject _bananaPeel;
 
     [Header( "UI" )]
-    [SerializeField] GameObject _interactButton;
+    [SerializeField] GameObject _morphButton;
 
     void Awake()
     {
@@ -34,14 +34,14 @@ public class Interactable : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        if ( _interactButton != null ) _interactButton.SetActive(true);
+        if ( _morphButton != null ) _morphButton.SetActive(true);
 
         PlayerStateMachine player = other.GetComponent<PlayerStateMachine>();
 
         if (player != null)
         {
-            player.CurrentInteractable = this;
-            player.LastInteractable = this;
+            player.CurrentMorphable = this;
+            player.LastMorphable = this;
         }
     }
 
@@ -49,13 +49,13 @@ public class Interactable : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        if ( _interactButton != null ) _interactButton.SetActive(false);
+        if ( _morphButton != null ) _morphButton.SetActive(false);
 
         PlayerStateMachine player = other.GetComponent<PlayerStateMachine>();
 
-        if (player != null && player.CurrentInteractable == this)
+        if (player != null && player.CurrentMorphable == this)
         {
-            player.CurrentInteractable = null;
+            player.CurrentMorphable = null;
         }
     }
 
@@ -76,12 +76,12 @@ public class Interactable : MonoBehaviour
 
     void UpdateVisuals()
     {
-        if ( _interactButton != null ) _interactButton.SetActive(false);
+        if ( _morphButton != null ) _morphButton.SetActive(false);
 
-        if ( _knife != null ) _knife.SetActive( _interactableType == InteractableType.Knife );
+        if ( _knife != null ) _knife.SetActive( _morphableType == MorphableType.Knife );
 
-        if ( _propaneTank != null ) _propaneTank.SetActive( _interactableType == InteractableType.PropaneTank );
+        if ( _propaneTank != null ) _propaneTank.SetActive( _morphableType == MorphableType.PropaneTank );
 
-        if ( _bananaPeel != null ) _bananaPeel.SetActive( _interactableType == InteractableType.BananaPeel );
+        if ( _bananaPeel != null ) _bananaPeel.SetActive( _morphableType == MorphableType.BananaPeel );
     }
 }

@@ -19,8 +19,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float JumpForce { get; set; }
 
     [Header("Prop Settings")]
-    public Interactable CurrentInteractable { get; set; }
-    public Interactable LastInteractable { get; set; }
+    public Morphable CurrentMorphable { get; set; }
+    public Morphable LastMorphable { get; set; }
     [field: SerializeField] public GameObject Knife { get; set; }
     [field: SerializeField] public int KnifeDamageAmount { get; set; }
     [field: SerializeField] public int KnifeKnockback { get; set; }

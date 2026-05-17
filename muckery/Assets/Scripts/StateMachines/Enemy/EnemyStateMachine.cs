@@ -20,6 +20,8 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float PlayerAttackRange { get; set; }
     [field: SerializeField] public Transform[] Waypoints { get; set; }
     [field: SerializeField] public float WaypointIdleTime { get; set; }
+    [field: SerializeField] public bool IsTarget { get; set; } = false;
+    [field: SerializeField] public Transform TargetEscape { get; set; }
     
     public int CurrentWaypointIndex { get; set; }
     public int WaypointDirection { get; set; } = 1;

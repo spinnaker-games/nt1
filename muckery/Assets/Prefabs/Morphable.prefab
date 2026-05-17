@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1107728459992005150
 Transform:
   m_ObjectHideFlags: 0
@@ -878,7 +878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8512253556193461286}
   m_Layer: 0
-  m_Name: InteractButton
+  m_Name: MorphButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1026,7 +1026,7 @@ GameObject:
   - component: {fileID: 8669732761359006157}
   - component: {fileID: 5892323916242743584}
   m_Layer: 5
-  m_Name: InteractIcon
+  m_Name: MorphIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1294,7 +1294,7 @@ GameObject:
   - component: {fileID: 1320618161420145065}
   - component: {fileID: 1134698556074668667}
   m_Layer: 0
-  m_Name: Interactable
+  m_Name: Morphable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1329,11 +1329,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ddb059918d2c2f45b558c7e5bed6938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  _interactableType: 1
+  _morphableType: 0
   _knife: {fileID: 8514845208126554497}
   _propaneTank: {fileID: 1104646418231072876}
   _bananaPeel: {fileID: 7792987111833459314}
-  _interactButton: {fileID: 6992427529901400907}
+  _morphButton: {fileID: 6992427529901400907}
 --- !u!135 &1134698556074668667
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1486,7 +1486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8520447666024531999
 Transform:
   m_ObjectHideFlags: 0
@@ -1706,7 +1706,7 @@ GameObject:
   - component: {fileID: 8956976213368083712}
   - component: {fileID: 7477824449080819971}
   m_Layer: 5
-  m_Name: InteractText
+  m_Name: MorphText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -127,25 +127,25 @@ public class PlayerFreeLookState : PlayerBaseState
 
     void OnMorph()
     {
-        Interactable target = _stateMachine.CurrentInteractable;
+        Morphable target = _stateMachine.CurrentMorphable;
 
         if (target == null)
-            target = _stateMachine.LastInteractable;
+            target = _stateMachine.LastMorphable;
 
         if (target == null)
             return;
 
         switch (target.Type)
         {
-            case Interactable.InteractableType.Knife:
+            case Morphable.MorphableType.Knife:
                 _stateMachine.SwitchState(new PlayerPropKnifeState(_stateMachine));
                 break;
 
-            case Interactable.InteractableType.PropaneTank:
+            case Morphable.MorphableType.PropaneTank:
                 _stateMachine.SwitchState(new PlayerPropPropaneState(_stateMachine));
                 break;
 
-            case Interactable.InteractableType.BananaPeel:
+            case Morphable.MorphableType.BananaPeel:
                 _stateMachine.SwitchState(new PlayerPropBananaPeelState(_stateMachine));
                 break;
             //ADD NEW PROP STATES HERE

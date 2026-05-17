@@ -29,6 +29,16 @@ public abstract class EnemyBaseState : State
         _stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);//TODO: implement smooth turning
     }
 
+    protected void FaceTargetEscape()
+    {
+        if (_stateMachine.TargetEscape == null) { return; }
+
+        Vector3 lookPos = _stateMachine.TargetEscape.transform.position - _stateMachine.transform.position;
+        lookPos.y = 0;
+
+        _stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);//TODO: implement smooth turning
+    }
+
     protected bool IsInChaseRange()
     {
         if (_stateMachine.Player.GetComponent<Health>().IsDead) { return false; }

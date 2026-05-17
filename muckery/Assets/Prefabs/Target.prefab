@@ -1671,6 +1671,8 @@ MonoBehaviour:
   <PlayerAttackRange>k__BackingField: 1.25
   <Waypoints>k__BackingField: []
   <WaypointIdleTime>k__BackingField: 3
+  <IsTarget>k__BackingField: 1
+  <TargetEscape>k__BackingField: {fileID: 0}
 --- !u!195 &2154328834117285813
 NavMeshAgent:
   m_ObjectHideFlags: 0
