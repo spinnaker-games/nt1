@@ -32,6 +32,37 @@ Transform:
   - {fileID: 7306036998406629433}
   m_Father: {fileID: 6001894592387845169}
   m_LocalEulerAnglesHint: {x: 60.74003, y: -35.534145, z: -28.965847}
+--- !u!1 &467682114976201756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5390038964296461442}
+  m_Layer: 0
+  m_Name: LineOfSight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5390038964296461442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467682114976201756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3128209290985583541}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &598964084566939244
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,6 +492,7 @@ Transform:
   m_Children:
   - {fileID: 5226970147381985248}
   - {fileID: 1600147434256046225}
+  - {fileID: 5390038964296461442}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &3599751863125033876
@@ -486,6 +518,7 @@ MonoBehaviour:
   <DamageAmount>k__BackingField: 20
   <AttackKnockback>k__BackingField: 20
   <MovementSpeed>k__BackingField: 3
+  <ChasePlayer>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 10
   <PlayerAttackRange>k__BackingField: 1.25
 --- !u!195 &3395640317378984621
