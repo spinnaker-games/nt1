@@ -25,6 +25,11 @@ public class EnemyDamageState : EnemyBaseState
 
         if (_duration <= 0f)
         {
+            if (_stateMachine.IsTarget)
+            {
+                _stateMachine.SwitchState(new EnemyEscapeState(_stateMachine));
+                return;
+            }
             _stateMachine.SwitchState(new EnemyIdleState(_stateMachine));
         }
     }

@@ -15,6 +15,7 @@ public class EnemyEscapeState : EnemyBaseState
     public override void Enter()
     {
         _stateMachine.Animator.CrossFadeInFixedTime(LocomotionBlendTreeHash, CrossFadeDuration);
+        Debug.Log("TARGET IS ESCAPING");
     }
 
     public override void Tick(float deltaTime)

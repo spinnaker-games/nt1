@@ -22,7 +22,13 @@ public class EnemyIdleState : EnemyBaseState
     public override void Tick(float deltaTime)
     {
         Move(deltaTime);
-    
+
+        if (CanSeePlayer(10f, 90f) && _stateMachine.IsTarget)
+        {
+            _stateMachine.SwitchState(new EnemyEscapeState(_stateMachine));
+            return;
+        }
+
         if (CanSeePlayer(10f, 90f) && IsInChaseRange()) //TODO: Magic numbers 
         {
             _stateMachine.SwitchState(new EnemyChasingState(_stateMachine));

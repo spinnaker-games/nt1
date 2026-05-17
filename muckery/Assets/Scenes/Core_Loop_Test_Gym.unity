@@ -447,12 +447,20 @@ PrefabInstance:
       propertyPath: _morphableType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5892323916242743584, guid: be8f25b883e8f494d8742231526fd61a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7808490280632833006, guid: be8f25b883e8f494d8742231526fd61a, type: 3}
       propertyPath: m_Name
       value: PropaneTank
       objectReference: {fileID: 0}
     - target: {fileID: 8514845208126554497, guid: be8f25b883e8f494d8742231526fd61a, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790681380378070183, guid: be8f25b883e8f494d8742231526fd61a, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
