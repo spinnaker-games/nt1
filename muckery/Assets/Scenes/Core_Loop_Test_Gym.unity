@@ -93,8 +93,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: db143be1f2cd9a940844384a0109fe1c, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 8cb9d78d2b5caec41b7d8f44745b8e79, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: d6b84ff1914b46b4cb32a5b2f663b8eb, type: 2}
+  m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -188,32 +188,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &168858951 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6465080435608425366, guid: 89bdc34b38c39ff4d8b9c7f8b3811154, type: 3}
-  m_PrefabInstance: {fileID: 5235069468639291758}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &168858953
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168858951}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0000002, y: 2.1, z: 0.9240509}
-  m_Center: {x: 0.5000001, y: 1.05, z: 0.108792365}
 --- !u!1 &397332647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,9 +1241,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6465080435608425366, guid: 89bdc34b38c39ff4d8b9c7f8b3811154, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 168858953}
     - targetCorrespondingSourceObject: {fileID: 2748899733033094893, guid: 89bdc34b38c39ff4d8b9c7f8b3811154, type: 3}
       insertIndex: -1
       addedObject: {fileID: 607264442}

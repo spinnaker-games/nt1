@@ -22,7 +22,8 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float WaypointIdleTime { get; set; }
     [field: SerializeField] public bool IsTarget { get; set; } = false;
     [field: SerializeField] public Transform TargetEscape { get; set; }
-    
+
+    public bool IsDead { get; set; } //TODO: expose????
     public int CurrentWaypointIndex { get; set; }
     public int WaypointDirection { get; set; } = 1;
 
@@ -30,6 +31,7 @@ public class EnemyStateMachine : StateMachine
 
     void Start()
     {
+        IsDead = false;
         Player = GameObject.FindGameObjectWithTag("Player"); //TODO: Evaluate if there is a better way to get player component
         NavMeshAgent.updatePosition = false;//by default, we do not want the agent to move
         NavMeshAgent.updateRotation = false;

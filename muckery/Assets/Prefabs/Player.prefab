@@ -331,7 +331,7 @@ MonoBehaviour:
   <DodgeDistance>k__BackingField: 4
   <JumpForce>k__BackingField: 5
   <Knife>k__BackingField: {fileID: 5046965239100303846}
-  <KnifeDamageAmount>k__BackingField: 5
+  <KnifeDamageAmount>k__BackingField: 50
   <KnifeKnockback>k__BackingField: 1
   <PropaneTank>k__BackingField: {fileID: 4572522169700020235}
   <BananaPeel>k__BackingField: {fileID: 7973235947033810766}

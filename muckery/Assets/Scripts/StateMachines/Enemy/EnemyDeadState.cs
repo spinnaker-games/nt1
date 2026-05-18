@@ -11,6 +11,11 @@ public class EnemyDeadState : EnemyBaseState
         _stateMachine.Ragdoll.ToggleRagdoll(true);
         _stateMachine.Weapon.gameObject.SetActive(false);
         GameObject.Destroy(_stateMachine.Target); //TODO: Object pool
+
+        GameSession.Instance.MarkTargetEliminated(); //TODO: Fix Tight Coupling
+
+        Debug.Log("TARGET ELIMINATED!!! EXTRACTION NOW AVAILLABLE!!!");
+        _stateMachine.IsDead = true;
     }
 
     public override void Tick(float deltaTime)

@@ -1,16 +1,31 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerExit : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] string _victorySceneName;
+
+    void OnTriggerEnter(Collider other)
     {
-        
+        if (!other.CompareTag("Player")) return;
+
+        if (!GameSession.Instance.TargetEliminated)
+        {
+            Debug.Log("CANNOT EXTRACT! TARGET IS STILL ALIVE!");
+            return;
+        }
+
+        LoadSceneByName();
     }
 
-    // Update is called once per frame
-    void Update()
+    void LoadSceneByName()
     {
-        
+        if ( string.IsNullOrWhiteSpace( _victorySceneName ) )
+        {
+            Debug.LogWarning( "Scene name is empty." );
+            return;
+        }
+
+        SceneManager.LoadScene( _victorySceneName );
     }
 }
