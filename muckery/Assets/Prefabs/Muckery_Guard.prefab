@@ -487,7 +487,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
   m_LocalPosition: {x: 9.919, y: 4.135, z: 10.08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5226970147381985248}
@@ -519,8 +519,13 @@ MonoBehaviour:
   <AttackKnockback>k__BackingField: 20
   <MovementSpeed>k__BackingField: 3
   <ChasePlayer>k__BackingField: 0
+  <EyeHeight>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 10
   <PlayerAttackRange>k__BackingField: 1.25
+  <Waypoints>k__BackingField: []
+  <WaypointIdleTime>k__BackingField: 0
+  <IsTarget>k__BackingField: 0
+  <TargetEscape>k__BackingField: {fileID: 0}
 --- !u!195 &3395640317378984621
 NavMeshAgent:
   m_ObjectHideFlags: 0
