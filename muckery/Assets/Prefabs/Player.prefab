@@ -322,6 +322,8 @@ MonoBehaviour:
   <ForceReceiver>k__BackingField: {fileID: 4913471925215069970}
   <Health>k__BackingField: {fileID: 4653779621868331263}
   <Ragdoll>k__BackingField: {fileID: 5170993173395392611}
+  <GameOverSceneName>k__BackingField: Game_Over_Scene_Dead
+  <PostDeathDelay>k__BackingField: 2
   <PlayerModel>k__BackingField: {fileID: 3202022680325112496}
   <LedgeDetector>k__BackingField: {fileID: 1530618723154072696}
   <FreeLookMovementSpeed>k__BackingField: 6
@@ -423,7 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1974045c771dc324ab95a7120e9eca50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  _maxHealth: 100
+  _maxHealth: 20
 --- !u!114 &5170993173395392611
 MonoBehaviour:
   m_ObjectHideFlags: 0

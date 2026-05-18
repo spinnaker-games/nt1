@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d463237da43f2104f804d6f4e4cace2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetExit
-  _gameOverSceneName: Game_Over_Scene
+  _gameOverSceneName: Game_Over_Scene_Escape
 --- !u!65 &8976423377866873995
 BoxCollider:
   m_ObjectHideFlags: 0

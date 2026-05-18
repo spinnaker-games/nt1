@@ -12,8 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Core_Loop_Test_Gym.unity
     guid: b0b8dd5c34739bf41873642575309b13
   - enabled: 1
-    path: Assets/Scenes/UI/Game_Over_Scene.unity
+    path: Assets/Scenes/UI/Game_Over_Scene_Escape.unity
     guid: 5416a7393980fbc4489a6b2ceb8e0151
+  - enabled: 1
+    path: Assets/Scenes/UI/Game_Over_Scene_Dead.unity
+    guid: 3c6316663f6b11b42965e424d0165210
   - enabled: 1
     path: Assets/Scenes/UI/Victory_Screen.unity
     guid: 883c0a497177efd47a9773432cdea706
