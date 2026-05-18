@@ -99,6 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5627132471868215303}
+  - component: {fileID: 1603882828140155633}
   m_Layer: 0
   m_Name: TargetExit
   m_TagString: Untagged
@@ -123,6 +124,18 @@ Transform:
   - {fileID: 9102740862869000548}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1603882828140155633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160382647729454933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d463237da43f2104f804d6f4e4cace2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetExit
 --- !u!1001 &9105580104930252198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,39 +204,10 @@ PrefabInstance:
     - {fileID: 64390202704256464, guid: e025362a5346a474ba28d4f1c1eee293, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1024562954466752, guid: e025362a5346a474ba28d4f1c1eee293, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4286129461825246059}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e025362a5346a474ba28d4f1c1eee293, type: 3}
 --- !u!4 &9102740862869000548 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4198256200778946, guid: e025362a5346a474ba28d4f1c1eee293, type: 3}
   m_PrefabInstance: {fileID: 9105580104930252198}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9105758416378798182 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1024562954466752, guid: e025362a5346a474ba28d4f1c1eee293, type: 3}
-  m_PrefabInstance: {fileID: 9105580104930252198}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &4286129461825246059
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9105758416378798182}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0000002, y: 2.1, z: 0.9240509}
-  m_Center: {x: 0.5000001, y: 1.05, z: 0.108792365}

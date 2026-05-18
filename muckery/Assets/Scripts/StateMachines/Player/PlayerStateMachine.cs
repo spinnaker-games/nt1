@@ -37,8 +37,8 @@ public class PlayerStateMachine : StateMachine
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false; //TODO: Find better way to handle mouse visibility
 
         MainCameraTransform = Camera.main.transform;
 
