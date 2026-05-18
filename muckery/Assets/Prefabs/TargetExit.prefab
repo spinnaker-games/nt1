@@ -100,6 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5627132471868215303}
   - component: {fileID: 1603882828140155633}
+  - component: {fileID: 8976423377866873995}
   m_Layer: 0
   m_Name: TargetExit
   m_TagString: Untagged
@@ -136,6 +137,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d463237da43f2104f804d6f4e4cace2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetExit
+  _gameOverSceneName: Game_Over_Scene
+--- !u!65 &8976423377866873995
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160382647729454933}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000002, y: 2.1, z: 1.3383136}
+  m_Center: {x: 0.5000001, y: 1.05, z: 0.31592375}
 --- !u!1001 &9105580104930252198
 PrefabInstance:
   m_ObjectHideFlags: 0
