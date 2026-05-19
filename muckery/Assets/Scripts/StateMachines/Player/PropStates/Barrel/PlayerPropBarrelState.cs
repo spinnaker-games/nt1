@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerPropBananaPeelState : PlayerBaseState
+public class PlayerPropBarrelPeelState : PlayerBaseState
 {
     bool _shouldFadeAnim;
     readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
@@ -8,7 +8,7 @@ public class PlayerPropBananaPeelState : PlayerBaseState
     const float AnimatorDampTime = 0.075f;
     const float CrossFadeDuration = 0.2f;
 
-    public PlayerPropBananaPeelState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
+    public PlayerPropBarrelPeelState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
     {
         this._shouldFadeAnim = shouldFadeAnim;
     }
@@ -34,7 +34,8 @@ public class PlayerPropBananaPeelState : PlayerBaseState
         }
 
         _stateMachine.PlayerModel.SetActive(false);
-        _stateMachine.BananaPeel.SetActive(true);
+        _stateMachine.Barrel.SetActive(true);
+        _stateMachine.CharacterController.radius = _stateMachine.BarreControllerRadius;
     }
 
     public override void Tick(float deltaTime)
@@ -64,7 +65,7 @@ public class PlayerPropBananaPeelState : PlayerBaseState
         _stateMachine.InputReader.JumpActivateEvent -= OnJump;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
 
-        _stateMachine.BananaPeel.SetActive(false);
+        _stateMachine.Barrel.SetActive(false);
     }
 
     Vector3 CalculateMovement()//TODO: Investigate adding this to base class
@@ -123,7 +124,7 @@ public class PlayerPropBananaPeelState : PlayerBaseState
 
     void OnJump()
     {
-        _stateMachine.SwitchState(new PlayerPropBananaPeelJumpingState(_stateMachine));
+        _stateMachine.SwitchState(new PlayerPropBarrelPeelJumpingState(_stateMachine));
     }
 
     void OnMorph()

@@ -24,6 +24,9 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.InputReader.JumpActivateEvent += OnJump;
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
 
+        _stateMachine.CharacterController.radius = _stateMachine.DefaultCharControllerRadius;
+        _stateMachine.CharacterController.height = _stateMachine.DefaultCharControllerHeight;
+
         _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0f); //prevents player from being in the middle of another animation when this state begins
 
         if (_shouldFadeAnim)
@@ -145,8 +148,8 @@ public class PlayerFreeLookState : PlayerBaseState
                 _stateMachine.SwitchState(new PlayerPropPropaneState(_stateMachine));
                 break;
 
-            case Morphable.MorphableType.BananaPeel:
-                _stateMachine.SwitchState(new PlayerPropBananaPeelState(_stateMachine));
+            case Morphable.MorphableType.Barrel:
+                _stateMachine.SwitchState(new PlayerPropBarrelPeelState(_stateMachine));
                 break;
             //ADD NEW PROP STATES HERE
         }

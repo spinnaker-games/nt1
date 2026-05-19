@@ -21,6 +21,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float JumpForce { get; set; }
 
     [Header("Prop Settings")]
+    public bool IsDisguised { get; set; } //TODO: expose????
     public Morphable CurrentMorphable { get; set; }
     public Morphable LastMorphable { get; set; }
     [field: SerializeField] public GameObject Knife { get; set; }
@@ -29,7 +30,9 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public GameObject PropaneTank { get; set; }
 
-    [field: SerializeField] public GameObject BananaPeel { get; set; }
+    [field: SerializeField] public GameObject Barrel { get; set; }
+    [field: SerializeField] public float BarreControllerRadius { get; set; }
+    [field: SerializeField] public float BarreControllerHeight { get; set; }
 
     [field: SerializeField] public GameObject Safe { get; set; }
 
@@ -37,12 +40,18 @@ public class PlayerStateMachine : StateMachine
     public float PreviousDodgeTime { get; set; } = Mathf.NegativeInfinity; //prevents the first dodge from having strange behaviour
     public Transform MainCameraTransform { get; set; }
 
+    public float DefaultCharControllerRadius { get; set; }
+    public float DefaultCharControllerHeight { get; set; }
+
     void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false; //TODO: Find better way to handle mouse visibility
 
         MainCameraTransform = Camera.main.transform;
+
+        DefaultCharControllerRadius = CharacterController.radius;
+        DefaultCharControllerHeight = CharacterController.height;
 
         SwitchState(new PlayerFreeLookState(this));
     }

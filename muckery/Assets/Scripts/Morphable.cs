@@ -4,13 +4,15 @@ using UnityEditor;
 
 using UnityEngine;
 
-public class Morphable : MonoBehaviour
+public class Morphable : MonoBehaviour //TODO: create IMorphable interface
 {
+    [field: SerializeField] public bool IsDisguise { get; private set; }
+
     public enum MorphableType
     {
         Knife,
         PropaneTank,
-        BananaPeel
+        Barrel
     }
 
     [SerializeField] MorphableType _morphableType;
@@ -20,7 +22,7 @@ public class Morphable : MonoBehaviour
     [Header( "Visuals" )]
     [SerializeField] GameObject _knife;
     [SerializeField] GameObject _propaneTank;
-    [SerializeField] GameObject _bananaPeel;
+    [SerializeField] GameObject _barrel;
 
     [Header( "UI" )]
     [SerializeField] GameObject _morphButton;
@@ -82,6 +84,6 @@ public class Morphable : MonoBehaviour
 
         if ( _propaneTank != null ) _propaneTank.SetActive( _morphableType == MorphableType.PropaneTank );
 
-        if ( _bananaPeel != null ) _bananaPeel.SetActive( _morphableType == MorphableType.BananaPeel );
+        if ( _barrel != null ) _barrel.SetActive( _morphableType == MorphableType.Barrel );
     }
 }

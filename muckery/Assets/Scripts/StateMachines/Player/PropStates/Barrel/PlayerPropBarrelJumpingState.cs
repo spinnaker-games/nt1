@@ -1,41 +1,39 @@
 using UnityEngine;
 
-public class PlayerPropBananaPeelFallingState : PlayerBaseState
+public class PlayerPropBarrelPeelJumpingState : PlayerBaseState
 {
-    readonly int JumpEndAnimHash = Animator.StringToHash("JumpEnd");
+    readonly int JumpBeginAnimHash = Animator.StringToHash("JumpBegin");
 
     Vector3 _momentum; //TODO: better name????
 
     const float CrossFadeDuration = 0.2f;
 
-    public PlayerPropBananaPeelFallingState(PlayerStateMachine stateMachine) : base(stateMachine)
+    public PlayerPropBarrelPeelJumpingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
 
     public override void Enter()
     {
+        _stateMachine.ForceReceiver.Jump(_stateMachine.JumpForce);
+
         _momentum = _stateMachine.CharacterController.velocity;
         _momentum.y = 0;
 
-        _stateMachine.Animator.CrossFadeInFixedTime(JumpEndAnimHash, CrossFadeDuration);
+        _stateMachine.Animator.CrossFadeInFixedTime(JumpBeginAnimHash, CrossFadeDuration);
 
         _stateMachine.LedgeDetector.OnLedgeDetect += HandleLedgeDetect;
+
+        _stateMachine.Barrel.SetActive(true);
     }
 
     public override void Tick(float deltaTime)
     {
         Move(_momentum, deltaTime);
 
-        if (_stateMachine.CharacterController.isGrounded)
+        if (_stateMachine.CharacterController.velocity.y <= 0)
         {
-            if (_stateMachine.Targeter.CurrentTarget != null)
-            {
-                //_stateMachine.SwitchState(new PlayerTargetingState(_stateMachine));
-            }
-            else
-            {
-                _stateMachine.SwitchState(new PlayerPropBananaPeelState(_stateMachine));//TODO: Add support for returning to other camera states by caching lastKnownCameraState
-            }
+            _stateMachine.SwitchState(new PlayerPropBarrelPeelFallingState(_stateMachine));
+            return;
         }
 
         FaceTarget();

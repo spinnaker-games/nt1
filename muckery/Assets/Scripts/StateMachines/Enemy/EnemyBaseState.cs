@@ -61,6 +61,10 @@ public abstract class EnemyBaseState : State
     {
         if ( _stateMachine.Player == null ) { return false; }
 
+        PlayerStateMachine player = _stateMachine.Player.GetComponent<PlayerStateMachine>();
+
+        if (player.IsDisguised) { return false; } //TODO: Also check for player Movement
+
         Transform playerTransform = _stateMachine.Player.transform;
 
         Vector3 origin = _stateMachine.transform.position + Vector3.up * _stateMachine.EyeHeight;//TODO: Understand Vector math that creates the raycast
