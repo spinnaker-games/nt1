@@ -24,9 +24,6 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.InputReader.JumpActivateEvent += OnJump;
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
 
-        _stateMachine.CharacterController.radius = _stateMachine.DefaultCharControllerRadius;
-        _stateMachine.CharacterController.height = _stateMachine.DefaultCharControllerHeight;
-
         _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0f); //prevents player from being in the middle of another animation when this state begins
 
         if (_shouldFadeAnim)
@@ -39,12 +36,17 @@ public class PlayerFreeLookState : PlayerBaseState
         }
 
         _stateMachine.PlayerModel.SetActive(true);
+
+        _stateMachine.IsDisguised = false;
     }
 
     public override void Tick(float deltaTime)
     {    
         Vector3 movement = CalculateMovement();
         Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
+
+        _stateMachine.IsMoving = _stateMachine.InputReader.MovementValue != Vector2.zero;
+        //Debug.Log("Player Movement = " + _stateMachine.IsMoving + "Disguise " + _stateMachine.IsDisguised);
 
         if (_stateMachine.InputReader.MovementValue == Vector2.zero)
         {

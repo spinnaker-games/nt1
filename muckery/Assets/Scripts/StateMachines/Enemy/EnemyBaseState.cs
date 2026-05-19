@@ -63,7 +63,7 @@ public abstract class EnemyBaseState : State
 
         PlayerStateMachine player = _stateMachine.Player.GetComponent<PlayerStateMachine>();
 
-        if (player.IsDisguised) { return false; } //TODO: Also check for player Movement
+        if (player.IsDisguised && !player.IsMoving) { return false; }
 
         Transform playerTransform = _stateMachine.Player.transform;
 

@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class Morphable : MonoBehaviour //TODO: create IMorphable interface
 {
-    [field: SerializeField] public bool IsDisguise { get; private set; }
-
     public enum MorphableType
     {
         Knife,

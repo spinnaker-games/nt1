@@ -338,9 +338,6 @@ MonoBehaviour:
   <KnifeKnockback>k__BackingField: 1
   <PropaneTank>k__BackingField: {fileID: 4572522169700020235}
   <Barrel>k__BackingField: {fileID: 5925173703688479011}
-  <BarreControllerRadius>k__BackingField: 0
-  <BarreControllerHeight>k__BackingField: 0
-  <Safe>k__BackingField: {fileID: 279575393055112401}
 --- !u!95 &5299276467586087753
 Animator:
   serializedVersion: 7
@@ -1500,11 +1497,11 @@ GameObject:
   - component: {fileID: 4506663500081607268}
   m_Layer: 0
   m_Name: SM_Prop_Barrel_Metal_01
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1168540635510567942
 Transform:
   m_ObjectHideFlags: 0

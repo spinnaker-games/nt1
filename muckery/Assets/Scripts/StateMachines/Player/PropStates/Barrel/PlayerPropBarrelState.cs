@@ -35,13 +35,18 @@ public class PlayerPropBarrelPeelState : PlayerBaseState
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.Barrel.SetActive(true);
-        _stateMachine.CharacterController.radius = _stateMachine.BarreControllerRadius;
+
+        _stateMachine.IsDisguised = true;//TODO: EXPOSE
     }
 
     public override void Tick(float deltaTime)
     {    
         Vector3 movement = CalculateMovement();
         Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
+
+        
+        _stateMachine.IsMoving = _stateMachine.InputReader.MovementValue != Vector2.zero;
+        //Debug.Log("Player Movement = " + _stateMachine.IsMoving + "Disguise " + _stateMachine.IsDisguised);
 
         if (_stateMachine.InputReader.MovementValue == Vector2.zero)
         {
