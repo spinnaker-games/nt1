@@ -67,28 +67,6 @@ public class PlayerPropPropaneState : PlayerBaseState
         _stateMachine.PropaneTank.SetActive(false);
     }
 
-    Vector3 CalculateMovement()//TODO: Investigate adding this to base class
-    {
-        Vector3 forward = _stateMachine.MainCameraTransform.forward;
-        forward.y = 0;
-        forward.Normalize();
-
-        Vector3 right = _stateMachine.MainCameraTransform.right;
-        right.y = 0;
-        right.Normalize();
-
-        // Combine camera forward/right directions with input so movement is relative to the camera's facing direction
-        return (forward * _stateMachine.InputReader.MovementValue.y) + (right * _stateMachine.InputReader.MovementValue.x);
-    }
-
-    void FaceMovementDirection(Vector3 movement, float deltaTime) //TODO: Investigate adding this to base class
-    {
-        _stateMachine.transform.rotation = Quaternion.Lerp(
-            _stateMachine.transform.rotation,
-            Quaternion.LookRotation(movement),
-            deltaTime * _stateMachine.RotationDamping);
-    }
-
     void OnTarget()
     {
         if (!_stateMachine.Targeter.SelectTarget()) { return; }

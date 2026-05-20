@@ -45,14 +45,4 @@ public class PlayerAimingState : PlayerBaseState
     void OnAttack()
     {
     }
-
-    Vector3 CalculateMovement()
-    {
-        Vector3 movement = new Vector3();
-
-        movement += _stateMachine.transform.right * _stateMachine.InputReader.MovementValue.x;
-        movement += _stateMachine.transform.forward * _stateMachine.InputReader.MovementValue.y;
-
-        return movement;
-    }
 }

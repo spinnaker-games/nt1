@@ -4,8 +4,6 @@ public class PlayerJumpingState : PlayerBaseState
 {
     readonly int JumpBeginAnimHash = Animator.StringToHash("JumpBegin");
 
-    Vector3 _momentum; //TODO: better name????
-
     const float CrossFadeDuration = 0.2f;
 
     public PlayerJumpingState(PlayerStateMachine stateMachine) : base(stateMachine)
@@ -16,17 +14,24 @@ public class PlayerJumpingState : PlayerBaseState
     {
         _stateMachine.ForceReceiver.Jump(_stateMachine.JumpForce);
 
-        _momentum = _stateMachine.CharacterController.velocity;
-        _momentum.y = 0;
-
         _stateMachine.Animator.CrossFadeInFixedTime(JumpBeginAnimHash, CrossFadeDuration);
+
+        _stateMachine.IsMoving = _stateMachine.InputReader.MovementValue != Vector2.zero;
 
         _stateMachine.LedgeDetector.OnLedgeDetect += HandleLedgeDetect;
     }
 
     public override void Tick(float deltaTime)
     {
-        Move(_momentum, deltaTime);
+        Vector3 movement = CalculateMovement();
+        
+        //Call Move Twice: One for jumping and one for directional motion
+        //Move(_momentum, deltaTime);
+        Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
+        FaceMovementDirection(movement, deltaTime);
+
+
+        _stateMachine.IsMoving = _stateMachine.InputReader.MovementValue != Vector2.zero;
 
         if (_stateMachine.CharacterController.velocity.y <= 0)
         {
