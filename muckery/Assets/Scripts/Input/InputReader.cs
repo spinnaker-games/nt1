@@ -23,6 +23,7 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
     public event Action ChaseCameraActivateEvent;
     public event Action ChaseCameraCancelEvent;
     public event Action MorphActivateEvent;
+    public event Action AttackEvent;
 
     InputActions _inputActions;
 
@@ -46,14 +47,9 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            IsAttacking = true;//TODO: investigate switcing this to an action event like the other inputs.
-        }
-        else if (context.canceled)
-        {
-            IsAttacking = false;
-        }
+        if (!context.performed) { return; }
+
+        AttackEvent?.Invoke();
     }
 
     public void OnCrouch(InputAction.CallbackContext context)

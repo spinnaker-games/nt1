@@ -20,6 +20,8 @@ public class PlayerDeadState : PlayerBaseState
         _stateMachine.Animator.CrossFadeInFixedTime( DeathAnimHash, CrossFadeDuration );
         _isAnimationFinished = false;
         _hasStartedCoroutine = false;
+
+        _stateMachine.PlayerModel.SetActive(true);
     }
 
     public override void Tick( float deltaTime )

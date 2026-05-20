@@ -23,6 +23,7 @@ public class PlayerPropKnifeState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent += OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent += OnJump;
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
+        _stateMachine.InputReader.AttackEvent += OnAttack;
 
         if (_shouldFadeAnim)
         {
@@ -37,6 +38,12 @@ public class PlayerPropKnifeState : PlayerBaseState
         _stateMachine.Knife.SetActive(true);
 
         WeaponDamage weapon = _stateMachine.Knife.GetComponent<WeaponDamage>();
+
+        if ( weapon == null )
+        {
+            weapon = _stateMachine.Knife.GetComponentInChildren<WeaponDamage>( true ); // the true is an overload because GetComponentInChildren ignores inactive objects 
+        }
+
         weapon.SetAttack(_stateMachine.KnifeDamageAmount, _stateMachine.KnifeKnockback);
     }
 
@@ -66,6 +73,7 @@ public class PlayerPropKnifeState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent -= OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent -= OnJump;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+        _stateMachine.InputReader.AttackEvent -= OnAttack;
 
         _stateMachine.Knife.SetActive(false);
     }
@@ -132,5 +140,10 @@ public class PlayerPropKnifeState : PlayerBaseState
     void OnMorph()
     {
         _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );//TODO: Create Pre-Morph State
+    }
+
+    void OnAttack()
+    {
+        _stateMachine.SwitchState( new PlayerPropKnifeAttackingState( _stateMachine ) );//TODO: Create Pre-Morph State
     }
 }
