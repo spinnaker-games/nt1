@@ -25,8 +25,6 @@ public class PlayerPropKnifeJumpingState : PlayerBaseState
     {
         Vector3 movement = CalculateMovement();
         
-        //Call Move Twice: One for jumping and one for directional motion
-        //Move(_momentum, deltaTime);
         Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
         FaceMovementDirection(movement, deltaTime);
 
