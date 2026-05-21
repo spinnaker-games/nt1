@@ -20,6 +20,7 @@ public class EnemyAlertState : EnemyBaseState
 
     public override void Tick(float deltaTime)
     {
+        FacePlayer();
         Move(deltaTime);
 
         _duration -= deltaTime;

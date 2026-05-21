@@ -22,7 +22,7 @@ public class EnemyChasingState : EnemyBaseState
     {
         if (!IsInChaseRange())
         {
-            _stateMachine.SwitchState(new EnemyPatrolState(_stateMachine));
+            _stateMachine.SwitchState(new EnemyPlayerEscapedState(_stateMachine));
             return;
         }
         else if(IsInAttackRange()) // leaving IsInAttackRange in EnemyBaseState because i want some enemies to attack the player from states other than chasing state 
