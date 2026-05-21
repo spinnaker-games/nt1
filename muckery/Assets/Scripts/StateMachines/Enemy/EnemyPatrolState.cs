@@ -40,7 +40,7 @@ public class EnemyPatrolState : EnemyBaseState
         if (HasReachedWaypoint())
         {
             AdvanceWaypoint();
-            SetDestination();
+            _stateMachine.SwitchState(new EnemyIdleState(_stateMachine));
         }
 
         _stateMachine.Animator.SetFloat(SpeedHash, 1f, AnimatorDampTime, deltaTime);
