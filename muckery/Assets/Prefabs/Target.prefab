@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &134849764823122378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8662551728419473807}
+  m_Layer: 0
+  m_Name: WaypointA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8662551728419473807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134849764823122378}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.182, z: 0.223}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7932950195517679021}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &259021726599339532
 GameObject:
   m_ObjectHideFlags: 0
@@ -2223,6 +2254,7 @@ Transform:
   - {fileID: 972701964543059798}
   - {fileID: 9100500210214072335}
   - {fileID: 4522184500400534084}
+  - {fileID: 8662551728419473807}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &3643623538971203985
@@ -2248,11 +2280,14 @@ MonoBehaviour:
   <DamageAmount>k__BackingField: 20
   <AttackKnockback>k__BackingField: 20
   <MovementSpeed>k__BackingField: 3
+  <IdleDuration>k__BackingField: 0
+  <EndlessIdle>k__BackingField: 0
   <ChasePlayer>k__BackingField: 0
   <EyeHeight>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 10
   <PlayerAttackRange>k__BackingField: 1.25
-  <Waypoints>k__BackingField: []
+  <Waypoints>k__BackingField:
+  - {fileID: 8662551728419473807}
   <WaypointIdleTime>k__BackingField: 3
   <IsTarget>k__BackingField: 1
   <TargetEscape>k__BackingField: {fileID: 0}
