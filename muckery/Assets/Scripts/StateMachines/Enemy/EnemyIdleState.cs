@@ -37,7 +37,7 @@ public class EnemyIdleState : EnemyBaseState
 
         if ( CanSeePlayer( 10f, 90f ) && IsInChaseRange() )
         {
-            _stateMachine.SwitchState( new EnemyChasingState( _stateMachine ) );
+            _stateMachine.SwitchState( new EnemyAlertState( _stateMachine ) );
             return;
         }
 
