@@ -102,21 +102,5 @@ public class EnemyPatrolState : EnemyBaseState
             _stateMachine.CurrentWaypointIndex = 1;
             _stateMachine.WaypointDirection = 1;
         }
-}
-
-    void FaceMovementDirection( Vector3 direction, float deltaTime ) //TODO: Add this to the enemy base state????
-    {
-        direction.y = 0f;
-
-        if (direction.sqrMagnitude < 0.01f)
-            return;
-
-        Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
-
-        _stateMachine.transform.rotation = Quaternion.Slerp(
-            _stateMachine.transform.rotation,
-            targetRotation,
-            deltaTime * 10f
-        );
     }
 }
