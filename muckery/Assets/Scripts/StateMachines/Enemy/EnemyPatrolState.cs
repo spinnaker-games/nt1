@@ -79,12 +79,10 @@ public class EnemyPatrolState : EnemyBaseState
         if (_stateMachine.Waypoints == null || _stateMachine.Waypoints.Length == 0)
             return false;
 
-        float distance = Vector3.Distance(
-            _stateMachine.transform.position,
-            CurrentWaypoint.position
-        );
+        if (_stateMachine.NavMeshAgent.pathPending)
+            return false;
 
-        return distance <= WaypointReachThreshold;
+        return _stateMachine.NavMeshAgent.remainingDistance <= WaypointReachThreshold;
     }
 
     void AdvanceWaypoint()
@@ -106,7 +104,7 @@ public class EnemyPatrolState : EnemyBaseState
         }
 }
 
-    void FaceMovementDirection( Vector3 direction, float deltaTime )
+    void FaceMovementDirection( Vector3 direction, float deltaTime ) //TODO: Add this to the enemy base state????
     {
         direction.y = 0f;
 
