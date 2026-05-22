@@ -57,17 +57,17 @@ public abstract class EnemyBaseState : State
         return playerDistanceSqr <= _stateMachine.PlayerAttackRange * _stateMachine.PlayerAttackRange;
     }
 
-    protected bool CanSeePlayer( float viewDistance, float viewAngle )
+    protected bool CanSeePlayer( float viewDistance, float viewAngle ) //TODO: Make Raycast Feild of View component
     {
         if ( _stateMachine.Player == null ) { return false; }
 
         PlayerStateMachine player = _stateMachine.Player.GetComponent<PlayerStateMachine>();
 
-        if (player.IsDisguised && !player.IsMoving) { return false; }
+        if ( player.IsDisguised && !player.IsMoving ) { return false; }
 
         Transform playerTransform = _stateMachine.Player.transform;
 
-        Vector3 origin = _stateMachine.transform.position + Vector3.up * _stateMachine.EyeHeight;//TODO: Understand Vector math that creates the raycast
+        Vector3 origin = _stateMachine.transform.position + Vector3.up * _stateMachine.EyeHeight;
         Vector3 target = playerTransform.position + Vector3.up * _stateMachine.EyeHeight;
 
         Vector3 toPlayer = target - origin;
@@ -76,20 +76,27 @@ public abstract class EnemyBaseState : State
         if ( distanceSqr > viewDistance * viewDistance ) { return false; }
 
         Vector3 forward = _stateMachine.transform.forward;
-        forward.y = 0;
+        forward.y = 0f;
         forward.Normalize();
 
-        Vector3 toPlayerDir = toPlayer;
-        toPlayerDir.y = 0;
+        Vector3 toPlayerDirFlat = toPlayer;
+        toPlayerDirFlat.y = 0f;
 
-        if ( toPlayerDir.sqrMagnitude < 0.0001f ) { return true; }
+        if ( toPlayerDirFlat.sqrMagnitude < 0.0001f ) { return true; }
 
-        toPlayerDir.Normalize();
+        toPlayerDirFlat.Normalize();
 
-        float angle = Vector3.Angle( forward, toPlayerDir );
+        float angle = Vector3.Angle( forward, toPlayerDirFlat );
         if ( angle > viewAngle * 0.5f ) { return false; }
 
-        if ( Physics.Raycast( origin, toPlayerDir, out RaycastHit hit, viewDistance ) )
+        Vector3 rayDir = ( target - origin );
+        float rayDist = rayDir.magnitude;
+
+        if ( rayDist < 0.0001f ) { return true; }
+
+        rayDir /= rayDist;
+
+        if ( Physics.Raycast( origin, rayDir, out RaycastHit hit, rayDist ) )
         {
             if ( hit.transform != playerTransform )
             {

@@ -31,7 +31,7 @@ public class EnemyPatrolState : EnemyBaseState
             return;
         }
 
-        if (CanSeePlayer(10f, 90f) && IsInChaseRange())
+        if (CanSeePlayer(8f, 90f) && IsInChaseRange())
         {
             _stateMachine.SwitchState(new EnemyAlertState(_stateMachine));
             return;
