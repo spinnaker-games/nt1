@@ -673,7 +673,7 @@ Transform:
   m_GameObject: {fileID: 5589419714669512396}
   serializedVersion: 2
   m_LocalRotation: {x: 0.30430353, y: -0.54156363, z: 0.21902624, w: 0.75241995}
-  m_LocalPosition: {x: 26.407162, y: 2.7647038, z: 3.1354587}
+  m_LocalPosition: {x: -4.3635626, y: 2.7647042, z: 1.7994568}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -919,6 +919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6073245065980736587}
   - component: {fileID: 8756734213370765654}
+  - component: {fileID: 6469011398249347629}
   m_Layer: 0
   m_Name: GameSession
   m_TagString: Untagged
@@ -960,6 +961,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a51647ad5e26ea42b196da53918c687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameSession
+--- !u!114 &6469011398249347629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8109227774025959374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be06b3ec0de06b4b9a0bb648305e059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorLock
+  _lockCursor: 1
 --- !u!1001 &137455110094149880
 PrefabInstance:
   m_ObjectHideFlags: 0
