@@ -117,7 +117,29 @@ public class PlayerPropKnifeState : PlayerBaseState
 
     void OnMorph()
     {
-        _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );//TODO: Create Pre-Morph State
+        Morphable target = _stateMachine.CurrentMorphable;
+
+        if (target == null)
+            target = _stateMachine.LastMorphable;
+
+        if (target == null)
+            return;
+
+        switch (target.Type)
+        {
+            case Morphable.MorphableType.Knife:
+                _stateMachine.SwitchState(new PlayerFreeLookState(_stateMachine)); //TODO: Investigate more elegant solution
+                break;
+
+            case Morphable.MorphableType.PropaneTank:
+                _stateMachine.SwitchState(new PlayerPropPropaneState(_stateMachine));
+                break;
+
+            case Morphable.MorphableType.Barrel:
+                _stateMachine.SwitchState(new PlayerPropBarrelPeelState(_stateMachine));
+                break;
+            //ADD NEW PROP STATES HERE
+        }
     }
 
     void OnAttack()
