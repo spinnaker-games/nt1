@@ -39,25 +39,36 @@ public abstract class EnemyBaseState : State
         _stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);//TODO: implement smooth turning
     }
 
-    protected bool IsInChaseRange()
+    protected bool IsInChaseRange() //TODO: Create a GetDistanceToPlayerSqr function
     {
-        if (_stateMachine.Player.GetComponent<Health>().IsDead) { return false; }
+        if ( _stateMachine.Player.GetComponent<Health>().IsDead ) { return false; }
 
-        float playerDistanceSqr = (_stateMachine.Player.transform.position - _stateMachine.transform.position).sqrMagnitude;
+        Vector3 origin = _stateMachine.transform.position + Vector3.up * _stateMachine.EyeHeight;
+        Vector3 target = _stateMachine.Player.transform.position + Vector3.up * _stateMachine.EyeHeight;
 
-        return playerDistanceSqr <= _stateMachine.PlayerChasingRange * _stateMachine.PlayerChasingRange;
+        Vector3 toPlayer = target - origin;
+
+        float distanceSqr = toPlayer.sqrMagnitude;
+
+        return distanceSqr <= _stateMachine.PlayerChasingRange * _stateMachine.PlayerChasingRange;
     }
 
-    protected bool IsInAttackRange()
+    protected bool IsInAttackRange() //TODO: Create a GetDistanceToPlayerSqr function
     {
-        if (_stateMachine.Player.GetComponent<Health>().IsDead) { return false; }
+        if ( _stateMachine.Player.GetComponent<Health>().IsDead ) { return false; }
 
-        float playerDistanceSqr = (_stateMachine.Player.transform.position - _stateMachine.transform.position).sqrMagnitude;
+        Vector3 origin = _stateMachine.transform.position + Vector3.up * _stateMachine.EyeHeight;
+        Vector3 target = _stateMachine.Player.transform.position + Vector3.up * _stateMachine.EyeHeight;
 
-        return playerDistanceSqr <= _stateMachine.PlayerAttackRange * _stateMachine.PlayerAttackRange;
+        Vector3 toPlayer = target - origin;
+
+        float distanceSqr = toPlayer.sqrMagnitude;
+
+        return distanceSqr <= _stateMachine.PlayerAttackRange * _stateMachine.PlayerAttackRange;
     }
 
     protected bool CanSeePlayer( float viewDistance, float viewAngle ) //TODO: Make Raycast Feild of View component
+    //TODO: Create a GetDistanceToPlayerSqr function
     {
         if ( _stateMachine.Player == null ) { return false; }
 
