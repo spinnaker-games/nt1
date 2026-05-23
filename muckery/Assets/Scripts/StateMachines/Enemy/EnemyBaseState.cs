@@ -73,18 +73,7 @@ public abstract class EnemyBaseState : State
         return GetDistanceToPlayerSqr() <= _stateMachine.PlayerAttackRange * _stateMachine.PlayerAttackRange;
     }
 
-    bool IsPlayerInRange( float viewDistance )
-    {
-        Vector3 origin = _stateMachine.transform.position + Vector3.up;
-        Vector3 target = _stateMachine.Player.transform.position + Vector3.up;
-
-        float distanceSqr = ( target - origin ).sqrMagnitude;
-        float viewDistanceSqr = viewDistance * viewDistance;
-
-        return distanceSqr <= viewDistanceSqr;
-    }
-
-    bool IsPlayerInFOV( float viewAngle )
+    bool IsPlayerInFOV()
     {
         Vector3 forward = _stateMachine.transform.forward;
         forward.y = 0f;
@@ -98,7 +87,7 @@ public abstract class EnemyBaseState : State
 
         Vector3 dir = toPlayer / Mathf.Sqrt( sqrMag );
 
-        float halfAngleRad = viewAngle * 0.5f * Mathf.Deg2Rad;
+        float halfAngleRad = _stateMachine.FOV * 0.5f * Mathf.Deg2Rad;
         float cosThreshold = Mathf.Cos( halfAngleRad );
 
         float dot = Vector3.Dot( forward, dir ); //TODO: understand Vector3.Dot
@@ -140,13 +129,13 @@ public abstract class EnemyBaseState : State
         return _stateMachine.PlayerStateMachine != null && _stateMachine.PlayerStateMachine.IsMoving;
     }
 
-    protected bool CanSeePlayer( float viewDistance, float viewAngle )
+    protected bool CanSeePlayer()
     {
         if ( _stateMachine.PlayerStateMachine == null ) { return false; }
 
         if ( IsPlayerDisguised() && !IsPlayerMoving() ) { return false; }
-        if ( !IsPlayerInRange( viewDistance ) ) { return false; }
-        if ( !IsPlayerInFOV( viewAngle ) ) { return false; }
+        if ( !IsPlayerInChaseRange() ) { return false; }
+        if ( !IsPlayerInFOV() ) { return false; }
         if ( !HasLineOfSightToPlayer() ) { return false; }
 
         return true;

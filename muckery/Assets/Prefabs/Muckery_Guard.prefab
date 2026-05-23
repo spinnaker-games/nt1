@@ -514,12 +514,14 @@ MonoBehaviour:
   <Health>k__BackingField: {fileID: 920089245140630}
   <Target>k__BackingField: {fileID: 5275448125190350983}
   <Ragdoll>k__BackingField: {fileID: 4308943313686756044}
+  <FOV>k__BackingField: 90
   <Weapon>k__BackingField: {fileID: 368458365988500869}
   <DamageAmount>k__BackingField: 20
   <AttackKnockback>k__BackingField: 10
   <MovementSpeed>k__BackingField: 3
+  <IdleDuration>k__BackingField: 0
+  <EndlessIdle>k__BackingField: 0
   <ChasePlayer>k__BackingField: 0
-  <EyeHeight>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 10
   <PlayerAttackRange>k__BackingField: 1.25
   <Waypoints>k__BackingField: []

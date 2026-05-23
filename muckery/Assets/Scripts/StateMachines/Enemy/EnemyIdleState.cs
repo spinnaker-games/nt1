@@ -29,13 +29,13 @@ public class EnemyIdleState : EnemyBaseState
 
         _idleTimer -= deltaTime;
 
-        if ( CanSeePlayer( 10f, 90f ) && _stateMachine.IsTarget )
+        if ( CanSeePlayer() && _stateMachine.IsTarget )
         {
             _stateMachine.SwitchState( new EnemyEscapeState( _stateMachine ) );
             return;
         }
 
-        if ( CanSeePlayer( 10f, 90f ) && IsPlayerInChaseRange() )
+        if ( CanSeePlayer() )
         {
             _stateMachine.SwitchState( new EnemyAlertState( _stateMachine ) );
             return;
