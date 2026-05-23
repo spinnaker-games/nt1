@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerFreeLookState : PlayerBaseState
 {
@@ -110,28 +111,37 @@ public class PlayerFreeLookState : PlayerBaseState
 
     void OnMorph()
     {
+        _stateMachine.StartCoroutine( MorphRoutine() ); // states are not mono behaviours, so we are borrowing this
+    }
+
+    IEnumerator MorphRoutine()
+    {
         Morphable target = _stateMachine.CurrentMorphable;
 
         if (target == null)
             target = _stateMachine.LastMorphable;
 
         if (target == null)
-            return;
+            yield break;
+
+        _stateMachine.PlayerModel.SetActive(false);
+        _stateMachine.MorphVFX.Play();
+
+        yield return new WaitForSeconds( _stateMachine.MorphDuration );
 
         switch (target.Type)
         {
             case Morphable.MorphableType.Knife:
-                _stateMachine.SwitchState(new PlayerPropKnifeState(_stateMachine));
+                _stateMachine.SwitchState( new PlayerPropKnifeState( _stateMachine ) );
                 break;
 
             case Morphable.MorphableType.PropaneTank:
-                _stateMachine.SwitchState(new PlayerPropPropaneState(_stateMachine));
+                _stateMachine.SwitchState( new PlayerPropPropaneState( _stateMachine ) );
                 break;
 
             case Morphable.MorphableType.Barrel:
-                _stateMachine.SwitchState(new PlayerPropBarrelPeelState(_stateMachine));
+                _stateMachine.SwitchState( new PlayerPropBarrelState( _stateMachine ) );
                 break;
-            //ADD NEW PROP STATES HERE
         }
     }
 }

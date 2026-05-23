@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class PlayerPropBarrelPeelFallingState : PlayerBaseState
+public class PlayerPropBarrelFallingState : PlayerBaseState
 {
     readonly int JumpEndAnimHash = Animator.StringToHash("JumpEnd");
 
     const float CrossFadeDuration = 0.2f;
 
-    public PlayerPropBarrelPeelFallingState(PlayerStateMachine stateMachine) : base(stateMachine)
+    public PlayerPropBarrelFallingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
 
@@ -35,7 +35,7 @@ public class PlayerPropBarrelPeelFallingState : PlayerBaseState
             }
             else
             {
-                _stateMachine.SwitchState(new PlayerPropBarrelPeelState(_stateMachine));//TODO: Add support for returning to other camera states by caching lastKnownCameraState
+                _stateMachine.SwitchState(new PlayerPropBarrelState(_stateMachine));//TODO: Add support for returning to other camera states by caching lastKnownCameraState
             }
         }
 

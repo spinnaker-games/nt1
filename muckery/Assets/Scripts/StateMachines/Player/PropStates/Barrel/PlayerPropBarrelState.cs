@@ -1,6 +1,7 @@
 using UnityEngine;
+using System.Collections;
 
-public class PlayerPropBarrelPeelState : PlayerBaseState
+public class PlayerPropBarrelState : PlayerBaseState
 {
     bool _shouldFadeAnim;
     readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
@@ -8,7 +9,7 @@ public class PlayerPropBarrelPeelState : PlayerBaseState
     const float AnimatorDampTime = 0.075f;
     const float CrossFadeDuration = 0.2f;
 
-    public PlayerPropBarrelPeelState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
+    public PlayerPropBarrelState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
     {
         this._shouldFadeAnim = shouldFadeAnim;
     }
@@ -107,10 +108,17 @@ public class PlayerPropBarrelPeelState : PlayerBaseState
 
     void OnJump()
     {
-        _stateMachine.SwitchState(new PlayerPropBarrelPeelJumpingState(_stateMachine));
+        _stateMachine.SwitchState(new PlayerPropBarrelJumpingState(_stateMachine));
     }
 
     void OnMorph()
+    {
+        _stateMachine.Barrel.SetActive(false);
+        _stateMachine.MorphVFX.Play();
+        _stateMachine.StartCoroutine( MorphRoutine() ); // states are not mono behaviours, so we are borrowing this
+    }
+
+    IEnumerator MorphRoutine()
     {
         Morphable target = _stateMachine.CurrentMorphable;
 
@@ -118,22 +126,23 @@ public class PlayerPropBarrelPeelState : PlayerBaseState
             target = _stateMachine.LastMorphable;
 
         if (target == null)
-            return;
+            yield break;
+
+        yield return new WaitForSeconds( _stateMachine.MorphDuration );
 
         switch (target.Type)
         {
             case Morphable.MorphableType.Knife:
-                _stateMachine.SwitchState(new PlayerPropKnifeState(_stateMachine));
+                _stateMachine.SwitchState( new PlayerPropKnifeState( _stateMachine ) );
                 break;
 
             case Morphable.MorphableType.PropaneTank:
-                _stateMachine.SwitchState(new PlayerPropPropaneState(_stateMachine));
+                _stateMachine.SwitchState( new PlayerPropPropaneState( _stateMachine ) );
                 break;
 
             case Morphable.MorphableType.Barrel:
-                _stateMachine.SwitchState(new PlayerFreeLookState(_stateMachine)); //TODO: Investigate more elegant solution
+                _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );
                 break;
-            //ADD NEW PROP STATES HERE
         }
     }
 }

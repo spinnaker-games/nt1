@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class PlayerPropBarrelPeelJumpingState : PlayerBaseState
+public class PlayerPropBarrelJumpingState : PlayerBaseState
 {
     readonly int JumpBeginAnimHash = Animator.StringToHash("JumpBegin");
 
     const float CrossFadeDuration = 0.2f;
 
-    public PlayerPropBarrelPeelJumpingState(PlayerStateMachine stateMachine) : base(stateMachine)
+    public PlayerPropBarrelJumpingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
 
@@ -32,7 +32,7 @@ public class PlayerPropBarrelPeelJumpingState : PlayerBaseState
 
         if (_stateMachine.CharacterController.velocity.y <= 0)
         {
-            _stateMachine.SwitchState(new PlayerPropBarrelPeelFallingState(_stateMachine));
+            _stateMachine.SwitchState(new PlayerPropBarrelFallingState(_stateMachine));
             return;
         }
 

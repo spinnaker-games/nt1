@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -9,6 +10,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public ForceReceiver ForceReceiver { get; set; }
     [field: SerializeField] public Health Health { get; set; }
     [field: SerializeField] public Ragdoll Ragdoll { get; set; }
+    [field: SerializeField] public VisualEffect MorphVFX { get; set; }
+    [field: SerializeField] public float MorphDuration { get; set; }
     [field: SerializeField] public string GameOverSceneName { get; set; }
     [field: SerializeField] public float PostDeathDelay { get; set; }
     [field: SerializeField] public GameObject PlayerModel { get; set; }
