@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerFreeLookState : PlayerBaseState
 {
@@ -48,6 +49,8 @@ public class PlayerFreeLookState : PlayerBaseState
 
         _stateMachine.IsMoving = _stateMachine.InputReader.MovementValue != Vector2.zero;
         //Debug.Log("Player Movement = " + _stateMachine.IsMoving + "Disguise " + _stateMachine.IsDisguised);
+
+        HandleMoveSFX();
 
         if (_stateMachine.InputReader.MovementValue == Vector2.zero)
         {
@@ -142,6 +145,20 @@ public class PlayerFreeLookState : PlayerBaseState
             case Morphable.MorphableType.Barrel:
                 _stateMachine.SwitchState( new PlayerPropBarrelState( _stateMachine ) );
                 break;
+        }
+    }
+
+        void HandleMoveSFX()
+    {
+        if (_stateMachine.IsMoving)
+        {
+            if (!_stateMachine.MoveSFX.isPlaying)
+                _stateMachine.MoveSFX.Play();
+        }
+        else
+        {
+            if (_stateMachine.MoveSFX.isPlaying)
+                _stateMachine.MoveSFX.Stop();
         }
     }
 }

@@ -32,6 +32,9 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public GameObject Barrel { get; set; }
 
+    [Header("Audio Settings")]
+    [field: SerializeField] public AudioSource MoveSFX { get; set; }
+
     public bool IsDisguised { get; set; }
     public bool IsMoving { get; set; }
     public Morphable CurrentMorphable { get; set; }
