@@ -17,7 +17,6 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float IdleDuration { get; set; }
     [field: SerializeField] public bool EndlessIdle { get; set; } //TODO: Find better name
     [field: SerializeField] public bool ChasePlayer { get; set; }
-    [field: SerializeField] public float EyeHeight { get; set; }
     [field: SerializeField] public float PlayerChasingRange { get; set; }
     [field: SerializeField] public float PlayerAttackRange { get; set; }
     [field: SerializeField] public Transform[] Waypoints { get; set; }
@@ -28,6 +27,8 @@ public class EnemyStateMachine : StateMachine
     public bool IsDead { get; set; } //TODO: expose????
     public int CurrentWaypointIndex { get; set; }
     public int WaypointDirection { get; set; } = 1;
+    public PlayerStateMachine PlayerStateMachine { get; private set; }
+    public Health PlayerHealth { get; private set; }
 
     public GameObject Player { get; set; }
 
@@ -35,6 +36,8 @@ public class EnemyStateMachine : StateMachine
     {
         IsDead = false;
         Player = GameObject.FindGameObjectWithTag("Player"); //TODO: Evaluate if there is a better way to get player component
+        PlayerStateMachine = Player.GetComponent<PlayerStateMachine>();
+        PlayerHealth = Player.GetComponent<Health>();
         NavMeshAgent.updatePosition = false;//by default, we do not want the agent to move
         NavMeshAgent.updateRotation = false;
         SwitchState(new EnemyPatrolState(this));

@@ -39,68 +39,83 @@ public abstract class EnemyBaseState : State
         _stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);//TODO: implement smooth turning
     }
 
-    protected bool IsInChaseRange() //TODO: Create a GetDistanceToPlayerSqr function
+    bool IsPlayerDead()
     {
-        if ( _stateMachine.Player.GetComponent<Health>().IsDead ) { return false; }
-
-        Vector3 origin = _stateMachine.transform.position + Vector3.up * _stateMachine.EyeHeight;
-        Vector3 target = _stateMachine.Player.transform.position + Vector3.up * _stateMachine.EyeHeight;
-
-        Vector3 toPlayer = target - origin;
-
-        float distanceSqr = toPlayer.sqrMagnitude;
-
-        return distanceSqr <= _stateMachine.PlayerChasingRange * _stateMachine.PlayerChasingRange;
+        return _stateMachine.PlayerHealth.IsDead;
     }
 
-    protected bool IsInAttackRange() //TODO: Create a GetDistanceToPlayerSqr function
+    protected float GetDistanceToPlayerSqr()
     {
-        if ( _stateMachine.Player.GetComponent<Health>().IsDead ) { return false; }
+        if ( _stateMachine.Player == null )
+        {
+            return float.MaxValue;
+        }
 
-        Vector3 origin = _stateMachine.transform.position + Vector3.up * _stateMachine.EyeHeight;
-        Vector3 target = _stateMachine.Player.transform.position + Vector3.up * _stateMachine.EyeHeight;
+        Vector3 origin = _stateMachine.transform.position + Vector3.up;
+        Vector3 target = _stateMachine.Player.transform.position + Vector3.up;
 
         Vector3 toPlayer = target - origin;
 
-        float distanceSqr = toPlayer.sqrMagnitude;
-
-        return distanceSqr <= _stateMachine.PlayerAttackRange * _stateMachine.PlayerAttackRange;
+        return toPlayer.sqrMagnitude;
     }
 
-    protected bool CanSeePlayer( float viewDistance, float viewAngle ) //TODO: Make Raycast Feild of View component
-    //TODO: Create a GetDistanceToPlayerSqr function
+    protected bool IsPlayerInChaseRange()
     {
-        if ( _stateMachine.Player == null ) { return false; }
+        if (IsPlayerDead()) { return false; }
 
-        PlayerStateMachine player = _stateMachine.Player.GetComponent<PlayerStateMachine>();
+        return GetDistanceToPlayerSqr() <= _stateMachine.PlayerChasingRange * _stateMachine.PlayerChasingRange;
+    }
 
-        if ( player.IsDisguised && !player.IsMoving ) { return false; }
+    protected bool IsPlayerInAttackRange()
+    {
+        if (IsPlayerDead()) { return false; }
 
-        Transform playerTransform = _stateMachine.Player.transform;
+        return GetDistanceToPlayerSqr() <= _stateMachine.PlayerAttackRange * _stateMachine.PlayerAttackRange;
+    }
 
-        Vector3 origin = _stateMachine.transform.position + Vector3.up * _stateMachine.EyeHeight;
-        Vector3 target = playerTransform.position + Vector3.up * _stateMachine.EyeHeight;
+    bool IsPlayerInRange( float viewDistance )
+    {
+        Vector3 origin = _stateMachine.transform.position + Vector3.up;
+        Vector3 target = _stateMachine.Player.transform.position + Vector3.up;
 
-        Vector3 toPlayer = target - origin;
+        float distanceSqr = ( target - origin ).sqrMagnitude;
+        float viewDistanceSqr = viewDistance * viewDistance;
 
-        float distanceSqr = toPlayer.sqrMagnitude;
-        if ( distanceSqr > viewDistance * viewDistance ) { return false; }
+        return distanceSqr <= viewDistanceSqr;
+    }
 
+    bool IsPlayerInFOV( float viewAngle )
+    {
         Vector3 forward = _stateMachine.transform.forward;
         forward.y = 0f;
         forward.Normalize();
 
-        Vector3 toPlayerDirFlat = toPlayer;
-        toPlayerDirFlat.y = 0f;
+        Vector3 toPlayer = _stateMachine.Player.transform.position - _stateMachine.transform.position;
+        toPlayer.y = 0f;
 
-        if ( toPlayerDirFlat.sqrMagnitude < 0.0001f ) { return true; }
+        float sqrMag = toPlayer.sqrMagnitude;
+        if ( sqrMag < 0.0001f ) { return true; }
 
-        toPlayerDirFlat.Normalize();
+        Vector3 dir = toPlayer / Mathf.Sqrt( sqrMag );
 
-        float angle = Vector3.Angle( forward, toPlayerDirFlat );
-        if ( angle > viewAngle * 0.5f ) { return false; }
+        float halfAngleRad = viewAngle * 0.5f * Mathf.Deg2Rad;
+        float cosThreshold = Mathf.Cos( halfAngleRad );
 
-        Vector3 rayDir = ( target - origin );
+        float dot = Vector3.Dot( forward, dir ); //TODO: understand Vector3.Dot
+
+        return dot >= cosThreshold;
+    }
+
+    protected bool HasLineOfSightToPlayer()
+    {
+        if ( _stateMachine.Player == null ) { return false; }
+
+        Transform playerTransform = _stateMachine.Player.transform;
+
+        Vector3 origin = _stateMachine.transform.position + Vector3.up;
+        Vector3 target = playerTransform.position + Vector3.up;
+
+        Vector3 rayDir = target - origin;
         float rayDist = rayDir.magnitude;
 
         if ( rayDist < 0.0001f ) { return true; }
@@ -109,11 +124,30 @@ public abstract class EnemyBaseState : State
 
         if ( Physics.Raycast( origin, rayDir, out RaycastHit hit, rayDist ) )
         {
-            if ( hit.transform != playerTransform )
-            {
-                return false;
-            }
+            return hit.transform == playerTransform;
         }
+
+        return true;
+    }
+
+    bool IsPlayerDisguised()
+    {
+        return _stateMachine.PlayerStateMachine != null && _stateMachine.PlayerStateMachine.IsDisguised;
+    }
+
+    bool IsPlayerMoving()
+    {
+        return _stateMachine.PlayerStateMachine != null && _stateMachine.PlayerStateMachine.IsMoving;
+    }
+
+    protected bool CanSeePlayer( float viewDistance, float viewAngle )
+    {
+        if ( _stateMachine.PlayerStateMachine == null ) { return false; }
+
+        if ( IsPlayerDisguised() && !IsPlayerMoving() ) { return false; }
+        if ( !IsPlayerInRange( viewDistance ) ) { return false; }
+        if ( !IsPlayerInFOV( viewAngle ) ) { return false; }
+        if ( !HasLineOfSightToPlayer() ) { return false; }
 
         return true;
     }

@@ -20,12 +20,12 @@ public class EnemyChasingState : EnemyBaseState
 
     public override void Tick(float deltaTime)
     {
-        if (!IsInChaseRange())
+        if (!IsPlayerInChaseRange())
         {
             _stateMachine.SwitchState(new EnemyPlayerEscapedState(_stateMachine));
             return;
         }
-        else if(IsInAttackRange()) // leaving IsInAttackRange in EnemyBaseState because i want some enemies to attack the player from states other than chasing state 
+        else if(IsPlayerInAttackRange()) // leaving IsInAttackRange in EnemyBaseState because i want some enemies to attack the player from states other than chasing state 
         {
             _stateMachine.SwitchState(new EnemyAttackingState(_stateMachine));
             return;
