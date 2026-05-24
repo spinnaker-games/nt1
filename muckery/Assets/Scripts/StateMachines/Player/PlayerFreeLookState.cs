@@ -73,6 +73,8 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent -= OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent -= OnJump;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+
+        _stateMachine.MoveSFX.Stop();
     }
 
     void OnTarget()
@@ -129,6 +131,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.MorphVFX.Play();
+        _stateMachine.MorphSFX.Play();
 
         yield return new WaitForSeconds( _stateMachine.MorphDuration );
 

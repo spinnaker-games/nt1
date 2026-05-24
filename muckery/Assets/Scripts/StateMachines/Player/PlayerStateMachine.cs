@@ -34,6 +34,8 @@ public class PlayerStateMachine : StateMachine
 
     [Header("Audio Settings")]
     [field: SerializeField] public AudioSource MoveSFX { get; set; }
+    [field: SerializeField] public AudioSource JumpSFX { get; set; }
+    [field: SerializeField] public AudioSource MorphSFX { get; set; }
 
     public bool IsDisguised { get; set; }
     public bool IsMoving { get; set; }

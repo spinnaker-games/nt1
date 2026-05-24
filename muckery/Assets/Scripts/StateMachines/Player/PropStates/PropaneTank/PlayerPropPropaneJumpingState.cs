@@ -19,6 +19,8 @@ public class PlayerPropPropaneJumpingState : PlayerBaseState
         _stateMachine.LedgeDetector.OnLedgeDetect += HandleLedgeDetect;
 
         _stateMachine.PropaneTank.SetActive(true);
+
+        _stateMachine.JumpSFX.Play();
     }
 
     public override void Tick(float deltaTime)

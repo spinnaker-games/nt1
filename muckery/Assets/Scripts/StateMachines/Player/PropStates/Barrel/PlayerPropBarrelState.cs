@@ -115,6 +115,7 @@ public class PlayerPropBarrelState : PlayerBaseState
     {
         _stateMachine.Barrel.SetActive(false);
         _stateMachine.MorphVFX.Play();
+        _stateMachine.MorphSFX.Play();
         _stateMachine.StartCoroutine( MorphRoutine() ); // states are not mono behaviours, so we are borrowing this
     }
 

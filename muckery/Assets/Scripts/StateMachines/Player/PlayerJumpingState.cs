@@ -19,6 +19,8 @@ public class PlayerJumpingState : PlayerBaseState
         _stateMachine.IsMoving = _stateMachine.InputReader.MovementValue != Vector2.zero;
 
         _stateMachine.LedgeDetector.OnLedgeDetect += HandleLedgeDetect;
+
+        _stateMachine.JumpSFX.Play();
     }
 
     public override void Tick(float deltaTime)

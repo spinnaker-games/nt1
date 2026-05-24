@@ -19,6 +19,8 @@ public class PlayerPropBarrelJumpingState : PlayerBaseState
         _stateMachine.LedgeDetector.OnLedgeDetect += HandleLedgeDetect;
 
         _stateMachine.Barrel.SetActive(true);
+
+        _stateMachine.JumpSFX.Play();
     }
 
     public override void Tick(float deltaTime)

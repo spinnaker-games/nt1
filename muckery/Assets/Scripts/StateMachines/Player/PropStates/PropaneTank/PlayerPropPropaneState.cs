@@ -109,6 +109,7 @@ public class PlayerPropPropaneState : PlayerBaseState
     {
         _stateMachine.PropaneTank.SetActive(false);
         _stateMachine.MorphVFX.Play();
+        _stateMachine.MorphSFX.Play();
         _stateMachine.StartCoroutine( MorphRoutine() ); // states are not mono behaviours, so we are borrowing this
     }
 
@@ -121,6 +122,7 @@ public class PlayerPropPropaneState : PlayerBaseState
 
         if (target == null)
             yield break;
+        
 
         yield return new WaitForSeconds( _stateMachine.MorphDuration );
 

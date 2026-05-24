@@ -120,6 +120,7 @@ public class PlayerPropKnifeState : PlayerBaseState
     {
         _stateMachine.Knife.SetActive(false);
         _stateMachine.MorphVFX.Play();
+        _stateMachine.MorphSFX.Play();
         _stateMachine.StartCoroutine( MorphRoutine() ); // states are not mono behaviours, so we are borrowing this
     }
 

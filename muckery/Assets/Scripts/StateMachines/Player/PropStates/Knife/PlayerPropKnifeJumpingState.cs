@@ -19,6 +19,8 @@ public class PlayerPropKnifeJumpingState : PlayerBaseState
         _stateMachine.LedgeDetector.OnLedgeDetect += HandleLedgeDetect;
 
         _stateMachine.Knife.SetActive(true);
+
+        _stateMachine.JumpSFX.Play();
     }
 
     public override void Tick(float deltaTime)
