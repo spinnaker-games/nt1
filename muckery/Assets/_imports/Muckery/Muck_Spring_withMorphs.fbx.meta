@@ -3,7 +3,12 @@ guid: adb3a60825ef0194d9106a4b0a7f9205
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Muck_Spring
+    second: {fileID: 2100000, guid: 3be143bf14b8baa4fa76bc372ab84fb8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
