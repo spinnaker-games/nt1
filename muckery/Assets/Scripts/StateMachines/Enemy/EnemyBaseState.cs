@@ -73,7 +73,7 @@ public abstract class EnemyBaseState : State
         return GetDistanceToPlayerSqr() <= _stateMachine.PlayerAttackRange * _stateMachine.PlayerAttackRange;
     }
 
-    bool IsPlayerInFOV()
+    bool IsPlayerInHorizontalFOV()
     {
         Vector3 forward = _stateMachine.transform.forward;
         forward.y = 0f;
@@ -87,12 +87,30 @@ public abstract class EnemyBaseState : State
 
         Vector3 dir = toPlayer / Mathf.Sqrt( sqrMag );
 
-        float halfAngleRad = _stateMachine.FOV * 0.5f * Mathf.Deg2Rad;
+        float halfAngleRad = _stateMachine.HorizontalFOV * 0.5f * Mathf.Deg2Rad;
         float cosThreshold = Mathf.Cos( halfAngleRad );
 
         float dot = Vector3.Dot( forward, dir ); //TODO: understand Vector3.Dot
 
         return dot >= cosThreshold;
+    }
+
+    bool IsPlayerInVerticalFOV()
+    {
+        if (_stateMachine.Player == null) return false;
+
+        Vector3 toPlayer = _stateMachine.Player.transform.position - _stateMachine.transform.position;
+
+        toPlayer = Vector3.ProjectOnPlane(toPlayer, _stateMachine.transform.right);
+
+        Vector3 forward = Vector3.ProjectOnPlane(_stateMachine.transform.forward, _stateMachine.transform.right);
+
+        if (toPlayer.sqrMagnitude < 0.0001f) return true;
+
+        float halfAngle = _stateMachine.VerticalFOV * 0.5f * Mathf.Deg2Rad;
+        float cosThreshold = Mathf.Cos(halfAngle);
+
+        return Vector3.Dot(forward.normalized, toPlayer.normalized) >= cosThreshold;
     }
 
     protected bool HasLineOfSightToPlayer()
@@ -135,7 +153,8 @@ public abstract class EnemyBaseState : State
 
         if ( IsPlayerDisguised() && !IsPlayerMoving() ) { return false; }
         if ( !IsPlayerInChaseRange() ) { return false; }
-        if ( !IsPlayerInFOV() ) { return false; }
+        if ( !IsPlayerInHorizontalFOV() ) { return false; }
+        if ( !IsPlayerInVerticalFOV() ) { return false; }
         if ( !HasLineOfSightToPlayer() ) { return false; }
 
         return true;

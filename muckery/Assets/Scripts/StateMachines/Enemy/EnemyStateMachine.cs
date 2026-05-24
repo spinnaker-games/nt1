@@ -10,7 +10,8 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public Health Health { get; set; }
     [field: SerializeField] public Target Target { get; set; }
     [field: SerializeField] public Ragdoll Ragdoll { get; set; }
-    [field: SerializeField] public float FOV { get; set; }
+    [field: SerializeField] public float HorizontalFOV { get; set; } = 90;
+    [field: SerializeField] public float VerticalFOV { get; set; } =30;
     [field: SerializeField] public WeaponDamage Weapon { get; set; }
     [field: SerializeField] public int DamageAmount { get; set; }
     [field: SerializeField] public int AttackKnockback { get; set; }
@@ -28,6 +29,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public AudioSource DeathSFX { get; set; }
     [field: SerializeField] public AudioSource AlertSXF { get; set; }
     [field: SerializeField] public AudioSource FootstepSXF { get; set; }
+    [field: SerializeField] public AudioSource AttackSXF { get; set; }
 
     public bool IsDead { get; set; } //TODO: expose????
     public int CurrentWaypointIndex { get; set; }
@@ -74,6 +76,11 @@ public class EnemyStateMachine : StateMachine
     public void PlayFootstepSFX()
     {
         FootstepSXF.Play();
+    }
+
+    public void PlayAttackSFX()
+    {
+        AttackSXF.Play();
     }
 
     void OnDrawGizmosSelected() //Will draw only when enemy is selected
