@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33feabbecc151d042861f2444eb6730a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TryAgainButton
-  _sceneName: Nikita_SetDressing
+  _sceneName: Intro_Screen
 --- !u!1 &2040215938
 GameObject:
   m_ObjectHideFlags: 0
