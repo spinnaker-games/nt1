@@ -24,6 +24,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float WaypointIdleTime { get; set; }
     [field: SerializeField] public bool IsTarget { get; set; } = false;
     [field: SerializeField] public Transform TargetEscape { get; set; }
+    [field: SerializeField] public AudioSource DeathSFX { get; set; }
 
     public bool IsDead { get; set; } //TODO: expose????
     public int CurrentWaypointIndex { get; set; }

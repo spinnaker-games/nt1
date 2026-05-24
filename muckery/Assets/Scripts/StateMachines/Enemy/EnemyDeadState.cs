@@ -16,6 +16,8 @@ public class EnemyDeadState : EnemyBaseState
 
         Debug.Log("TARGET ELIMINATED!!! EXTRACTION NOW AVAILLABLE!!!");
         _stateMachine.IsDead = true;
+
+        _stateMachine.DeathSFX.Play();
     }
 
     public override void Tick(float deltaTime)

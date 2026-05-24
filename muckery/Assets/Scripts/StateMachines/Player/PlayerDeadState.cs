@@ -22,6 +22,8 @@ public class PlayerDeadState : PlayerBaseState
         _hasStartedCoroutine = false;
 
         _stateMachine.PlayerModel.SetActive(true);
+
+        _stateMachine.DeathSFX.Play();
     }
 
     public override void Tick( float deltaTime )
