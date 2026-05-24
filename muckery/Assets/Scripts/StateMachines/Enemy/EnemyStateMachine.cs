@@ -25,6 +25,8 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public bool IsTarget { get; set; } = false;
     [field: SerializeField] public Transform TargetEscape { get; set; }
     [field: SerializeField] public AudioSource DeathSFX { get; set; }
+    [field: SerializeField] public AudioSource AlertSXF { get; set; }
+    [field: SerializeField] public AudioSource FootstepSXF { get; set; }
 
     public bool IsDead { get; set; } //TODO: expose????
     public int CurrentWaypointIndex { get; set; }
@@ -65,6 +67,12 @@ public class EnemyStateMachine : StateMachine
     void HandleDeath()
     {
         SwitchState(new EnemyDeadState(this));
+    }
+
+    
+    public void PlayFootstepSFX()
+    {
+        FootstepSXF.Play();
     }
 
     void OnDrawGizmosSelected() //Will draw only when enemy is selected

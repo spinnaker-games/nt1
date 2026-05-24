@@ -10,6 +10,7 @@ public class EnemyAlertState : EnemyBaseState
 
     public EnemyAlertState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
+        _stateMachine.AlertSXF.Play();
     }
 
     public override void Enter()
