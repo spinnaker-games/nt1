@@ -21,6 +21,9 @@ public class PlayerDeadState : PlayerBaseState
         _isAnimationFinished = false;
         _hasStartedCoroutine = false;
 
+        _stateMachine.Knife.SetActive(false);
+        _stateMachine.Barrel.SetActive(false);
+        _stateMachine.Spring.SetActive(false);
         _stateMachine.PlayerModel.SetActive(true);
 
         _stateMachine.DeathSFX.Play();

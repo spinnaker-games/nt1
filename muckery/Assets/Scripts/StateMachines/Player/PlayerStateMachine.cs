@@ -27,6 +27,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public GameObject Knife { get; set; }
     [field: SerializeField] public int KnifeDamageAmount { get; set; }
     [field: SerializeField] public int KnifeKnockback { get; set; }
+    [field: SerializeField] public AudioSource KnifeAttackSXF { get; set; }
 
     [field: SerializeField] public GameObject Spring { get; set; }
 
@@ -75,5 +76,10 @@ public class PlayerStateMachine : StateMachine
     void HandleDeath()
     {
         SwitchState(new PlayerDeadState(this));
+    }
+
+    public void PlayKnifeAttackSFX()
+    {
+        KnifeAttackSXF.Play();
     }
 }
