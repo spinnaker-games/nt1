@@ -53,7 +53,7 @@ public class EnemyChasingState : EnemyBaseState
         {
             /*This setup uses the NavMeshAgent for pathfinding while the CharacterController handles physics-based 
             movement, syncing velocities so the agent follows the path realistically with collision and slope handling.*/
-            Move(_stateMachine.NavMeshAgent.desiredVelocity.normalized * _stateMachine.MovementSpeed, deltaTime);
+            Move(_stateMachine.NavMeshAgent.desiredVelocity.normalized * _stateMachine.ChaseSpeed, deltaTime);
             _stateMachine.NavMeshAgent.destination = _stateMachine.Player.transform.position;
         }
             _stateMachine.NavMeshAgent.velocity = _stateMachine.CharacterController.velocity; //This ensures that the NavMeshAgent and the CharacterController are in sync

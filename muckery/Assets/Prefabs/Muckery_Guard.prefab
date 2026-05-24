@@ -522,6 +522,7 @@ MonoBehaviour:
   <DamageAmount>k__BackingField: 20
   <AttackKnockback>k__BackingField: 10
   <MovementSpeed>k__BackingField: 3
+  <ChaseSpeed>k__BackingField: 6
   <IdleDuration>k__BackingField: 0
   <EndlessIdle>k__BackingField: 0
   <ChasePlayer>k__BackingField: 0

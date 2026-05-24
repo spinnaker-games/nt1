@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerPropSpringJumpingState : PlayerBaseState
 {
-    readonly int JumpBeginAnimHash = Animator.StringToHash("JumpBegin");
+    readonly int JumpBeginAnimHash = Animator.StringToHash("SpringJumpBegin");
 
     const float CrossFadeDuration = 0.2f;
 
