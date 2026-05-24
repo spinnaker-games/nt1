@@ -22,6 +22,11 @@ public class EnemyChasingState : EnemyBaseState
     {
         if (!IsPlayerInChaseRange())
         {
+            if (IsPlayerDead())
+            {
+                _stateMachine.SwitchState(new EnemyPlayerKilledState(_stateMachine));
+                return;
+            }
             _stateMachine.SwitchState(new EnemyPlayerEscapedState(_stateMachine));
             return;
         }

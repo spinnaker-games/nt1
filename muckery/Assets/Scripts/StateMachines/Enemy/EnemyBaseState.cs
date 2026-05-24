@@ -39,7 +39,7 @@ public abstract class EnemyBaseState : State
         _stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);//TODO: implement smooth turning
     }
 
-    bool IsPlayerDead()
+    protected bool IsPlayerDead()
     {
         return _stateMachine.PlayerHealth.IsDead;
     }
