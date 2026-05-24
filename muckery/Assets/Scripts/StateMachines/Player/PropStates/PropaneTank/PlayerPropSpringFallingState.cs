@@ -1,26 +1,21 @@
 using UnityEngine;
 
-public class PlayerPropPropaneJumpingState : PlayerBaseState
+public class PlayerPropSpringFallingState : PlayerBaseState
 {
-    readonly int JumpBeginAnimHash = Animator.StringToHash("JumpBegin");
+    readonly int JumpEndAnimHash = Animator.StringToHash("JumpEnd");
 
     const float CrossFadeDuration = 0.2f;
 
-    public PlayerPropPropaneJumpingState(PlayerStateMachine stateMachine) : base(stateMachine)
+    public PlayerPropSpringFallingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
 
     public override void Enter()
     {
-        _stateMachine.ForceReceiver.Jump(_stateMachine.JumpForce);
 
-        _stateMachine.Animator.CrossFadeInFixedTime(JumpBeginAnimHash, CrossFadeDuration);
+        _stateMachine.Animator.CrossFadeInFixedTime(JumpEndAnimHash, CrossFadeDuration);
 
         _stateMachine.LedgeDetector.OnLedgeDetect += HandleLedgeDetect;
-
-        _stateMachine.PropaneTank.SetActive(true);
-
-        _stateMachine.JumpSFX.Play();
     }
 
     public override void Tick(float deltaTime)
@@ -30,10 +25,17 @@ public class PlayerPropPropaneJumpingState : PlayerBaseState
         Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
         FaceMovementDirection(movement, deltaTime);
 
-        if (_stateMachine.CharacterController.velocity.y <= 0)
+
+        if (_stateMachine.CharacterController.isGrounded)
         {
-            _stateMachine.SwitchState(new PlayerPropPropaneFallingState(_stateMachine));
-            return;
+            if (_stateMachine.Targeter.CurrentTarget != null)
+            {
+                //_stateMachine.SwitchState(new PlayerTargetingState(_stateMachine));
+            }
+            else
+            {
+                _stateMachine.SwitchState(new PlayerPropSpringState(_stateMachine));//TODO: Add support for returning to other camera states by caching lastKnownCameraState
+            }
         }
 
         FaceTarget();

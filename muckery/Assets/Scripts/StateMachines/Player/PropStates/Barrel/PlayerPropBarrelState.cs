@@ -108,7 +108,7 @@ public class PlayerPropBarrelState : PlayerBaseState
 
     void OnJump()
     {
-        _stateMachine.SwitchState(new PlayerPropBarrelJumpingState(_stateMachine));
+        //_stateMachine.SwitchState(new PlayerPropBarrelJumpingState(_stateMachine));
     }
 
     void OnMorph()
@@ -137,8 +137,8 @@ public class PlayerPropBarrelState : PlayerBaseState
                 _stateMachine.SwitchState( new PlayerPropKnifeState( _stateMachine ) );
                 break;
 
-            case Morphable.MorphableType.PropaneTank:
-                _stateMachine.SwitchState( new PlayerPropPropaneState( _stateMachine ) );
+            case Morphable.MorphableType.Spring:
+                _stateMachine.SwitchState( new PlayerPropSpringState( _stateMachine ) );
                 break;
 
             case Morphable.MorphableType.Barrel:

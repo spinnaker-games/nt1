@@ -9,7 +9,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
     public enum MorphableType
     {
         Knife,
-        PropaneTank,
+        Spring,
         Barrel
     }
 
@@ -19,7 +19,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
 
     [Header( "Visuals" )]
     [SerializeField] GameObject _knife;
-    [SerializeField] GameObject _propaneTank;
+    [SerializeField] GameObject _spring;
     [SerializeField] GameObject _barrel;
 
     [Header( "UI" )]
@@ -80,7 +80,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
 
         if ( _knife != null ) _knife.SetActive( _morphableType == MorphableType.Knife );
 
-        if ( _propaneTank != null ) _propaneTank.SetActive( _morphableType == MorphableType.PropaneTank );
+        if ( _spring != null ) _spring.SetActive( _morphableType == MorphableType.Spring );
 
         if ( _barrel != null ) _barrel.SetActive( _morphableType == MorphableType.Barrel );
     }

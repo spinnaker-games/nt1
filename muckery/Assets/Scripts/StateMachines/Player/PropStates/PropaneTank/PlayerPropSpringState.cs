@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerPropPropaneState : PlayerBaseState
+public class PlayerPropSpringState : PlayerBaseState
 {
     bool _shouldFadeAnim;
     readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
@@ -9,7 +9,7 @@ public class PlayerPropPropaneState : PlayerBaseState
     const float AnimatorDampTime = 0.075f;
     const float CrossFadeDuration = 0.2f;
 
-    public PlayerPropPropaneState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
+    public PlayerPropSpringState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
     {
         this._shouldFadeAnim = shouldFadeAnim;
     }
@@ -24,6 +24,7 @@ public class PlayerPropPropaneState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent += OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent += OnJump;
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
+        _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
 
         if (_shouldFadeAnim)
         {
@@ -35,7 +36,7 @@ public class PlayerPropPropaneState : PlayerBaseState
         }
 
         _stateMachine.PlayerModel.SetActive(false);
-        _stateMachine.PropaneTank.SetActive(true);
+        _stateMachine.Spring.SetActive(true);
     }
 
     public override void Tick(float deltaTime)
@@ -64,8 +65,9 @@ public class PlayerPropPropaneState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent -= OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent -= OnJump;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+        _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
 
-        _stateMachine.PropaneTank.SetActive(false);
+        _stateMachine.Spring.SetActive(false);
     }
 
     void OnTarget()
@@ -102,15 +104,20 @@ public class PlayerPropPropaneState : PlayerBaseState
 
     void OnJump()
     {
-        _stateMachine.SwitchState(new PlayerPropPropaneJumpingState(_stateMachine));
+        //_stateMachine.SwitchState(new PlayerPropSpringJumpingState(_stateMachine));
     }
 
     void OnMorph()
     {
-        _stateMachine.PropaneTank.SetActive(false);
+        _stateMachine.Spring.SetActive(false);
         _stateMachine.MorphVFX.Play();
         _stateMachine.MorphSFX.Play();
         _stateMachine.StartCoroutine( MorphRoutine() ); // states are not mono behaviours, so we are borrowing this
+    }
+
+    void OnAbilityActivate()
+    {
+        _stateMachine.SwitchState( new PlayerPropSpringJumpingState( _stateMachine ) );
     }
 
     IEnumerator MorphRoutine()
@@ -132,7 +139,7 @@ public class PlayerPropPropaneState : PlayerBaseState
                 _stateMachine.SwitchState( new PlayerPropKnifeState( _stateMachine ) );
                 break;
 
-            case Morphable.MorphableType.PropaneTank:
+            case Morphable.MorphableType.Spring:
                 _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );
                 break;
 

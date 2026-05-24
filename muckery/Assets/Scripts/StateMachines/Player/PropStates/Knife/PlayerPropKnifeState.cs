@@ -24,7 +24,7 @@ public class PlayerPropKnifeState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent += OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent += OnJump;
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
-        _stateMachine.InputReader.AttackEvent += OnAttack;
+        _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
 
         if (_shouldFadeAnim)
         {
@@ -74,7 +74,7 @@ public class PlayerPropKnifeState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent -= OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent -= OnJump;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
-        _stateMachine.InputReader.AttackEvent -= OnAttack;
+        _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
 
         _stateMachine.Knife.SetActive(false);
     }
@@ -113,7 +113,7 @@ public class PlayerPropKnifeState : PlayerBaseState
 
     void OnJump()
     {
-        _stateMachine.SwitchState(new PlayerPropKnifeJumpingState(_stateMachine));
+        //_stateMachine.SwitchState(new PlayerPropKnifeJumpingState(_stateMachine));
     }
 
     void OnMorph()
@@ -142,8 +142,8 @@ public class PlayerPropKnifeState : PlayerBaseState
                 _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );
                 break;
 
-            case Morphable.MorphableType.PropaneTank:
-                _stateMachine.SwitchState( new PlayerPropPropaneState( _stateMachine ) );
+            case Morphable.MorphableType.Spring:
+                _stateMachine.SwitchState( new PlayerPropSpringState( _stateMachine ) );
                 break;
 
             case Morphable.MorphableType.Barrel:
@@ -152,7 +152,7 @@ public class PlayerPropKnifeState : PlayerBaseState
         }
     }
 
-    void OnAttack()
+    void OnAbilityActivate()
     {
         _stateMachine.SwitchState( new PlayerPropKnifeAttackingState( _stateMachine ) );//TODO: Create Pre-Morph State
     }

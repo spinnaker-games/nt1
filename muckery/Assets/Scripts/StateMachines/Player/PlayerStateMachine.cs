@@ -28,7 +28,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public int KnifeDamageAmount { get; set; }
     [field: SerializeField] public int KnifeKnockback { get; set; }
 
-    [field: SerializeField] public GameObject PropaneTank { get; set; }
+    [field: SerializeField] public GameObject Spring { get; set; }
 
     [field: SerializeField] public GameObject Barrel { get; set; }
 

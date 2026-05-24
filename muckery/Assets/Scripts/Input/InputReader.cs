@@ -23,7 +23,7 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
     public event Action ChaseCameraActivateEvent;
     public event Action ChaseCameraCancelEvent;
     public event Action MorphActivateEvent;
-    public event Action AttackEvent;
+    public event Action AbilityActivateEvent;
 
     InputActions _inputActions;
 
@@ -45,11 +45,11 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
         _inputActions.Player.Disable();
     }
 
-    public void OnAttack(InputAction.CallbackContext context)
+    public void OnAbilityActivate(InputAction.CallbackContext context)
     {
         if (!context.performed) { return; }
 
-        AttackEvent?.Invoke();
+        AbilityActivateEvent?.Invoke();
     }
 
     public void OnCrouch(InputAction.CallbackContext context)
