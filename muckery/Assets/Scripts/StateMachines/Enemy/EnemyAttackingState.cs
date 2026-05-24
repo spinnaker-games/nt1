@@ -4,7 +4,7 @@ public class EnemyAttackingState : EnemyBaseState
 {
     readonly int AttackAnimHash = Animator.StringToHash("Attack");
 
-    const float CrossFadeDuration = 0.2f;
+    const float CrossFadeDuration = 0f;
 
     public EnemyAttackingState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
