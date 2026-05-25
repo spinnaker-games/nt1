@@ -101,16 +101,29 @@ public abstract class EnemyBaseState : State
 
         Vector3 toPlayer = _stateMachine.Player.transform.position - _stateMachine.transform.position;
 
-        toPlayer = Vector3.ProjectOnPlane(toPlayer, _stateMachine.transform.right);
+        toPlayer = Vector3.ProjectOnPlane( toPlayer, _stateMachine.transform.right );
 
-        Vector3 forward = Vector3.ProjectOnPlane(_stateMachine.transform.forward, _stateMachine.transform.right);
+        Vector3 forward = Vector3.ProjectOnPlane( _stateMachine.transform.forward, _stateMachine.transform.right );
 
-        if (toPlayer.sqrMagnitude < 0.0001f) return true;
+        float distance = toPlayer.magnitude;
 
-        float halfAngle = _stateMachine.VerticalFOV * 0.5f * Mathf.Deg2Rad;
-        float cosThreshold = Mathf.Cos(halfAngle);
+        if (distance < 0.0001f)
+            return true;
 
-        return Vector3.Dot(forward.normalized, toPlayer.normalized) >= cosThreshold;
+        forward.Normalize();
+        toPlayer.Normalize();
+
+        float angle = Vector3.Angle( forward, toPlayer );
+
+        float extraCloseRangeAngle = Mathf.Lerp( //TODO: Understand how this math makes the beginning more narrow
+            25f,
+            0f,
+            Mathf.InverseLerp( 0f, 5f, distance )
+        );
+
+        float allowedAngle = (_stateMachine.VerticalFOV * 0.5f) + extraCloseRangeAngle;
+
+        return angle <= allowedAngle;
     }
 
     protected bool HasLineOfSightToPlayer()
