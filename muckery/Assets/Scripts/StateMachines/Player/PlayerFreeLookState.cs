@@ -40,6 +40,8 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.PlayerModel.SetActive(true);
 
         _stateMachine.IsDisguised = false;
+
+        _stateMachine.SlimeTrail.SetActive(true);
     }
 
     public override void Tick(float deltaTime)
@@ -75,6 +77,8 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
 
         _stateMachine.MoveSFX.Stop();
+
+        _stateMachine.SlimeTrail.SetActive(false);
     }
 
     void OnTarget()

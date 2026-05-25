@@ -22,6 +22,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float DodgeDuration { get; set; }
     [field: SerializeField] public float DodgeDistance { get; set; }
     [field: SerializeField] public float JumpForce { get; set; }
+    [field: SerializeField] public GameObject SlimeTrail { get; set; }
 
     [Header("Prop Settings")]
     [field: SerializeField] public GameObject Knife { get; set; }

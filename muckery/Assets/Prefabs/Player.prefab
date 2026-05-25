@@ -342,6 +342,7 @@ MonoBehaviour:
   <DodgeDuration>k__BackingField: 0.3
   <DodgeDistance>k__BackingField: 4
   <JumpForce>k__BackingField: 5
+  <SlimeTrail>k__BackingField: {fileID: 5142666740733040684}
   <Knife>k__BackingField: {fileID: 5046965239100303846}
   <KnifeDamageAmount>k__BackingField: 50
   <KnifeKnockback>k__BackingField: 1
