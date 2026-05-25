@@ -898,14 +898,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: ThirdPersonCombat3D
+  metroPackageName: Muckery
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: ThirdPersonCombat3D
+  metroApplicationDescription: Muckery
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
