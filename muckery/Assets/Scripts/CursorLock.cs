@@ -11,7 +11,7 @@ public class CursorLock : MonoBehaviour
 
     void Update()
     {
-        ApplyCursorState();
+        //ApplyCursorState();
     }
 
     void ApplyCursorState()

@@ -40,6 +40,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public AudioSource MorphSFX { get; set; }
     [field: SerializeField] public AudioSource DeathSFX { get; set; }
 
+    [field: SerializeField] public GameObject PauseMenu { get; set; }
+
     public bool IsDisguised { get; set; }
     public bool IsMoving { get; set; }
     public Morphable CurrentMorphable { get; set; }

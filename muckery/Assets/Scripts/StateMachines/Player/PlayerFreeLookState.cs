@@ -25,6 +25,7 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent += OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent += OnJump;
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
+        _stateMachine.InputReader.PauseActivateEvent += OnPause;
 
         _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0f); //prevents player from being in the middle of another animation when this state begins
 
@@ -75,6 +76,7 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.InputReader.ChaseCameraActivateEvent -= OnChaseCameraActive;
         _stateMachine.InputReader.JumpActivateEvent -= OnJump;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+        _stateMachine.InputReader.PauseActivateEvent -= OnPause;
 
         _stateMachine.MoveSFX.Stop();
 
@@ -121,6 +123,11 @@ public class PlayerFreeLookState : PlayerBaseState
     void OnMorph()
     {
         _stateMachine.StartCoroutine( MorphRoutine() ); // states are not mono behaviours, so we are borrowing this
+    }
+
+    void OnPause()
+    {
+        _stateMachine.SwitchState( new PlayerPauseState(_stateMachine) );
     }
 
     IEnumerator MorphRoutine()
