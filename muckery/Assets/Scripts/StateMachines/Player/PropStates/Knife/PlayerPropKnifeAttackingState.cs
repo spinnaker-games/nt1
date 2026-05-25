@@ -14,6 +14,7 @@ public class PlayerPropKnifeAttackingState : PlayerBaseState
 
     public override void Enter()
     {
+        FaceCameraDirection();
         _stateMachine.Knife.SetActive(true);
 
         _stateMachine.Animator.CrossFadeInFixedTime(KnifeAttackAnimHash, CrossFadeDuration);
@@ -34,5 +35,18 @@ public class PlayerPropKnifeAttackingState : PlayerBaseState
 
     public override void Exit()
     {
+    }
+
+    void FaceCameraDirection() //TODO: Add to base state
+    {
+        Vector3 cameraForward = Camera.main.transform.forward;
+
+        cameraForward.y = 0f;
+        cameraForward.Normalize();
+
+        if (cameraForward.sqrMagnitude > 0f)
+        {
+            _stateMachine.transform.rotation = Quaternion.LookRotation(cameraForward);
+        }
     }
 }
