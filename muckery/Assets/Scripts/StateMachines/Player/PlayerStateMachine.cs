@@ -44,6 +44,7 @@ public class PlayerStateMachine : StateMachine
 
     public bool IsDisguised { get; set; }
     public bool IsMoving { get; set; }
+    public bool IsMorphed { get; set; }
     public Morphable CurrentMorphable { get; set; }
     public Morphable LastMorphable { get; set; }
     public float PreviousDodgeTime { get; set; } = Mathf.NegativeInfinity; //prevents the first dodge from having strange behaviour

@@ -17,12 +17,6 @@ public class PlayerPropKnifeState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.InputReader.TargetEvent += OnTarget;
-        _stateMachine.InputReader.AimActivateEvent += OnAim;
-        _stateMachine.InputReader.VantagePointActivateEvent += OnVantagePointActivate;
-        _stateMachine.InputReader.TopDownActivateEvent += OnTopDownActivate;
-        _stateMachine.InputReader.SideScrollActivateEvent += OnSideScrollActivate;
-        _stateMachine.InputReader.ChaseCameraActivateEvent += OnChaseCameraActive;
-        _stateMachine.InputReader.JumpActivateEvent += OnJump;
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
         _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
 
@@ -46,6 +40,8 @@ public class PlayerPropKnifeState : PlayerBaseState
         }
 
         weapon.SetAttack(_stateMachine.KnifeDamageAmount, _stateMachine.KnifeKnockback);
+
+        _stateMachine.IsMorphed = true;
     }
 
     public override void Tick(float deltaTime)
@@ -67,12 +63,6 @@ public class PlayerPropKnifeState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.InputReader.TargetEvent -= OnTarget;
-        _stateMachine.InputReader.AimActivateEvent -= OnAim;
-        _stateMachine.InputReader.VantagePointActivateEvent -= OnVantagePointActivate;
-        _stateMachine.InputReader.TopDownActivateEvent -= OnTopDownActivate;
-        _stateMachine.InputReader.SideScrollActivateEvent -= OnSideScrollActivate;
-        _stateMachine.InputReader.ChaseCameraActivateEvent -= OnChaseCameraActive;
-        _stateMachine.InputReader.JumpActivateEvent -= OnJump;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
         _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
 
@@ -86,70 +76,9 @@ public class PlayerPropKnifeState : PlayerBaseState
         _stateMachine.SwitchState(new PlayerTargetingState(_stateMachine));
     }
 
-    void OnAim()
-    {
-        _stateMachine.SwitchState(new PlayerAimingState(_stateMachine));
-    }
-
-    void OnVantagePointActivate()
-    {
-        _stateMachine.SwitchState(new PlayerVantagePointState(_stateMachine));
-    }
-
-    void OnTopDownActivate()
-    {
-        _stateMachine.SwitchState(new PlayerTopDownState(_stateMachine));
-    }
-
-    void OnSideScrollActivate()
-    {
-        _stateMachine.SwitchState(new PlayerSideScrollState(_stateMachine));
-    }
-
-    void OnChaseCameraActive()
-    {
-        _stateMachine.SwitchState(new PlayerChaseCameraState(_stateMachine));
-    }
-
-    void OnJump()
-    {
-        //_stateMachine.SwitchState(new PlayerPropKnifeJumpingState(_stateMachine));
-    }
-
     void OnMorph()
     {
-        _stateMachine.Knife.SetActive(false);
-        _stateMachine.MorphVFX.Play();
-        _stateMachine.MorphSFX.Play();
-        _stateMachine.StartCoroutine( MorphRoutine() ); // states are not mono behaviours, so we are borrowing this
-    }
-
-    IEnumerator MorphRoutine()
-    {
-        Morphable target = _stateMachine.CurrentMorphable;
-
-        if (target == null)
-            target = _stateMachine.LastMorphable;
-
-        if (target == null)
-            yield break;
-
-        yield return new WaitForSeconds( _stateMachine.MorphDuration );
-
-        switch (target.Type)
-        {
-            case Morphable.MorphableType.Knife:
-                _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );
-                break;
-
-            case Morphable.MorphableType.Spring:
-                _stateMachine.SwitchState( new PlayerPropSpringState( _stateMachine ) );
-                break;
-
-            case Morphable.MorphableType.Barrel:
-                _stateMachine.SwitchState( new PlayerPropBarrelState( _stateMachine ) );
-                break;
-        }
+        _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
     }
 
     void OnAbilityActivate()
