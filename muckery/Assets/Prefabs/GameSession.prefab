@@ -572,8 +572,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5589419714669512396}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000014722313, y: 0.9690157, z: -0.24699904, w: -0.00000005775793}
-  m_LocalPosition: {x: 24.453, y: 1.9335297, z: 9.188957}
+  m_LocalRotation: {x: -0.0053826547, y: 0.89571995, z: -0.0108478125, w: -0.44445384}
+  m_LocalPosition: {x: 9.350239, y: 0.79734415, z: 14.511717}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -981,7 +981,7 @@ RectTransform:
   m_GameObject: {fileID: 6628308466182537815}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.04664, y: 0.2582073, z: 1}
+  m_LocalScale: {x: 4.704219, y: 0.2582073, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4072747023165026241}
@@ -1091,7 +1091,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Controls: WASD = Move, F = Morph, Left Click = Ability'
+  m_text: 'Controls: WASD = Move, F = Morph, Left Click/Spacebar = Ability'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1993,11 +1993,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5807158554861242235, guid: d54931614431a3b4d81ab545a4a8416e, type: 3}
       propertyPath: VerticalAxis.Value
-      value: 1.3877122
+      value: 1.3877031
       objectReference: {fileID: 0}
     - target: {fileID: 5807158554861242235, guid: d54931614431a3b4d81ab545a4a8416e, type: 3}
       propertyPath: HorizontalAxis.Value
-      value: -127.21904
+      value: -127.219055
       objectReference: {fileID: 0}
     - target: {fileID: 6130306162145292584, guid: d54931614431a3b4d81ab545a4a8416e, type: 3}
       propertyPath: m_LocalPosition.x
