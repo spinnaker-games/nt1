@@ -61,7 +61,7 @@ public class MetalDetector : MonoBehaviour
         _currentTarget = closest;
     }
 
-    protected void FaceMetal()
+    void FaceMetal()
     {
         if ( _currentTarget == null ) { return; }
 
