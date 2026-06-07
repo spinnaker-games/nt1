@@ -2093,7 +2093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d195c8e10bd72da459aa08ea7c6c8087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MetalDetectorTrigger
-  MetalDetectorCompass: {fileID: 6320167976479833236}
+  _metalDetectorCompass: {fileID: 6320167976479833236}
 --- !u!65 &2661592409047922074
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2471,9 +2471,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b1b731c77bbaf40960d1af65d246be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoopScale
-  _minScale: 180
-  _maxScale: 220
-  _time: 0.25
+  _minScale: 0.9
+  _maxScale: 1.1
+  _cycleTime: 0.25
 --- !u!1 &6434245786234429040
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class MetalDetector : MonoBehaviour
 {
-    [SerializeField] GameObject MetalDetectorCompass;
+    [SerializeField] GameObject _metalDetectorCompass;
 
     readonly HashSet<Transform> _metalsInRange = new();
 
@@ -19,8 +19,8 @@ public class MetalDetector : MonoBehaviour
     {
         if ( other.CompareTag( "Metal" ) )
         {
-            _metalsInRange.Add( other.transform.root );
-            MetalDetectorCompass.SetActive( true );
+            _metalsInRange.Add( other.transform.root ); //TODO: This setup breaks when metal objects are grouped
+            _metalDetectorCompass.SetActive( true );
         }
     }
 
@@ -32,7 +32,7 @@ public class MetalDetector : MonoBehaviour
 
             if ( _metalsInRange.Count == 0 )
             {
-                MetalDetectorCompass.SetActive( false );
+                _metalDetectorCompass.SetActive( false );
                 _currentTarget = null;
             }
         }
@@ -40,7 +40,7 @@ public class MetalDetector : MonoBehaviour
 
     void UpdateClosestMetal()
     {
-        Transform detector = MetalDetectorCompass.transform;
+        Transform detector = _metalDetectorCompass.transform;
 
         float bestDist = float.MaxValue;
         Transform closest = null;
@@ -65,7 +65,7 @@ public class MetalDetector : MonoBehaviour
     {
         if ( _currentTarget == null ) { return; }
 
-        Vector3 lookPos = _currentTarget.position - MetalDetectorCompass.transform.position;
+        Vector3 lookPos = _currentTarget.position - _metalDetectorCompass.transform.position;
         lookPos.y = 0f;
 
         if ( lookPos.sqrMagnitude < 0.0001f ) { return; }
@@ -73,6 +73,6 @@ public class MetalDetector : MonoBehaviour
         Quaternion baseRotation = Quaternion.LookRotation( lookPos );
         Quaternion xOffset = Quaternion.Euler( 90f, 0f, 0f );
 
-        MetalDetectorCompass.transform.rotation = baseRotation * xOffset;
+        _metalDetectorCompass.transform.rotation = baseRotation * xOffset;
     }
 }
