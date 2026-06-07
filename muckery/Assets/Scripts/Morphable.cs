@@ -10,7 +10,8 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
     {
         Knife,
         Spring,
-        Barrel
+        Barrel,
+        MetalDetector
     }
 
     [SerializeField] MorphableType _morphableType;
@@ -21,6 +22,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
     [SerializeField] GameObject _knife;
     [SerializeField] GameObject _spring;
     [SerializeField] GameObject _barrel;
+    [SerializeField] GameObject _metalDetector;
 
     [Header( "UI" )]
     [SerializeField] GameObject _morphButton;
@@ -83,5 +85,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
         if ( _spring != null ) _spring.SetActive( _morphableType == MorphableType.Spring );
 
         if ( _barrel != null ) _barrel.SetActive( _morphableType == MorphableType.Barrel );
+
+        if ( _barrel != null ) _metalDetector.SetActive( _morphableType == MorphableType.MetalDetector );
     }
 }

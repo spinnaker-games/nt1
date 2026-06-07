@@ -64,6 +64,10 @@ public class PlayerMorphingState : PlayerBaseState
             case Morphable.MorphableType.Barrel:
                 _stateMachine.SwitchState( new PlayerPropBarrelState( _stateMachine ) );
                 break;
+
+            case Morphable.MorphableType.MetalDetector:
+                _stateMachine.SwitchState( new PlayerPropMetalDetectorState( _stateMachine ) );
+                break;
         }
     }
 }

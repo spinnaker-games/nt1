@@ -19,7 +19,7 @@ public class PlayerHangClimbState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        if (GetNormalizedTime(_stateMachine.Animator, "Climbing") < 1) { return; }
+        if (GetNormalizedAnimTime(_stateMachine.Animator, "Climbing") < 1) { return; }
 
 
         _stateMachine.CharacterController.enabled = false;//TODO: Investigate more elegant way to translate player character controller

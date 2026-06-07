@@ -8,7 +8,7 @@ public class PlayerDeadState : PlayerBaseState
 
     const float CrossFadeDuration = 0.2f;
 
-    bool _isAnimationFinished;
+    bool _isAnimFinished;
     bool _hasStartedCoroutine;
 
     public PlayerDeadState( PlayerStateMachine stateMachine ) : base( stateMachine )
@@ -18,7 +18,7 @@ public class PlayerDeadState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.Animator.CrossFadeInFixedTime( DeathAnimHash, CrossFadeDuration );
-        _isAnimationFinished = false;
+        _isAnimFinished = false;
         _hasStartedCoroutine = false;
 
         _stateMachine.Knife.SetActive(false);
@@ -33,18 +33,18 @@ public class PlayerDeadState : PlayerBaseState
     {
         Move( deltaTime );
 
-        if ( !_isAnimationFinished )
+        if ( !_isAnimFinished )
         {
             var stateInfo = _stateMachine.Animator.GetCurrentAnimatorStateInfo( 0 );
 
             if ( stateInfo.shortNameHash == DeathAnimHash &&
                  stateInfo.normalizedTime >= 1f )
             {
-                _isAnimationFinished = true;
+                _isAnimFinished = true;
             }
         }
 
-        if ( _isAnimationFinished && !_hasStartedCoroutine )
+        if ( _isAnimFinished && !_hasStartedCoroutine )
         {
             _hasStartedCoroutine = true;
             _stateMachine.StartCoroutine( DeathRoutine() );

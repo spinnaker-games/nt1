@@ -34,6 +34,8 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public GameObject Barrel { get; set; }
 
+    [field: SerializeField] public GameObject MetalDetector { get; set; }
+
     [Header("Audio Settings")]
     [field: SerializeField] public AudioSource MoveSFX { get; set; }
     [field: SerializeField] public AudioSource JumpSFX { get; set; }

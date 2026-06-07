@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ragdoll
   - Target
+  - Metal
   layers:
   - Default
   - TransparentFX

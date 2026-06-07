@@ -8,7 +8,7 @@ public abstract class State
 
     public abstract void Exit();
 
-    protected float GetNormalizedTime(Animator animator, string tag)//TODO: Rename this to something more specific
+    protected float GetNormalizedAnimTime(Animator animator, string tag)//TODO: Rename this to something more specific
     {
         AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);
         AnimatorStateInfo nextInfo = animator.GetNextAnimatorStateInfo(0);

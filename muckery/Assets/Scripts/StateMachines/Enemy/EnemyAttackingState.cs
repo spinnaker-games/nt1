@@ -21,7 +21,7 @@ public class EnemyAttackingState : EnemyBaseState
     {
         FacePlayer();
 
-        if (GetNormalizedTime(_stateMachine.Animator, "Attack") >= 1)
+        if (GetNormalizedAnimTime(_stateMachine.Animator, "Attack") >= 1)
         {
             _stateMachine.SwitchState(new EnemyChasingState(_stateMachine));
         }
