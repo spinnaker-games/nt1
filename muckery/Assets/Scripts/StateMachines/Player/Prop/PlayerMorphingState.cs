@@ -68,6 +68,10 @@ public class PlayerMorphingState : PlayerBaseState
             case Morphable.MorphableType.MetalDetector:
                 _stateMachine.SwitchState( new PlayerPropMetalDetectorState( _stateMachine ) );
                 break;
+
+            case Morphable.MorphableType.SniperRifle:
+                _stateMachine.SwitchState( new PlayerPropSniperRifleState( _stateMachine ) );
+                break;
         }
     }
 }

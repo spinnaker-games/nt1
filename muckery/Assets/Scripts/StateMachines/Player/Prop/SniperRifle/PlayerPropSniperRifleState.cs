@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class PlayerPropBarrelState : PlayerBaseState
+public class PlayerPropSniperRifleState : PlayerBaseState
 {
-    bool _shouldFadeAnim;
-    readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
-    readonly int FreeLookZoomBlendTreeHash = Animator.StringToHash("FreeLookZoomBlendTree");
-    const float AnimatorDampTime = 0.075f;
-    const float CrossFadeDuration = 0.2f;
-
-    public PlayerPropBarrelState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
+    public PlayerPropSniperRifleState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-        this._shouldFadeAnim = shouldFadeAnim;
     }
 
     public override void Enter()
@@ -19,9 +12,7 @@ public class PlayerPropBarrelState : PlayerBaseState
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
 
         _stateMachine.PlayerModel.SetActive(false);
-        _stateMachine.Barrel.SetActive(true);
-
-        _stateMachine.IsDisguised = true;//TODO: EXPOSE
+        _stateMachine.SniperRifle.SetActive(true);
 
         _stateMachine.IsMorphed = true;
     }
@@ -31,11 +22,6 @@ public class PlayerPropBarrelState : PlayerBaseState
         Vector3 movement = CalculateMovement();
         Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
 
-        
-        _stateMachine.IsMoving = _stateMachine.InputReader.MovementValue != Vector2.zero;
-
-        _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 1, AnimatorDampTime, deltaTime); //TODO: Fix magic numbers
-
         FaceMovementDirection(movement, deltaTime);
     }
 
@@ -44,7 +30,7 @@ public class PlayerPropBarrelState : PlayerBaseState
         _stateMachine.InputReader.TargetEvent -= OnTarget;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
 
-        _stateMachine.Barrel.SetActive(false);
+        _stateMachine.SniperRifle.SetActive(false);
     }
 
     void OnTarget()
