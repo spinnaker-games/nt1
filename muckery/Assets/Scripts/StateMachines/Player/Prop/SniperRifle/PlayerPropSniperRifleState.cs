@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerPropSniperRifleState : PlayerBaseState
 {
+    readonly int FreeLookBlendTreeHash = Animator.StringToHash("FreeLookBlendTree");
+
     public PlayerPropSniperRifleState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -10,11 +12,14 @@ public class PlayerPropSniperRifleState : PlayerBaseState
     {
         _stateMachine.InputReader.TargetEvent += OnTarget;
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
+        _stateMachine.InputReader.AimActivateEvent += OnAim;
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.SniperRifle.SetActive(true);
 
         _stateMachine.IsMorphed = true;
+
+        _stateMachine.Animator.Play(FreeLookBlendTreeHash);
     }
 
     public override void Tick(float deltaTime)
@@ -29,6 +34,7 @@ public class PlayerPropSniperRifleState : PlayerBaseState
     {
         _stateMachine.InputReader.TargetEvent -= OnTarget;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+        _stateMachine.InputReader.AimActivateEvent -= OnAim;
 
         _stateMachine.SniperRifle.SetActive(false);
     }
@@ -45,4 +51,8 @@ public class PlayerPropSniperRifleState : PlayerBaseState
         _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
     }
 
+    void OnAim()
+    {
+        _stateMachine.SwitchState(new PlayerPropSniperRifleAimState(_stateMachine));
+    }
 }

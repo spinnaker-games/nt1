@@ -1,3 +1,5 @@
+using Microsoft.Unity.VisualStudio.Editor;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -67,7 +69,13 @@ public class PlayerStateMachine : StateMachine
     
     [field: Space]
     [field: SerializeField] public GameObject SniperRifle { get; set; }
+    [field: SerializeField] public GameObject SniperRifleScope { get; set; }
+    [field: SerializeField] public float SniperFOV { get; set; } = 20;
 
+    [field: Header("CAMERA")]
+    [field: Space]
+    [field: SerializeField] public CinemachineCamera FreeLookVC { get; set; }
+    
 
     public bool IsDisguised { get; set; }
     public bool IsMoving { get; set; }

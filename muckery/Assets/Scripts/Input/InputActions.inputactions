@@ -481,7 +481,7 @@
                 {
                     "name": "",
                     "id": "42d45eef-bb82-4660-b370-22f203c63cf6",
-                    "path": "<Mouse>/middleButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -491,23 +491,12 @@
                 },
                 {
                     "name": "",
-                    "id": "c8dca305-4a56-40fb-8ea0-2d2c3de5c981",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Block",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2440adea-1e96-4d09-8b42-f4eaee299bfe",
+                    "id": "78e89f84-e9ef-49e1-98ca-7dd248c9a3d0",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Block",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
