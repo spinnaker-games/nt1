@@ -72,6 +72,10 @@ public class PlayerMorphingState : PlayerBaseState
             case Morphable.MorphableType.SniperRifle:
                 _stateMachine.SwitchState( new PlayerPropSniperRifleState( _stateMachine ) );
                 break;
+
+            case Morphable.MorphableType.Binoculars:
+                _stateMachine.SwitchState( new PlayerPropBinocularsState( _stateMachine ) );
+                break;
         }
     }
 }
