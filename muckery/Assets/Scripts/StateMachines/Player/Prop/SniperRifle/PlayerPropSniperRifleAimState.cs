@@ -10,6 +10,7 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
 
     public override void Enter()
     {
+        _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
         _stateMachine.InputReader.AimCancelEvent += OnAimCancel;
 
@@ -36,6 +37,7 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
 
     public override void Exit()
     {
+        _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
         _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
         _stateMachine.InputReader.AimActivateEvent -= OnAimCancel;
 
@@ -53,5 +55,25 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
     void OnAimCancel()
     {
         _stateMachine.SwitchState(new PlayerPropSniperRifleState(_stateMachine));
+    }
+
+    void OnAbilityActivate()
+    {
+        Camera camera = Camera.main;
+
+        _stateMachine.SniperShotSFX.Play();
+
+        Ray ray = camera.ViewportPointToRay( new Vector3( 0.5f, 0.5f, 0f ) );
+
+        if ( Physics.Raycast( ray, out RaycastHit hit, 1000f ) )
+        {
+            Health health = hit.collider.GetComponentInParent<Health>();
+
+            if ( health != null )
+            {
+                health.DealDamage(_stateMachine.SniperDamageAmount);
+                //TODO: Apply Force to enemy being hit
+            }
+        }
     }
 }

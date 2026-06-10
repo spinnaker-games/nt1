@@ -69,6 +69,8 @@ public class PlayerStateMachine : StateMachine
     
     [field: Space]
     [field: SerializeField] public GameObject SniperRifle { get; set; }
+    [field: SerializeField] public int SniperDamageAmount { get; set; }
+    [field: SerializeField] public AudioSource SniperShotSFX { get; set; }
     [field: SerializeField] public GameObject SniperRifleScope { get; set; }
     [field: SerializeField] public float SniperFOV { get; set; } = 20;
 

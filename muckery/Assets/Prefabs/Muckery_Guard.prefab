@@ -518,7 +518,8 @@ MonoBehaviour:
   <Health>k__BackingField: {fileID: 920089245140630}
   <Target>k__BackingField: {fileID: 5275448125190350983}
   <Ragdoll>k__BackingField: {fileID: 4308943313686756044}
-  <FOV>k__BackingField: 90
+  <HorizontalFOV>k__BackingField: 90
+  <VerticalFOV>k__BackingField: 30
   <Weapon>k__BackingField: {fileID: 1609309662124245007}
   <DamageAmount>k__BackingField: 20
   <AttackKnockback>k__BackingField: 10
@@ -608,7 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1974045c771dc324ab95a7120e9eca50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  _maxHealth: 100
+  _maxHealth: 50
 --- !u!95 &40804267160095558
 Animator:
   serializedVersion: 7
