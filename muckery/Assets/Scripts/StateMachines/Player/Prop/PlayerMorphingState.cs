@@ -80,6 +80,10 @@ public class PlayerMorphingState : PlayerBaseState
             case Morphable.MorphableType.Umbrella:
                 _stateMachine.SwitchState( new PlayerPropUmbrellaState( _stateMachine ) );
                 break;
+
+            case Morphable.MorphableType.ScanCamera:
+                _stateMachine.SwitchState( new PlayerPropScanCameraState( _stateMachine ) );
+                break;
         }
     }
 }

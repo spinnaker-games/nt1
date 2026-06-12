@@ -80,6 +80,12 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float BinocularsFOV { get; set; } = 20;
 
     [field: Space]
+    [field: SerializeField] public GameObject ScanCamera { get; set; }
+    [field: SerializeField] public AudioSource CameraSnapSFX { get; set; }
+    [field: SerializeField] public GameObject ScanCameraScope { get; set; }
+    [field: SerializeField] public float ScanCameraFOV { get; set; } = 40;
+
+    [field: Space]
     [field: SerializeField] public GameObject Umbrella { get; set; }
     [field: SerializeField] public AudioSource UmbrellaJumpSFX { get; set; }
     [field: SerializeField] public float UmbrellaJumpForce { get; set; }
