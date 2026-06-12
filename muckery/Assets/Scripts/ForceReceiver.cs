@@ -13,6 +13,8 @@ public class ForceReceiver : MonoBehaviour//TODO: investigate the benefit of hav
 
     float _vertivalVelocity;
 
+    public float GravityScale { get; set; } = 1f;
+
     public Vector3 Movement => _impact + Vector3.up * _vertivalVelocity;//this allows us to maintain gravity across different player states
 
     void Update() //TODO: Should this be FixedUpdate since it involves physics?
@@ -23,7 +25,7 @@ public class ForceReceiver : MonoBehaviour//TODO: investigate the benefit of hav
         }
         else
         {
-            _vertivalVelocity += Physics.gravity.y * Time.deltaTime;
+            _vertivalVelocity += Physics.gravity.y * GravityScale * Time.deltaTime;
         }
 
         _impact = Vector3.SmoothDamp(_impact, Vector3.zero, ref _dampingVelocity, _drag);//TODO: Understand this function

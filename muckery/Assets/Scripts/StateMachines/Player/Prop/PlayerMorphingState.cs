@@ -76,6 +76,10 @@ public class PlayerMorphingState : PlayerBaseState
             case Morphable.MorphableType.Binoculars:
                 _stateMachine.SwitchState( new PlayerPropBinocularsState( _stateMachine ) );
                 break;
+
+            case Morphable.MorphableType.Umbrella:
+                _stateMachine.SwitchState( new PlayerPropUmbrellaState( _stateMachine ) );
+                break;
         }
     }
 }

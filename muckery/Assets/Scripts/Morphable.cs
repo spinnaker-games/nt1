@@ -13,7 +13,8 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
         Barrel,
         MetalDetector,
         SniperRifle,
-        Binoculars
+        Binoculars,
+        Umbrella
     }
 
     [SerializeField] MorphableType _morphableType;
@@ -27,6 +28,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
     [SerializeField] GameObject _metalDetector;
     [SerializeField] GameObject _sniperRifel;
     [SerializeField] GameObject _binoculars;
+    [SerializeField] GameObject _umbrella;
 
     [Header( "UI" )]
     [SerializeField] GameObject _morphButton;
@@ -94,6 +96,8 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
 
         if ( _barrel != null ) _sniperRifel.SetActive( _morphableType == MorphableType.SniperRifle );
 
-        if ( _barrel != null ) _binoculars.SetActive( _morphableType == MorphableType.Binoculars );
+        if ( _binoculars != null ) _binoculars.SetActive( _morphableType == MorphableType.Binoculars );
+
+        if ( _umbrella != null ) _umbrella.SetActive( _morphableType == MorphableType.Umbrella );
     }
 }
