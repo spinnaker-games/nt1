@@ -102,8 +102,7 @@ public class PlayerStateMachine : StateMachine
     public bool IsMoving { get; set; }
     public bool IsMorphed { get; set; }
     public bool IsLockPick { get; set; }
-    public Morphable CurrentMorphable { get; set; }
-    public Morphable LastMorphable { get; set; }
+    public Morphable MorphableSlot { get; set; }
     public float PreviousDodgeTime { get; set; } = Mathf.NegativeInfinity; //prevents the first dodge from having strange behaviour
     public Transform MainCameraTransform { get; set; }
 

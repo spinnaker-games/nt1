@@ -36,8 +36,9 @@ public class PlayerFreeLookState : PlayerBaseState
 
         _stateMachine.IsDisguised = false;
 
-        _stateMachine.SlimeTrail.SetActive(true);
         _stateMachine.IsMorphed = false;
+
+        _stateMachine.SlimeTrail.SetActive(true);
     }
 
     public override void Tick(float deltaTime)
@@ -81,7 +82,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
     void OnMorph()
     {
-        if (_stateMachine.LastMorphable == null && _stateMachine.CurrentMorphable == null ) { return; }
+        if (_stateMachine.MorphableSlot == null) { return; }
         _stateMachine.SwitchState( new PlayerMorphingState(_stateMachine) );
     }
 

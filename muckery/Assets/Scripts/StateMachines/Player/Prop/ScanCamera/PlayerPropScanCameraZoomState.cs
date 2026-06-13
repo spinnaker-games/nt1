@@ -17,7 +17,6 @@ public class PlayerPropScanCameraZoomState : PlayerBaseState
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.ScanCamera.SetActive(true);
 
-        _stateMachine.IsMorphed = true;
         _stateMachine.ScanCameraScope.SetActive(true);
         _stateMachine.ScanCamera.SetActive(false);
 

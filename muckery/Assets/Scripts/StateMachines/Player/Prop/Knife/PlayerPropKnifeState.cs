@@ -40,8 +40,6 @@ public class PlayerPropKnifeState : PlayerBaseState
         }
 
         weapon.SetAttack(_stateMachine.KnifeDamageAmount, _stateMachine.KnifeKnockback);
-
-        _stateMachine.IsMorphed = true;
     }
 
     public override void Tick(float deltaTime)

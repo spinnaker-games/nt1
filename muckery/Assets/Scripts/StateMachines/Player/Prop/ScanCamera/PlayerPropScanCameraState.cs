@@ -17,8 +17,6 @@ public class PlayerPropScanCameraState : PlayerBaseState
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.ScanCamera.SetActive(true);
 
-        _stateMachine.IsMorphed = true;
-
         _stateMachine.Animator.Play(FreeLookBlendTreeHash);
     }
 

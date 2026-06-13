@@ -1634,6 +1634,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 581418495234065194}
+  - component: {fileID: 9083898520512184171}
   - component: {fileID: 1320618161420145065}
   - component: {fileID: 1134698556074668667}
   m_Layer: 0
@@ -1660,6 +1661,18 @@ Transform:
   - {fileID: 3162247175265667597}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9083898520512184171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7808490280632833006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ad1917bb9c34249926671b8327693a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputReader
 --- !u!114 &1320618161420145065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1672,6 +1685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ddb059918d2c2f45b558c7e5bed6938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  _inputReader: {fileID: 9083898520512184171}
   _morphableType: 0
   _knife: {fileID: 8514845208126554497}
   _spring: {fileID: 9011244650856314940}

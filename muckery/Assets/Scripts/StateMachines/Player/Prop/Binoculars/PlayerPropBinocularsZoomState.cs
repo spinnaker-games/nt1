@@ -16,7 +16,6 @@ public class PlayerPropBinocularsZoomState : PlayerBaseState
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.Binoculars.SetActive(true);
 
-        _stateMachine.IsMorphed = true;
         _stateMachine.BinocularsScope.SetActive(true);
         _stateMachine.Binoculars.SetActive(false);
 

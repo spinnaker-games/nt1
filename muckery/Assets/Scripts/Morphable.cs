@@ -19,9 +19,12 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
         LockPick
     }
 
+    [SerializeField] InputReader _inputReader;
     [SerializeField] MorphableType _morphableType;
 
     public MorphableType Type => _morphableType;
+
+    PlayerStateMachine player; //TODO: Tight coupling
 
     [Header( "Visuals" )]
     [SerializeField] GameObject _knife;
@@ -42,32 +45,36 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
         UpdateVisuals();
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter( Collider other )
     {
-        if (!other.CompareTag("Player")) return;
+        if ( !other.CompareTag( "Player" ) ) return;
 
-        if ( _morphButton != null ) _morphButton.SetActive(true);
+        _inputReader.MorphActivateEvent += OnMorph;
 
-        PlayerStateMachine player = other.GetComponent<PlayerStateMachine>();
+        if ( _morphButton != null )
+            _morphButton.SetActive( true );
 
-        if (player != null)
-        {
-            player.CurrentMorphable = this;
-            player.LastMorphable = this;
-        }
+        player = other.GetComponent<PlayerStateMachine>();
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit( Collider other )
     {
-        if (!other.CompareTag("Player")) return;
+        if ( !other.CompareTag( "Player" ) ) return;
 
-        if ( _morphButton != null ) _morphButton.SetActive(false);
+        _inputReader.MorphActivateEvent -= OnMorph;
 
-        PlayerStateMachine player = other.GetComponent<PlayerStateMachine>();
+        if ( _morphButton != null )
+            _morphButton.SetActive( false );
 
-        if (player != null && player.CurrentMorphable == this)
+        player = null;
+    }
+
+    void OnMorph()
+    {
+        if (player != null)
         {
-            player.CurrentMorphable = null;
+            player.MorphableSlot = this;
+            Debug.Log("Morphable Type: " + player.MorphableSlot.Type);
         }
     }
 

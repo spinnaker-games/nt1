@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerMorphingState : PlayerBaseState
 {
+    Morphable _lastMorphable;
 
     public PlayerMorphingState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
     {
@@ -29,10 +30,7 @@ public class PlayerMorphingState : PlayerBaseState
 
     IEnumerator MorphRoutine()
     {
-        Morphable target = _stateMachine.CurrentMorphable;
-
-        if (target == null)
-            target = _stateMachine.LastMorphable;
+        Morphable target = _stateMachine.MorphableSlot;
 
         if (target == null)
             yield break;
@@ -45,11 +43,13 @@ public class PlayerMorphingState : PlayerBaseState
             yield break;
         }
 
-        if (_stateMachine.IsMorphed && _stateMachine.CurrentMorphable == null)
+        if (_stateMachine.IsMorphed )
         {
             _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );
             yield break;
         }
+
+        _stateMachine.IsMorphed = true; //one call for all morphables
 
         switch (target.Type)
         {

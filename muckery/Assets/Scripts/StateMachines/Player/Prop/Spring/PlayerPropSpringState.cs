@@ -31,8 +31,6 @@ public class PlayerPropSpringState : PlayerBaseState
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.Spring.SetActive(true);
-
-        _stateMachine.IsMorphed = true;
     }
 
     public override void Tick(float deltaTime)

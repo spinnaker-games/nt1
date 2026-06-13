@@ -22,8 +22,6 @@ public class PlayerPropBarrelState : PlayerBaseState
         _stateMachine.Barrel.SetActive(true);
 
         _stateMachine.IsDisguised = true;//TODO: EXPOSE
-
-        _stateMachine.IsMorphed = true;
     }
 
     public override void Tick(float deltaTime)

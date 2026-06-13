@@ -17,8 +17,6 @@ public class PlayerPropBinocularsState : PlayerBaseState
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.Binoculars.SetActive(true);
 
-        _stateMachine.IsMorphed = true;
-
         _stateMachine.Animator.Play(FreeLookBlendTreeHash);
     }
 

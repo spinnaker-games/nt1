@@ -17,8 +17,6 @@ public class PlayerPropUmbrellaState : PlayerBaseState
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.Umbrella.SetActive(true);
-
-        _stateMachine.IsMorphed = true;
     }
 
     public override void Tick(float deltaTime)

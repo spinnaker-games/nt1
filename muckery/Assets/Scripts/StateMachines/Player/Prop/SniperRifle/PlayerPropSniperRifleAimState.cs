@@ -17,7 +17,6 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.SniperRifle.SetActive(true);
 
-        _stateMachine.IsMorphed = true;
         _stateMachine.SniperRifleScope.SetActive(true);
         _stateMachine.SniperRifle.SetActive(false);
 

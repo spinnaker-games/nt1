@@ -22,8 +22,6 @@ public class PlayerPropMetalDetectorState : PlayerBaseState
         {
             weapon = _stateMachine.MetalDetector.GetComponentInChildren<WeaponDamage>( true ); // the true is an overload because GetComponentInChildren ignores inactive objects 
         }
-
-        _stateMachine.IsMorphed = true;
     }
 
     public override void Tick(float deltaTime)

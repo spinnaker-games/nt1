@@ -13,8 +13,6 @@ public class PlayerPropLockPickState : PlayerBaseState
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.LockPick.SetActive(true);
-
-        _stateMachine.IsMorphed = true;
         _stateMachine.IsLockPick = true;
     }
 
