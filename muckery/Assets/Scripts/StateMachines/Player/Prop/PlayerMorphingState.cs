@@ -84,6 +84,10 @@ public class PlayerMorphingState : PlayerBaseState
             case Morphable.MorphableType.ScanCamera:
                 _stateMachine.SwitchState( new PlayerPropScanCameraState( _stateMachine ) );
                 break;
+
+            case Morphable.MorphableType.LockPick:
+                _stateMachine.SwitchState( new PlayerPropLockPickState( _stateMachine ) );
+                break;
         }
     }
 }

@@ -15,7 +15,8 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
         SniperRifle,
         Binoculars,
         Umbrella,
-        ScanCamera
+        ScanCamera,
+        LockPick
     }
 
     [SerializeField] MorphableType _morphableType;
@@ -31,6 +32,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
     [SerializeField] GameObject _binoculars;
     [SerializeField] GameObject _umbrella;
     [SerializeField] GameObject _scanCamera;
+    [SerializeField] GameObject _lockPick;
 
     [Header( "UI" )]
     [SerializeField] GameObject _morphButton;
@@ -103,5 +105,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
         if ( _umbrella != null ) _umbrella.SetActive( _morphableType == MorphableType.Umbrella );
 
         if ( _scanCamera != null ) _scanCamera.SetActive( _morphableType == MorphableType.ScanCamera );
+
+        if ( _lockPick != null ) _lockPick.SetActive( _morphableType == MorphableType.LockPick );
     }
 }

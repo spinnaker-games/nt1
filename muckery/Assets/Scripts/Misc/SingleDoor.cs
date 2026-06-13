@@ -14,12 +14,16 @@ public class SingleDoor : MonoBehaviour
     readonly int DoorCloseHash = Animator.StringToHash( "SingleDoorClose" );
 
     bool _playerInRange;
+    bool _playerLockPick;
     bool _isOpen;
-
 
     void OnTriggerEnter( Collider other )
     {
         if ( !other.CompareTag( "Player" ) ) return;
+
+        PlayerStateMachine player = other.GetComponent<PlayerStateMachine>(); //TODO: Tight Coupling??? Can I do this better?
+
+        _playerLockPick = player.IsLockPick;
 
         _playerInRange = true;
 
@@ -50,9 +54,11 @@ public class SingleDoor : MonoBehaviour
     {
         if ( !_playerInRange ) return;
 
-        if (_locked) return;
+        if (_locked && !_playerLockPick) return;
 
         _isOpen = !_isOpen;
+
+        _locked = false;
 
         UpdateButtonText();
 
@@ -70,9 +76,15 @@ public class SingleDoor : MonoBehaviour
     {
         if ( _doorButtonText == null ) return;
 
-        if (_locked)
+        if (_locked && !_playerLockPick)
         {
             _doorButtonText.text = "Locked";
+            return;
+        }
+
+        if (_locked && _playerLockPick)
+        {
+            _doorButtonText.text = "[E] Unlock";
             return;
         }
 

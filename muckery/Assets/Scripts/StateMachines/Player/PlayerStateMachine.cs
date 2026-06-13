@@ -90,6 +90,9 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public AudioSource UmbrellaJumpSFX { get; set; }
     [field: SerializeField] public float UmbrellaJumpForce { get; set; }
 
+    [field: Space]
+    [field: SerializeField] public GameObject LockPick { get; set; }
+
     [field: Header("CAMERA")]
     [field: Space]
     [field: SerializeField] public CinemachineCamera FreeLookVC { get; set; }
@@ -98,6 +101,7 @@ public class PlayerStateMachine : StateMachine
     public bool IsDisguised { get; set; }
     public bool IsMoving { get; set; }
     public bool IsMorphed { get; set; }
+    public bool IsLockPick { get; set; }
     public Morphable CurrentMorphable { get; set; }
     public Morphable LastMorphable { get; set; }
     public float PreviousDodgeTime { get; set; } = Mathf.NegativeInfinity; //prevents the first dodge from having strange behaviour
