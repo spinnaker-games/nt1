@@ -1314,8 +1314,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SingleDoor
   _doorButton: {fileID: 7905948708633444820}
+  _doorButtonText: {fileID: 3310577215253244955}
   _animator: {fileID: 1964309419717311971}
   _inputReader: {fileID: 3156027664286235938}
+  _locked: 0
 --- !u!135 &2008306196198919063
 SphereCollider:
   m_ObjectHideFlags: 0
