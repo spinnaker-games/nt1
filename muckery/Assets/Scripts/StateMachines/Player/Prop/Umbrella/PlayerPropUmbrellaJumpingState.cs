@@ -36,6 +36,8 @@ public class PlayerPropUmbrellaJumpingState : PlayerBaseState
             return;
         }
 
+         _stateMachine.IsMoving = _stateMachine.InputReader.MovementValue != Vector2.zero;
+
         FaceTarget();
     }
 

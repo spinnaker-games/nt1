@@ -47,6 +47,8 @@ public class PlayerPropUmbrellaFallingState : PlayerBaseState
             }
         }
 
+        _stateMachine.IsMoving = _stateMachine.InputReader.MovementValue != Vector2.zero;
+
         FaceTarget();
     }
 
@@ -64,7 +66,7 @@ public class PlayerPropUmbrellaFallingState : PlayerBaseState
     void SpinUmbrella( float deltaTime )
     {
         _stateMachine.Umbrella.transform.Rotate(
-            Vector3.up,
+            Vector3.forward,
             UmbrellaSpinSpeed * deltaTime,
             Space.Self );
     }

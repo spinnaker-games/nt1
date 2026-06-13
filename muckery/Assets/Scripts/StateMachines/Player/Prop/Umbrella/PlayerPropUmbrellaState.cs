@@ -3,15 +3,9 @@ using System.Collections;
 
 public class PlayerPropUmbrellaState : PlayerBaseState
 {
-    bool _shouldFadeAnim;
-    readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
-    readonly int FreeLookZoomBlendTreeHash = Animator.StringToHash("FreeLookZoomBlendTree");
-    const float AnimatorDampTime = 0.075f;
-    const float CrossFadeDuration = 0.2f;
 
-    public PlayerPropUmbrellaState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
+    public PlayerPropUmbrellaState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-        this._shouldFadeAnim = shouldFadeAnim;
     }
 
     public override void Enter()
@@ -20,14 +14,6 @@ public class PlayerPropUmbrellaState : PlayerBaseState
         _stateMachine.InputReader.MorphActivateEvent += OnMorph;
         _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
 
-        if (_shouldFadeAnim)
-        {
-            _stateMachine.Animator.CrossFadeInFixedTime(FreeLookZoomBlendTreeHash, CrossFadeDuration);
-        }
-        else
-        {
-            _stateMachine.Animator.Play(FreeLookZoomBlendTreeHash);
-        }
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.Umbrella.SetActive(true);
@@ -40,13 +26,7 @@ public class PlayerPropUmbrellaState : PlayerBaseState
         Vector3 movement = CalculateMovement();
         Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
 
-        if (_stateMachine.InputReader.MovementValue == Vector2.zero)
-        {
-            _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0, AnimatorDampTime, deltaTime); //TODO: Fix magic numbers
-            return;
-        }
-
-        _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 1, AnimatorDampTime, deltaTime); //TODO: Fix magic numbers
+        _stateMachine.IsMoving = _stateMachine.InputReader.MovementValue != Vector2.zero;
 
         FaceMovementDirection(movement, deltaTime);
     }
