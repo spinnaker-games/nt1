@@ -17,7 +17,7 @@ public class PlayerTargetingState : PlayerBaseState
     {
         _stateMachine.InputReader.TargetEvent += OnTarget;
         _stateMachine.InputReader.DodgeEvent += OnDodge;
-        _stateMachine.InputReader.JumpActivateEvent += OnJump;
+        _stateMachine.InputReader.InteractActivateEvent += OnInteract;
 
 
         _stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, CrossFadeDuration);
@@ -53,7 +53,7 @@ public class PlayerTargetingState : PlayerBaseState
     {
         _stateMachine.InputReader.TargetEvent -= OnTarget;
         _stateMachine.InputReader.DodgeEvent -= OnDodge;
-        _stateMachine.InputReader.JumpActivateEvent -= OnJump;
+        _stateMachine.InputReader.InteractActivateEvent -= OnInteract;
 
     }
 
@@ -68,9 +68,8 @@ public class PlayerTargetingState : PlayerBaseState
         _stateMachine.SwitchState(new PlayerDodgingState(_stateMachine, _stateMachine.InputReader.MovementValue)); //dodging state requires player movement direction to blend animation accordingly
     }
 
-    void OnJump()
+    void OnInteract()
     {
-            //_stateMachine.SwitchState(new PlayerJumpingState(_stateMachine));
     }
 
     Vector3 CalculateMovement(float deltaTime)

@@ -9,7 +9,7 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
     public Vector2 MovementValue { get; set; }
     public Vector2 LookValue { get; set; }
 
-    public event Action JumpActivateEvent;
+    public event Action InteractActivateEvent;
     public event Action DodgeEvent;
     public event Action TargetEvent;
     public event Action AimActivateEvent;
@@ -59,13 +59,9 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-    }
-
-    public void OnJump(InputAction.CallbackContext context)
-    {
         if (!context.performed) { return; }
 
-        JumpActivateEvent?.Invoke();
+        InteractActivateEvent?.Invoke();
     }
 
     public void OnMorph(InputAction.CallbackContext context)
