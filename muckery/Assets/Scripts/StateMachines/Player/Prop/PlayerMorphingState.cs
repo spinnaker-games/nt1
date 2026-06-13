@@ -3,8 +3,6 @@ using System.Collections;
 
 public class PlayerMorphingState : PlayerBaseState
 {
-    Morphable _lastMorphable;
-
     public PlayerMorphingState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
     {
     }
@@ -32,26 +30,29 @@ public class PlayerMorphingState : PlayerBaseState
     {
         Morphable target = _stateMachine.MorphableSlot;
 
-        if (target == null)
+        if ( target == null )
             yield break;
 
         yield return new WaitForSeconds( _stateMachine.MorphDuration );
 
-        if (_stateMachine.Health.IsDead)
-        {
-            //_stateMachine.SwitchState(new PlayerDeadState(_stateMachine));
+        if ( _stateMachine.Health.IsDead )
             yield break;
-        }
 
-        if (_stateMachine.IsMorphed )
+        if ( _stateMachine.IsMorphed )
         {
-            _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );
-            yield break;
+            if ( _stateMachine.CurrentMorphable == target )
+            {
+                _stateMachine.IsMorphed = false;
+                _stateMachine.CurrentMorphable = null;
+                _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );
+                yield break;
+            }
         }
 
         _stateMachine.IsMorphed = true; //one call for all morphables
+        _stateMachine.CurrentMorphable = target;
 
-        switch (target.Type)
+        switch (target.Type) //TODO: replace switch with lookup table
         {
             case Morphable.MorphableType.Knife:
                 _stateMachine.SwitchState( new PlayerPropKnifeState( _stateMachine ) );
