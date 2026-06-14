@@ -16,7 +16,8 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
         Binoculars,
         Umbrella,
         ScanCamera,
-        LockPick
+        LockPick,
+        GasCan
     }
 
     [SerializeField] InputReader _inputReader;
@@ -36,6 +37,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
     [SerializeField] GameObject _umbrella;
     [SerializeField] GameObject _scanCamera;
     [SerializeField] GameObject _lockPick;
+    [SerializeField] GameObject _gasCan;
 
     [Header( "UI" )]
     [SerializeField] GameObject _morphButton;
@@ -103,9 +105,9 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
 
         if ( _barrel != null ) _barrel.SetActive( _morphableType == MorphableType.Barrel );
 
-        if ( _barrel != null ) _metalDetector.SetActive( _morphableType == MorphableType.MetalDetector );
+        if ( _metalDetector != null ) _metalDetector.SetActive( _morphableType == MorphableType.MetalDetector );
 
-        if ( _barrel != null ) _sniperRifel.SetActive( _morphableType == MorphableType.SniperRifle );
+        if ( _sniperRifel != null ) _sniperRifel.SetActive( _morphableType == MorphableType.SniperRifle );
 
         if ( _binoculars != null ) _binoculars.SetActive( _morphableType == MorphableType.Binoculars );
 
@@ -114,5 +116,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
         if ( _scanCamera != null ) _scanCamera.SetActive( _morphableType == MorphableType.ScanCamera );
 
         if ( _lockPick != null ) _lockPick.SetActive( _morphableType == MorphableType.LockPick );
+
+        if ( _gasCan != null ) _gasCan.SetActive( _morphableType == MorphableType.GasCan );
     }
 }

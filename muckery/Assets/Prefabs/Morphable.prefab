@@ -1696,6 +1696,7 @@ MonoBehaviour:
   _umbrella: {fileID: 8824223791391719260}
   _scanCamera: {fileID: 2018524666408308357}
   _lockPick: {fileID: 1314585644569849028}
+  _gasCan: {fileID: 8977555305451123315}
   _morphButton: {fileID: 6992427529901400907}
 --- !u!135 &1134698556074668667
 SphereCollider:

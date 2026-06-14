@@ -93,6 +93,10 @@ public class PlayerStateMachine : StateMachine
     [field: Space]
     [field: SerializeField] public GameObject LockPick { get; set; }
 
+    [field: Space]
+    [field: SerializeField] public GameObject GasCan { get; set; }
+    [field: SerializeField] public GameObject OilPuddle { get; set; }
+
     [field: Header("CAMERA")]
     [field: Space]
     [field: SerializeField] public CinemachineCamera FreeLookVC { get; set; }

@@ -89,6 +89,10 @@ public class PlayerMorphingState : PlayerBaseState
             case Morphable.MorphableType.LockPick:
                 _stateMachine.SwitchState( new PlayerPropLockPickState( _stateMachine ) );
                 break;
+
+            case Morphable.MorphableType.GasCan:
+                _stateMachine.SwitchState( new PlayerPropGasCanState( _stateMachine ) );
+                break;
         }
     }
 }
