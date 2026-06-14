@@ -6,36 +6,55 @@ public class JellyMesh : MonoBehaviour
     public float Mass = 1f;
     public float stiffness = 1f;
     public float damping = 0.75f;
-    private Mesh OriginalMesh, MeshClone;
-    private MeshRenderer renderer;
-    private JellyVertex[] jv;
-    private Vector3[] vertexArray;
-    
+
+    Mesh _originalMesh;
+    Mesh _meshClone;
+    MeshRenderer _meshRenderer;
+
+    JellyVertex[] _jellyVertices;
+    Vector3[] _vertexArray;
+
     void Start()
     {
-        OriginalMesh = GetComponent<MeshFilter>().sharedMesh;
-        MeshClone = Instantiate(OriginalMesh);
-        GetComponent<MeshFilter>().sharedMesh = MeshClone;
-        renderer = GetComponent<MeshRenderer>();
-        jv = new JellyVertex[MeshClone.vertices.Length];
-        for (int i = 0; i < MeshClone.vertices.Length; i++)
+        _originalMesh = GetComponent<MeshFilter>().sharedMesh;
+
+        _meshClone = Instantiate( _originalMesh );
+        GetComponent<MeshFilter>().sharedMesh = _meshClone;
+
+        _meshRenderer = GetComponent<MeshRenderer>();
+
+        _jellyVertices = new JellyVertex[_meshClone.vertices.Length];
+
+        for (int i = 0; i < _meshClone.vertices.Length; i++)
         {
-            jv[i] = new JellyVertex(i, transform.TransformPoint(MeshClone.vertices[i]));
+            _jellyVertices[i] = new JellyVertex(
+                i,
+                transform.TransformPoint( _meshClone.vertices[i] )
+            );
         }
     }
 
     void FixedUpdate()
     {
-        vertexArray = OriginalMesh.vertices;
-        for(int i = 0; i < jv.Length; i++)
+        _vertexArray = _originalMesh.vertices;
+
+        for (int i = 0; i < _jellyVertices.Length; i++)
         {
-            Vector3 target = transform.TransformPoint(vertexArray[jv[i].ID]);
-            float intensity = (1 - (renderer.bounds.max.y - target.y) / renderer.bounds.size.y) * Intensity;
-            jv[i].Shake(target, Mass, stiffness, damping);
-            target = transform.InverseTransformPoint(jv[i].Position);
-            vertexArray[jv[i].ID] = Vector3.Lerp(vertexArray[jv[i].ID], target, intensity);
+            Vector3 target = transform.TransformPoint( _vertexArray[_jellyVertices[i].ID] );
+
+            float intensity =
+                (1 - (_meshRenderer.bounds.max.y - target.y) / _meshRenderer.bounds.size.y)
+                * Intensity;
+
+            _jellyVertices[i].Shake(target, Mass, stiffness, damping);
+
+            target = transform.InverseTransformPoint(_jellyVertices[i].Position);
+
+            _vertexArray[_jellyVertices[i].ID] =
+                Vector3.Lerp(_vertexArray[_jellyVertices[i].ID], target, intensity);
         }
-        MeshClone.vertices = vertexArray;
+
+        _meshClone.vertices = _vertexArray;
     }
 
     public class JellyVertex
@@ -43,7 +62,7 @@ public class JellyMesh : MonoBehaviour
         public int ID;
         public Vector3 Position;
         public Vector3 velocity, Force;
-        
+
         public JellyVertex(int _id, Vector3 _pos)
         {
             ID = _id;
@@ -55,6 +74,7 @@ public class JellyMesh : MonoBehaviour
             Force = (target - Position) * s;
             velocity = (velocity + Force / m) * d;
             Position += velocity;
+
             if ((velocity + Force + Force / m).magnitude < 0.001f)
                 Position = target;
         }
