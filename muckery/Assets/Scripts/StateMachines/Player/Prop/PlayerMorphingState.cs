@@ -93,6 +93,10 @@ public class PlayerMorphingState : PlayerBaseState
             case Morphable.MorphableType.GasCan:
                 _stateMachine.SwitchState( new PlayerPropGasCanState( _stateMachine ) );
                 break;
+
+            case Morphable.MorphableType.BabyOil:
+                _stateMachine.SwitchState( new PlayerPropBabyOilState( _stateMachine ) );
+                break;
         }
     }
 }

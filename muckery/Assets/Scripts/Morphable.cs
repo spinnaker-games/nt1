@@ -17,7 +17,8 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
         Umbrella,
         ScanCamera,
         LockPick,
-        GasCan
+        GasCan,
+        BabyOil
     }
 
     [SerializeField] InputReader _inputReader;
@@ -38,6 +39,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
     [SerializeField] GameObject _scanCamera;
     [SerializeField] GameObject _lockPick;
     [SerializeField] GameObject _gasCan;
+    [SerializeField] GameObject _babyOil;
 
     [Header( "UI" )]
     [SerializeField] GameObject _morphButton;
@@ -118,5 +120,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
         if ( _lockPick != null ) _lockPick.SetActive( _morphableType == MorphableType.LockPick );
 
         if ( _gasCan != null ) _gasCan.SetActive( _morphableType == MorphableType.GasCan );
+
+        if ( _babyOil != null ) _babyOil.SetActive( _morphableType == MorphableType.BabyOil );
     }
 }
