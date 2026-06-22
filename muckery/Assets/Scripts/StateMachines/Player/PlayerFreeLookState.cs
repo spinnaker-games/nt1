@@ -82,7 +82,6 @@ public class PlayerFreeLookState : PlayerBaseState
 
     void OnMorph()
     {
-        if (_stateMachine.MorphableSlot == null) { return; }
         _stateMachine.SwitchState( new PlayerMorphingState(_stateMachine) );
     }
 

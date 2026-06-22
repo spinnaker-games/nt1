@@ -1,42 +1,51 @@
 using UnityEngine;
-using System.Collections;
 
 public class PlayerMorphingState : PlayerBaseState
 {
-    public PlayerMorphingState(PlayerStateMachine stateMachine, bool shouldFadeAnim = true) : base(stateMachine)
+    float _morphTimer;
+
+    public PlayerMorphingState( PlayerStateMachine stateMachine, bool shouldFadeAnim = true ) : base( stateMachine )
     {
     }
 
     public override void Enter()
     {
-        _stateMachine.MorphVFX.Play();
+        _morphTimer = _stateMachine.MorphDuration;
+
         _stateMachine.MorphSFX.Play();
-        _stateMachine.StartCoroutine( MorphRoutine() );
+        _stateMachine.MorphVFX.Play();
     }
 
-    public override void Tick(float deltaTime)
-    {    
+    public override void Tick( float deltaTime )
+    {
         Vector3 movement = CalculateMovement();
-        Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime); //TODO: Do we want movement while morphing?
+        Move( movement * _stateMachine.FreeLookMovementSpeed, deltaTime );
 
-        FaceMovementDirection(movement, deltaTime);
+        FaceMovementDirection( movement, deltaTime );
+
+        _morphTimer -= deltaTime;
+
+        if ( _morphTimer > 0f )
+            return;
+
+        CompleteMorph();
     }
 
     public override void Exit()
     {
     }
 
-    IEnumerator MorphRoutine()
+    void CompleteMorph()
     {
+        if ( _stateMachine.Health.IsDead ) return;
+
         Morphable target = _stateMachine.MorphableSlot;
 
         if ( target == null )
-            yield break;
-
-        yield return new WaitForSeconds( _stateMachine.MorphDuration );
-
-        if ( _stateMachine.Health.IsDead )
-            yield break;
+        {
+            _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );
+            return;
+        }
 
         if ( _stateMachine.IsMorphed )
         {
@@ -45,14 +54,14 @@ public class PlayerMorphingState : PlayerBaseState
                 _stateMachine.IsMorphed = false;
                 _stateMachine.CurrentMorphable = null;
                 _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );
-                yield break;
+                return;
             }
         }
 
-        _stateMachine.IsMorphed = true; //one call for all morphables
+        _stateMachine.IsMorphed = true;
         _stateMachine.CurrentMorphable = target;
 
-        switch (target.Type) //TODO: replace switch with lookup table
+        switch ( target.Type )
         {
             case Morphable.MorphableType.Knife:
                 _stateMachine.SwitchState( new PlayerPropKnifeState( _stateMachine ) );
