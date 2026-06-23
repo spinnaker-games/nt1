@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class PlayerPropSniperRifleAimState : PlayerBaseState
+public class PlayerPropSniperRifleZoomState : PlayerBaseState
 {
     float _defaultFOV;
 
-    public PlayerPropSniperRifleAimState(PlayerStateMachine stateMachine) : base(stateMachine)
+    public PlayerPropSniperRifleZoomState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
 
@@ -12,7 +12,7 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
     {
         _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
         _stateMachine.InputReader.MorphSlotActivateEvent += OnMorphSlot;
-        _stateMachine.InputReader.AimCancelEvent += OnAimCancel;
+        _stateMachine.InputReader.ZoomCancelEvent += OnZoomCancel;
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.SniperRifle.SetActive(true);
@@ -38,7 +38,7 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
     {
         _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
         _stateMachine.InputReader.MorphSlotActivateEvent -= OnMorphSlot;
-        _stateMachine.InputReader.AimActivateEvent -= OnAimCancel;
+        _stateMachine.InputReader.ZoomCancelEvent -= OnZoomCancel;
 
         _stateMachine.SniperRifleScope.SetActive(false);
         _stateMachine.SniperRifle.SetActive(true);
@@ -51,7 +51,7 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
         _stateMachine.SwitchState( new PlayerMorphingState( _stateMachine, slot + 1 ) );
     }
 
-    void OnAimCancel()
+    void OnZoomCancel()
     {
         _stateMachine.SwitchState(new PlayerPropSniperRifleState(_stateMachine));
     }

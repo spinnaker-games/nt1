@@ -51,6 +51,6 @@ public class PlayerPropSniperRifleState : PlayerBaseState
 
     void OnAim()
     {
-        _stateMachine.SwitchState(new PlayerPropSniperRifleAimState(_stateMachine));
+        _stateMachine.SwitchState(new PlayerPropSniperRifleZoomState(_stateMachine));
     }
 }

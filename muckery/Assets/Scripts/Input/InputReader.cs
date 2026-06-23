@@ -13,7 +13,7 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
     public event Action DodgeEvent;
     public event Action TargetEvent;
     public event Action AimActivateEvent;
-    public event Action AimCancelEvent;
+    public event Action ZoomCancelEvent;
     public event Action VantagePointActivateEvent;
     public event Action VantagePointCancelEvent;
     public event Action TopDownActivateEvent;
@@ -136,7 +136,7 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
         }
         else if (context.canceled)
         {
-            AimCancelEvent?.Invoke();
+            ZoomCancelEvent?.Invoke();
         }
     }
 

@@ -11,8 +11,8 @@ public class PlayerAimingState : PlayerBaseState
 
     public override void Enter()
     {
-        _stateMachine.InputReader.AimCancelEvent += OnCancel;
-        _stateMachine.InputReader.AimCancelEvent += OnAttack;
+        _stateMachine.InputReader.ZoomCancelEvent += OnCancel;
+        _stateMachine.InputReader.ZoomCancelEvent += OnAttack;
 
         Vector3 cameraForward = _stateMachine.MainCameraTransform.forward;
         cameraForward.y = 0f;
@@ -33,8 +33,8 @@ public class PlayerAimingState : PlayerBaseState
 
     public override void Exit()
     {
-        _stateMachine.InputReader.AimCancelEvent -= OnCancel;
-        _stateMachine.InputReader.AimCancelEvent -= OnAttack;
+        _stateMachine.InputReader.ZoomCancelEvent -= OnCancel;
+        _stateMachine.InputReader.ZoomCancelEvent -= OnAttack;
     }
 
     void OnCancel()
