@@ -16,8 +16,7 @@ public class PlayerPropBarrelState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.InputReader.TargetEvent += OnTarget;
-        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
-
+        _stateMachine.InputReader.MorphSlotActivateEvent += OnMorphSlot;
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.Barrel.SetActive(true);
 
@@ -40,8 +39,7 @@ public class PlayerPropBarrelState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.InputReader.TargetEvent -= OnTarget;
-        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
-
+        _stateMachine.InputReader.MorphSlotActivateEvent -= OnMorphSlot;
         _stateMachine.Barrel.SetActive(false);
     }
 
@@ -52,9 +50,8 @@ public class PlayerPropBarrelState : PlayerBaseState
         _stateMachine.SwitchState(new PlayerTargetingState(_stateMachine));
     }
 
-    void OnMorph()
+    void OnMorphSlot( int slot )
     {
-        _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
+        _stateMachine.SwitchState( new PlayerMorphingState( _stateMachine, slot + 1 ) );
     }
-
 }

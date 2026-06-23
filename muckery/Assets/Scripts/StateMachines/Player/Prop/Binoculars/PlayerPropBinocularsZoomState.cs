@@ -10,7 +10,6 @@ public class PlayerPropBinocularsZoomState : PlayerBaseState
 
     public override void Enter()
     {
-        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
         _stateMachine.InputReader.AimCancelEvent += OnAimCancel;
 
         _stateMachine.PlayerModel.SetActive(false);
@@ -35,18 +34,12 @@ public class PlayerPropBinocularsZoomState : PlayerBaseState
 
     public override void Exit()
     {
-        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
         _stateMachine.InputReader.AimActivateEvent -= OnAimCancel;
 
         _stateMachine.BinocularsScope.SetActive(false);
         _stateMachine.Binoculars.SetActive(true);
 
         _stateMachine.FreeLookVC.Lens.FieldOfView = _defaultFOV;
-    }
-
-    void OnMorph()
-    {
-        _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
     }
 
     void OnAimCancel()

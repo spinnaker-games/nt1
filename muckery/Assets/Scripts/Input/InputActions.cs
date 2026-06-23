@@ -120,9 +120,27 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Morph"",
+                    ""name"": ""MorphSlotA"",
                     ""type"": ""Button"",
                     ""id"": ""60c5e5b4-f00e-4424-a9dd-5d5e17004b2c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MorphSlotB"",
+                    ""type"": ""Button"",
+                    ""id"": ""c115d929-e434-4a01-be71-acbc8cf5dbe9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MorphSlotC"",
+                    ""type"": ""Button"",
+                    ""id"": ""dbcbeb8e-4760-4ced-a625-136cc88e72bf"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -446,22 +464,66 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""05ece9f9-8872-4676-a5dd-cd3b3f4e3052"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Morph"",
+                    ""action"": ""MorphSlotA"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""b01f8e87-2f1d-4558-a3f7-7b32e49dd890"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MorphSlotA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d4c947e-fc61-4112-a998-c343ddaf0156"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MorphSlotB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00ad9d92-a052-4d8a-9ce3-72d8478ce82a"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MorphSlotB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1417b9e-da88-40ac-9ace-9db1d6730193"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MorphSlotC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cabee0fd-1892-41fa-ad20-81d5b08a4302"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Morph"",
+                    ""action"": ""MorphSlotC"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1338,7 +1400,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_AbilityActivate = m_Player.FindAction("AbilityActivate", throwIfNotFound: true);
-        m_Player_Morph = m_Player.FindAction("Morph", throwIfNotFound: true);
+        m_Player_MorphSlotA = m_Player.FindAction("MorphSlotA", throwIfNotFound: true);
+        m_Player_MorphSlotB = m_Player.FindAction("MorphSlotB", throwIfNotFound: true);
+        m_Player_MorphSlotC = m_Player.FindAction("MorphSlotC", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
@@ -1449,7 +1513,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_AbilityActivate;
-    private readonly InputAction m_Player_Morph;
+    private readonly InputAction m_Player_MorphSlotA;
+    private readonly InputAction m_Player_MorphSlotB;
+    private readonly InputAction m_Player_MorphSlotC;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Pause;
@@ -1488,9 +1554,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @AbilityActivate => m_Wrapper.m_Player_AbilityActivate;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Morph".
+        /// Provides access to the underlying input action "Player/MorphSlotA".
         /// </summary>
-        public InputAction @Morph => m_Wrapper.m_Player_Morph;
+        public InputAction @MorphSlotA => m_Wrapper.m_Player_MorphSlotA;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/MorphSlotB".
+        /// </summary>
+        public InputAction @MorphSlotB => m_Wrapper.m_Player_MorphSlotB;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/MorphSlotC".
+        /// </summary>
+        public InputAction @MorphSlotC => m_Wrapper.m_Player_MorphSlotC;
         /// <summary>
         /// Provides access to the underlying input action "Player/Interact".
         /// </summary>
@@ -1582,9 +1656,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @AbilityActivate.started += instance.OnAbilityActivate;
             @AbilityActivate.performed += instance.OnAbilityActivate;
             @AbilityActivate.canceled += instance.OnAbilityActivate;
-            @Morph.started += instance.OnMorph;
-            @Morph.performed += instance.OnMorph;
-            @Morph.canceled += instance.OnMorph;
+            @MorphSlotA.started += instance.OnMorphSlotA;
+            @MorphSlotA.performed += instance.OnMorphSlotA;
+            @MorphSlotA.canceled += instance.OnMorphSlotA;
+            @MorphSlotB.started += instance.OnMorphSlotB;
+            @MorphSlotB.performed += instance.OnMorphSlotB;
+            @MorphSlotB.canceled += instance.OnMorphSlotB;
+            @MorphSlotC.started += instance.OnMorphSlotC;
+            @MorphSlotC.performed += instance.OnMorphSlotC;
+            @MorphSlotC.canceled += instance.OnMorphSlotC;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -1647,9 +1727,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @AbilityActivate.started -= instance.OnAbilityActivate;
             @AbilityActivate.performed -= instance.OnAbilityActivate;
             @AbilityActivate.canceled -= instance.OnAbilityActivate;
-            @Morph.started -= instance.OnMorph;
-            @Morph.performed -= instance.OnMorph;
-            @Morph.canceled -= instance.OnMorph;
+            @MorphSlotA.started -= instance.OnMorphSlotA;
+            @MorphSlotA.performed -= instance.OnMorphSlotA;
+            @MorphSlotA.canceled -= instance.OnMorphSlotA;
+            @MorphSlotB.started -= instance.OnMorphSlotB;
+            @MorphSlotB.performed -= instance.OnMorphSlotB;
+            @MorphSlotB.canceled -= instance.OnMorphSlotB;
+            @MorphSlotC.started -= instance.OnMorphSlotC;
+            @MorphSlotC.performed -= instance.OnMorphSlotC;
+            @MorphSlotC.canceled -= instance.OnMorphSlotC;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -2014,12 +2100,26 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAbilityActivate(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Morph" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "MorphSlotA" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMorph(InputAction.CallbackContext context);
+        void OnMorphSlotA(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MorphSlotB" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMorphSlotB(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MorphSlotC" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMorphSlotC(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

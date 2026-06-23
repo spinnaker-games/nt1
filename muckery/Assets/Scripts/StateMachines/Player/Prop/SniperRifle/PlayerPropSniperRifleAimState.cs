@@ -11,7 +11,7 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
-        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent += OnMorphSlot;
         _stateMachine.InputReader.AimCancelEvent += OnAimCancel;
 
         _stateMachine.PlayerModel.SetActive(false);
@@ -37,7 +37,7 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
-        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent -= OnMorphSlot;
         _stateMachine.InputReader.AimActivateEvent -= OnAimCancel;
 
         _stateMachine.SniperRifleScope.SetActive(false);
@@ -46,9 +46,9 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
         _stateMachine.FreeLookVC.Lens.FieldOfView = _defaultFOV;
     }
 
-    void OnMorph()
+    void OnMorphSlot( int slot )
     {
-        _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
+        _stateMachine.SwitchState( new PlayerMorphingState( _stateMachine, slot + 1 ) );
     }
 
     void OnAimCancel()

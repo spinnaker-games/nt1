@@ -10,7 +10,7 @@ public class PlayerPropScanCameraZoomState : PlayerBaseState
 
     public override void Enter()
     {
-        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent += OnMorphSlot;
         _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
         _stateMachine.InputReader.AimCancelEvent += OnAimCancel;
 
@@ -37,7 +37,7 @@ public class PlayerPropScanCameraZoomState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
-        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent -= OnMorphSlot;
         _stateMachine.InputReader.AimActivateEvent -= OnAimCancel;
 
         _stateMachine.ScanCameraScope.SetActive(false);
@@ -46,9 +46,9 @@ public class PlayerPropScanCameraZoomState : PlayerBaseState
         _stateMachine.FreeLookVC.Lens.FieldOfView = _defaultFOV;
     }
 
-    void OnMorph()
+    void OnMorphSlot( int slot )
     {
-        _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
+        _stateMachine.SwitchState( new PlayerMorphingState( _stateMachine, slot + 1 ) );
     }
 
     void OnAimCancel()
