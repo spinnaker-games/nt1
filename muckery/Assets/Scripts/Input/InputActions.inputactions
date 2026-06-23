@@ -34,9 +34,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Morph",
+                    "name": "MorphSlotA",
                     "type": "Button",
                     "id": "60c5e5b4-f00e-4424-a9dd-5d5e17004b2c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MorphSlotB",
+                    "type": "Button",
+                    "id": "c115d929-e434-4a01-be71-acbc8cf5dbe9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MorphSlotC",
+                    "type": "Button",
+                    "id": "dbcbeb8e-4760-4ced-a625-136cc88e72bf",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -360,22 +378,66 @@
                 {
                     "name": "",
                     "id": "05ece9f9-8872-4676-a5dd-cd3b3f4e3052",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Morph",
+                    "action": "MorphSlotA",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "b01f8e87-2f1d-4558-a3f7-7b32e49dd890",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MorphSlotA",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d4c947e-fc61-4112-a998-c343ddaf0156",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MorphSlotB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "00ad9d92-a052-4d8a-9ce3-72d8478ce82a",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MorphSlotB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1417b9e-da88-40ac-9ace-9db1d6730193",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MorphSlotC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cabee0fd-1892-41fa-ad20-81d5b08a4302",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Morph",
+                    "action": "MorphSlotC",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

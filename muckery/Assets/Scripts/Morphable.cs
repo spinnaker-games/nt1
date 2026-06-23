@@ -4,7 +4,7 @@ using UnityEditor;
 
 using UnityEngine;
 
-public class Morphable : MonoBehaviour //TODO: create IMorphable interface
+public class Morphable : MonoBehaviour
 {
     public enum MorphableType
     {
@@ -26,9 +26,9 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
 
     public MorphableType Type => _morphableType;
 
-    PlayerStateMachine player; //TODO: Tight coupling
+    PlayerStateMachine player;
 
-    [Header( "Visuals" )]
+    [Header("Visuals")]
     [SerializeField] GameObject _knife;
     [SerializeField] GameObject _spring;
     [SerializeField] GameObject _barrel;
@@ -41,7 +41,7 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
     [SerializeField] GameObject _gasCan;
     [SerializeField] GameObject _babyOil;
 
-    [Header( "UI" )]
+    [Header("UI")]
     [SerializeField] GameObject _morphButton;
 
     void Awake()
@@ -51,21 +51,23 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
 
     void OnTriggerEnter( Collider other )
     {
-        if ( !other.CompareTag( "Player" ) ) return;
+        if ( !other.CompareTag( "Player" ) )
+            return;
 
-        _inputReader.MorphActivateEvent += OnMorph;
+        player = other.GetComponent<PlayerStateMachine>();
+
+        _inputReader.MorphSlotActivateEvent += OnMorphSlot;
 
         if ( _morphButton != null )
             _morphButton.SetActive( true );
-
-        player = other.GetComponent<PlayerStateMachine>();
     }
 
     void OnTriggerExit( Collider other )
     {
-        if ( !other.CompareTag( "Player" ) ) return;
+        if ( !other.CompareTag( "Player" ) )
+            return;
 
-        _inputReader.MorphActivateEvent -= OnMorph;
+        _inputReader.MorphSlotActivateEvent -= OnMorphSlot;
 
         if ( _morphButton != null )
             _morphButton.SetActive( false );
@@ -73,12 +75,27 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
         player = null;
     }
 
-    void OnMorph()
+    void OnMorphSlot( int slot )
     {
-        if (player != null)
+        if ( player == null )
+            return;
+
+        switch ( slot )
         {
-            player.MorphableSlot = this;
-            Debug.Log("Morphable Type: " + player.MorphableSlot.Type);
+            case 0:
+                player.MorphableSlotA = this;
+                Debug.Log( $"Assigned {Type} to Slot A" );
+                break;
+
+            case 1:
+                player.MorphableSlotB = this;
+                Debug.Log( $"Assigned {Type} to Slot B" );
+                break;
+
+            case 2:
+                player.MorphableSlotC = this;
+                Debug.Log( $"Assigned {Type} to Slot C" );
+                break;
         }
     }
 
@@ -99,28 +116,19 @@ public class Morphable : MonoBehaviour //TODO: create IMorphable interface
 
     void UpdateVisuals()
     {
-        if ( _morphButton != null ) _morphButton.SetActive(false);
+        if ( _morphButton != null )
+            _morphButton.SetActive( false );
 
         if ( _knife != null ) _knife.SetActive( _morphableType == MorphableType.Knife );
-
         if ( _spring != null ) _spring.SetActive( _morphableType == MorphableType.Spring );
-
         if ( _barrel != null ) _barrel.SetActive( _morphableType == MorphableType.Barrel );
-
         if ( _metalDetector != null ) _metalDetector.SetActive( _morphableType == MorphableType.MetalDetector );
-
         if ( _sniperRifel != null ) _sniperRifel.SetActive( _morphableType == MorphableType.SniperRifle );
-
         if ( _binoculars != null ) _binoculars.SetActive( _morphableType == MorphableType.Binoculars );
-
         if ( _umbrella != null ) _umbrella.SetActive( _morphableType == MorphableType.Umbrella );
-
         if ( _scanCamera != null ) _scanCamera.SetActive( _morphableType == MorphableType.ScanCamera );
-
         if ( _lockPick != null ) _lockPick.SetActive( _morphableType == MorphableType.LockPick );
-
         if ( _gasCan != null ) _gasCan.SetActive( _morphableType == MorphableType.GasCan );
-
         if ( _babyOil != null ) _babyOil.SetActive( _morphableType == MorphableType.BabyOil );
     }
 }

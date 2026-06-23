@@ -11,7 +11,7 @@ public class PlayerPropUmbrellaState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.InputReader.TargetEvent += OnTarget;
-        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent += OnMorphSlot;
         _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
 
 
@@ -32,7 +32,7 @@ public class PlayerPropUmbrellaState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.InputReader.TargetEvent -= OnTarget;
-        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent -= OnMorphSlot;
         _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
 
         _stateMachine.Umbrella.SetActive(false);
@@ -45,9 +45,9 @@ public class PlayerPropUmbrellaState : PlayerBaseState
         _stateMachine.SwitchState(new PlayerTargetingState(_stateMachine));
     }
 
-    void OnMorph()
+    void OnMorphSlot( int slot )
     {
-        _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
+        _stateMachine.SwitchState( new PlayerMorphingState( _stateMachine, slot + 1 ) );
     }
 
     void OnAbilityActivate()

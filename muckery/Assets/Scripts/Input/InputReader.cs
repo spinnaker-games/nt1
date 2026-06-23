@@ -13,7 +13,7 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
     public event Action DodgeEvent;
     public event Action TargetEvent;
     public event Action AimActivateEvent;
-    public event Action AimCancelEvent;
+    public event Action ZoomCancelEvent;
     public event Action VantagePointActivateEvent;
     public event Action VantagePointCancelEvent;
     public event Action TopDownActivateEvent;
@@ -22,7 +22,7 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
     public event Action SideScrollCancelEvent;
     public event Action ChaseCameraActivateEvent;
     public event Action ChaseCameraCancelEvent;
-    public event Action MorphActivateEvent;
+    public event Action<int> MorphSlotActivateEvent;
     public event Action AbilityActivateEvent;
     public event Action PauseActivateEvent;
 
@@ -64,11 +64,25 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
         InteractActivateEvent?.Invoke();
     }
 
-    public void OnMorph(InputAction.CallbackContext context)
+    public void OnMorphSlotA( InputAction.CallbackContext context )
     {
-        if (!context.performed) { return; }
+        if ( !context.performed ) return;
 
-        MorphActivateEvent?.Invoke();
+        MorphSlotActivateEvent?.Invoke( 0 );
+    }
+
+    public void OnMorphSlotB( InputAction.CallbackContext context )
+    {
+        if ( !context.performed ) return;
+
+        MorphSlotActivateEvent?.Invoke( 1 );
+    }
+
+    public void OnMorphSlotC( InputAction.CallbackContext context )
+    {
+        if ( !context.performed ) return;
+
+        MorphSlotActivateEvent?.Invoke( 2 );
     }
 
     public void OnPause(InputAction.CallbackContext context)
@@ -122,7 +136,7 @@ public class InputReader : MonoBehaviour, InputActions.IPlayerActions
         }
         else if (context.canceled)
         {
-            AimCancelEvent?.Invoke();
+            ZoomCancelEvent?.Invoke();
         }
     }
 

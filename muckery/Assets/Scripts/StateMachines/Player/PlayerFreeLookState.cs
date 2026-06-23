@@ -18,7 +18,7 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.InputReader.TargetEvent += OnTarget;
-        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent += OnMorphSlot;
         _stateMachine.InputReader.PauseActivateEvent += OnPause;
 
         _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0f); //prevents player from being in the middle of another animation when this state begins
@@ -65,7 +65,7 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.InputReader.TargetEvent -= OnTarget;
-        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent -= OnMorphSlot;
         _stateMachine.InputReader.PauseActivateEvent -= OnPause;
 
         _stateMachine.MoveSFX.Stop();
@@ -80,9 +80,9 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.SwitchState(new PlayerTargetingState(_stateMachine));
     }
 
-    void OnMorph()
+    void OnMorphSlot( int slot )
     {
-        _stateMachine.SwitchState( new PlayerMorphingState(_stateMachine) );
+        _stateMachine.SwitchState( new PlayerMorphingState( _stateMachine, slot + 1 ) );
     }
 
     void OnPause()

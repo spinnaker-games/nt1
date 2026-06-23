@@ -9,7 +9,7 @@ public class PlayerPropGasCanState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
-        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent += OnMorphSlot;
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.GasCan.SetActive(true);
@@ -29,7 +29,7 @@ public class PlayerPropGasCanState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
-        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent -= OnMorphSlot;
 
         _stateMachine.GasCan.SetActive(false);
     }
@@ -46,9 +46,9 @@ public class PlayerPropGasCanState : PlayerBaseState
         );
     }
 
-    void OnMorph()
+    void OnMorphSlot( int slot )
     {
-        _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
+        _stateMachine.SwitchState( new PlayerMorphingState( _stateMachine, slot + 1 ) );
     }
 
 }

@@ -3,9 +3,11 @@ using UnityEngine;
 public class PlayerMorphingState : PlayerBaseState
 {
     float _morphTimer;
+    int _morphSlot;
 
-    public PlayerMorphingState( PlayerStateMachine stateMachine, bool shouldFadeAnim = true ) : base( stateMachine )
+    public PlayerMorphingState( PlayerStateMachine stateMachine, int morphSlot = 0 ) : base( stateMachine )
     {
+        _morphSlot = morphSlot;
     }
 
     public override void Enter()
@@ -37,9 +39,10 @@ public class PlayerMorphingState : PlayerBaseState
 
     void CompleteMorph()
     {
-        if ( _stateMachine.Health.IsDead ) return;
+        if ( _stateMachine.Health.IsDead )
+            return;
 
-        Morphable target = _stateMachine.MorphableSlot;
+        Morphable target = GetMorphableTarget();
 
         if ( target == null )
         {
@@ -49,17 +52,17 @@ public class PlayerMorphingState : PlayerBaseState
 
         if ( _stateMachine.IsMorphed )
         {
-            if ( _stateMachine.CurrentMorphable == target )
+            if ( _stateMachine.CurrentMorphInteractable == target )
             {
                 _stateMachine.IsMorphed = false;
-                _stateMachine.CurrentMorphable = null;
+                _stateMachine.CurrentMorphInteractable = null;
                 _stateMachine.SwitchState( new PlayerFreeLookState( _stateMachine ) );
                 return;
             }
         }
 
         _stateMachine.IsMorphed = true;
-        _stateMachine.CurrentMorphable = target;
+        _stateMachine.CurrentMorphInteractable = target;
 
         switch ( target.Type )
         {
@@ -106,6 +109,17 @@ public class PlayerMorphingState : PlayerBaseState
             case Morphable.MorphableType.BabyOil:
                 _stateMachine.SwitchState( new PlayerPropBabyOilState( _stateMachine ) );
                 break;
+        }
+    }
+
+    Morphable GetMorphableTarget()
+    {
+        switch ( _morphSlot )
+        {
+            case 1: return _stateMachine.MorphableSlotA;
+            case 2: return _stateMachine.MorphableSlotB;
+            case 3: return _stateMachine.MorphableSlotC;
+            default: return null;
         }
     }
 }

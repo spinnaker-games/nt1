@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class PlayerPropSniperRifleAimState : PlayerBaseState
+public class PlayerPropSniperRifleZoomState : PlayerBaseState
 {
     float _defaultFOV;
 
-    public PlayerPropSniperRifleAimState(PlayerStateMachine stateMachine) : base(stateMachine)
+    public PlayerPropSniperRifleZoomState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
 
     public override void Enter()
     {
         _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
-        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
-        _stateMachine.InputReader.AimCancelEvent += OnAimCancel;
+        _stateMachine.InputReader.MorphSlotActivateEvent += OnMorphSlot;
+        _stateMachine.InputReader.ZoomCancelEvent += OnZoomCancel;
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.SniperRifle.SetActive(true);
@@ -37,8 +37,8 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
-        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
-        _stateMachine.InputReader.AimActivateEvent -= OnAimCancel;
+        _stateMachine.InputReader.MorphSlotActivateEvent -= OnMorphSlot;
+        _stateMachine.InputReader.ZoomCancelEvent -= OnZoomCancel;
 
         _stateMachine.SniperRifleScope.SetActive(false);
         _stateMachine.SniperRifle.SetActive(true);
@@ -46,12 +46,12 @@ public class PlayerPropSniperRifleAimState : PlayerBaseState
         _stateMachine.FreeLookVC.Lens.FieldOfView = _defaultFOV;
     }
 
-    void OnMorph()
+    void OnMorphSlot( int slot )
     {
-        _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
+        _stateMachine.SwitchState( new PlayerMorphingState( _stateMachine, slot + 1 ) );
     }
 
-    void OnAimCancel()
+    void OnZoomCancel()
     {
         _stateMachine.SwitchState(new PlayerPropSniperRifleState(_stateMachine));
     }

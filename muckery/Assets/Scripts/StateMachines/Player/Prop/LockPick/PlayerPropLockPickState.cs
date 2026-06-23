@@ -9,7 +9,7 @@ public class PlayerPropLockPickState : PlayerBaseState
 
     public override void Enter()
     {
-        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent += OnMorphSlot;
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.LockPick.SetActive(true);
@@ -29,15 +29,14 @@ public class PlayerPropLockPickState : PlayerBaseState
 
     public override void Exit()
     {
-        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent -= OnMorphSlot;
 
         _stateMachine.LockPick.SetActive(false);
         _stateMachine.IsLockPick = false;
     }
 
-    void OnMorph()
+    void OnMorphSlot( int slot )
     {
-        _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
+        _stateMachine.SwitchState( new PlayerMorphingState( _stateMachine, slot + 1 ) );
     }
-
 }

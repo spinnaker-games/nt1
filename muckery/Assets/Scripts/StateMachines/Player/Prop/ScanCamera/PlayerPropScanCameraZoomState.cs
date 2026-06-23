@@ -10,9 +10,9 @@ public class PlayerPropScanCameraZoomState : PlayerBaseState
 
     public override void Enter()
     {
-        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
+        _stateMachine.InputReader.MorphSlotActivateEvent += OnMorphSlot;
         _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
-        _stateMachine.InputReader.AimCancelEvent += OnAimCancel;
+        _stateMachine.InputReader.ZoomCancelEvent += OnZoomCancel;
 
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.ScanCamera.SetActive(true);
@@ -37,8 +37,8 @@ public class PlayerPropScanCameraZoomState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
-        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
-        _stateMachine.InputReader.AimActivateEvent -= OnAimCancel;
+        _stateMachine.InputReader.MorphSlotActivateEvent -= OnMorphSlot;
+        _stateMachine.InputReader.ZoomCancelEvent -= OnZoomCancel;
 
         _stateMachine.ScanCameraScope.SetActive(false);
         _stateMachine.ScanCamera.SetActive(true);
@@ -46,12 +46,12 @@ public class PlayerPropScanCameraZoomState : PlayerBaseState
         _stateMachine.FreeLookVC.Lens.FieldOfView = _defaultFOV;
     }
 
-    void OnMorph()
+    void OnMorphSlot( int slot )
     {
-        _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
+        _stateMachine.SwitchState( new PlayerMorphingState( _stateMachine, slot + 1 ) );
     }
 
-    void OnAimCancel()
+    void OnZoomCancel()
     {
         _stateMachine.SwitchState(new PlayerPropScanCameraState(_stateMachine));
     }

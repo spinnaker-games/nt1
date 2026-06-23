@@ -9,8 +9,7 @@ public class PlayerPropBabyOilState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.InputReader.AbilityActivateEvent += OnAbilityActivate;
-        _stateMachine.InputReader.MorphActivateEvent += OnMorph;
-
+        _stateMachine.InputReader.MorphSlotActivateEvent += OnMorphSlot;
         _stateMachine.PlayerModel.SetActive(false);
         _stateMachine.BabyOil.SetActive(true);
     }
@@ -29,8 +28,7 @@ public class PlayerPropBabyOilState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.InputReader.AbilityActivateEvent -= OnAbilityActivate;
-        _stateMachine.InputReader.MorphActivateEvent -= OnMorph;
-
+        _stateMachine.InputReader.MorphSlotActivateEvent -= OnMorphSlot;
         _stateMachine.BabyOil.SetActive(false);
     }
 
@@ -46,9 +44,8 @@ public class PlayerPropBabyOilState : PlayerBaseState
         );
     }
 
-    void OnMorph()
+    void OnMorphSlot( int slot )
     {
-        _stateMachine.SwitchState(new PlayerMorphingState(_stateMachine));
+        _stateMachine.SwitchState( new PlayerMorphingState( _stateMachine, slot + 1 ) );
     }
-
 }
