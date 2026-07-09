@@ -1,44 +1,107 @@
-using System;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.Rendering.Universal;
 
-[Serializable, VolumeComponentMenu("Post-processing/Custom/ToonShadingPP")]
-public sealed class ToonShadingPP : CustomPostProcessVolumeComponent, IPostProcessComponent
+public class ToonShadingRenderFeature : ScriptableRendererFeature
 {
-    [SerializeField] private FloatParameter _posterizeAmount = new FloatParameter(1f);
-    [SerializeField] private BoolParameter _isEnabled = new BoolParameter(false);
-
-    Material m_Material;
-
-    public bool IsActive() => m_Material != null && _isEnabled.value;
-
-    public override CustomPostProcessInjectionPoint injectionPoint => CustomPostProcessInjectionPoint.AfterPostProcess;
-
-    const string kShaderName = "Hidden/Shader/ToonShadingPP";
-
-    public override void Setup()
+    [System.Serializable]
+    public class Settings
     {
-        if (Shader.Find(kShaderName) != null)
-            m_Material = new Material(Shader.Find(kShaderName));
-        else
-            Debug.LogError(
-                $"Unable to find shader '{kShaderName}'. Post Process Volume ToonShadingPP is unable to load.");
+        public Shader shader;
+        [Range(1, 256)]
+        public float posterizeAmount = 1f;
+        public bool isEnabled = true;
+
+        public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing;
     }
 
-    public override void Render(CommandBuffer cmd, HDCamera camera, RTHandle source, RTHandle destination)
+    public Settings settings = new Settings();
+
+    class ToonShadingPass : ScriptableRenderPass
     {
-        if (m_Material == null)
+        private Material material;
+        private Settings settings;
+
+        private RTHandle temporaryColorTexture;
+
+        public ToonShadingPass(Settings settings)
+        {
+            this.settings = settings;
+        }
+
+        public void Setup(Material material)
+        {
+            this.material = material;
+        }
+
+        public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
+        {
+            var descriptor = renderingData.cameraData.cameraTargetDescriptor;
+            descriptor.depthBufferBits = 0;
+
+            RenderingUtils.ReAllocateIfNeeded(
+                ref temporaryColorTexture,
+                descriptor,
+                FilterMode.Bilinear,
+                TextureWrapMode.Clamp,
+                name: "_ToonTemp");
+        }
+
+        public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+        {
+            if (!settings.isEnabled || material == null)
+                return;
+
+            CommandBuffer cmd = CommandBufferPool.Get("Toon Shading");
+
+            material.SetFloat("_PosterizeAmount", settings.posterizeAmount);
+
+            RTHandle source = renderingData.cameraData.renderer.cameraColorTargetHandle;
+
+            Blitter.BlitCameraTexture(cmd, source, temporaryColorTexture, material, 0);
+            Blitter.BlitCameraTexture(cmd, temporaryColorTexture, source);
+
+            context.ExecuteCommandBuffer(cmd);
+            CommandBufferPool.Release(cmd);
+        }
+
+        public override void OnCameraCleanup(CommandBuffer cmd)
+        {
+        }
+
+        public void Dispose()
+        {
+            temporaryColorTexture?.Release();
+        }
+    }
+
+    private ToonShadingPass pass;
+    private Material material;
+
+    public override void Create()
+    {
+        if (settings.shader == null)
             return;
 
-        m_Material.SetFloat("_PosterizeAmount", _posterizeAmount.value);
+        material = CoreUtils.CreateEngineMaterial(settings.shader);
 
-        m_Material.SetTexture("_InputTexture", source);
-        HDUtils.DrawFullScreen(cmd, m_Material, destination);
+        pass = new ToonShadingPass(settings)
+        {
+            renderPassEvent = settings.renderPassEvent
+        };
+
+        pass.Setup(material);
     }
 
-    public override void Cleanup()
+    public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        CoreUtils.Destroy(m_Material);
+        if (settings.isEnabled && material != null)
+            renderer.EnqueuePass(pass);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        CoreUtils.Destroy(material);
+        pass?.Dispose();
     }
 }
