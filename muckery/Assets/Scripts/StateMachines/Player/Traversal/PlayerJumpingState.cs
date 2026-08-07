@@ -27,7 +27,7 @@ public class PlayerJumpingState : PlayerBaseState
     {
         Vector3 movement = CalculateMovement();
         
-        Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
+        Move(movement * _stateMachine.PlayerConfig.FreeLookMovementSpeed, deltaTime);
         FaceMovementDirection(movement, deltaTime);
 
 

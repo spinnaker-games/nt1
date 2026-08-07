@@ -42,7 +42,7 @@ public class PlayerTargetingState : PlayerBaseState
         }
 
         Vector3 movement = CalculateMovement(deltaTime);
-        Move(movement * _stateMachine.TargetingMovementSpeed, deltaTime);
+        Move(movement * _stateMachine.PlayerConfig.TargetingMovementSpeed, deltaTime);
 
         UpdateAnimator(deltaTime);
 

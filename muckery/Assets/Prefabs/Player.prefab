@@ -366,6 +366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStateMachine
   <Targeter>k__BackingField: {fileID: 2294870588811280927}
   <PauseMenu>k__BackingField: {fileID: 0}
+  <PlayerConfig>k__BackingField: {fileID: 11400000, guid: 8c732699ec34ec7449dd5885de277200, type: 2}
   <InputReader>k__BackingField: {fileID: 3730049834243752415}
   <CharacterController>k__BackingField: {fileID: 4123771200341800996}
   <PlayerModel>k__BackingField: {fileID: 3202022680325112496}
@@ -374,11 +375,6 @@ MonoBehaviour:
   <Health>k__BackingField: {fileID: 4653779621868331263}
   <GameOverSceneName>k__BackingField: Game_Over_Scene_Dead
   <PostDeathDelay>k__BackingField: 2
-  <FreeLookMovementSpeed>k__BackingField: 4
-  <TargetingMovementSpeed>k__BackingField: 5
-  <RotationDamping>k__BackingField: 10
-  <DodgeDuration>k__BackingField: 0.3
-  <DodgeDistance>k__BackingField: 4
   <LedgeDetector>k__BackingField: {fileID: 1530618723154072696}
   <ForceReceiver>k__BackingField: {fileID: 4913471925215069970}
   <Ragdoll>k__BackingField: {fileID: 5170993173395392611}

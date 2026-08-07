@@ -44,7 +44,7 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Tick(float deltaTime)
     {    
         Vector3 movement = CalculateMovement();
-        Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
+        Move(movement * _stateMachine.PlayerConfig.FreeLookMovementSpeed, deltaTime);
 
         _stateMachine.IsMoving = _stateMachine.InputReader.MovementValue != Vector2.zero;
         //Debug.Log("Player Movement = " + _stateMachine.IsMoving + "Disguise " + _stateMachine.IsDisguised);

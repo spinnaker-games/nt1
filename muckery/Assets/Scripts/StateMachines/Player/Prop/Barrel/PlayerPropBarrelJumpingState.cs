@@ -29,7 +29,7 @@ public class PlayerPropBarrelJumpingState : PlayerBaseState
         
         //Call Move Twice: One for jumping and one for directional motion
         //Move(_momentum, deltaTime);
-        Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
+        Move(movement * _stateMachine.PlayerConfig.FreeLookMovementSpeed, deltaTime);
         FaceMovementDirection(movement, deltaTime);
 
         if (_stateMachine.CharacterController.velocity.y <= 0)

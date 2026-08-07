@@ -19,7 +19,7 @@ public class PlayerDodgingState : PlayerBaseState
 
     public override void Enter()
     {
-        _remainingDodgeTime = _stateMachine.DodgeDuration;
+        _remainingDodgeTime = _stateMachine.PlayerConfig.DodgeDuration;
 
         _stateMachine.Animator.SetFloat(DodgingForwardBlendSpeedHash, _dodgingDirectionInput.y);
         _stateMachine.Animator.SetFloat(DodgingRightBlendSpeedHash, _dodgingDirectionInput.x);
@@ -32,8 +32,8 @@ public class PlayerDodgingState : PlayerBaseState
     {
         Vector3 movement = new Vector3();
 
-        movement += _stateMachine.transform.right * _dodgingDirectionInput.x * _stateMachine.DodgeDistance / _stateMachine.DodgeDuration;
-        movement += _stateMachine.transform.forward * _dodgingDirectionInput.y * _stateMachine.DodgeDistance / _stateMachine.DodgeDuration;
+        movement += _stateMachine.transform.right * _dodgingDirectionInput.x * _stateMachine.PlayerConfig.DodgeDistance / _stateMachine.PlayerConfig.DodgeDuration;
+        movement += _stateMachine.transform.forward * _dodgingDirectionInput.y * _stateMachine.PlayerConfig.DodgeDistance / _stateMachine.PlayerConfig.DodgeDuration;
 
         Move(movement, deltaTime);
 

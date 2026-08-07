@@ -26,7 +26,7 @@ public class PlayerAimingState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         Vector3 movement = CalculateMovement();
-        Move(movement * _stateMachine.TargetingMovementSpeed, deltaTime);
+        Move(movement * _stateMachine.PlayerConfig.TargetingMovementSpeed, deltaTime);
         //Rotate Camera relative to input
         //Rotate player relative to camera
     }

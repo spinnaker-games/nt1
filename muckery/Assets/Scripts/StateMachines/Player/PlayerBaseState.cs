@@ -37,7 +37,7 @@ public abstract class PlayerBaseState : State
         _stateMachine.transform.rotation = Quaternion.Lerp(
             _stateMachine.transform.rotation,
             targetRotation,
-            deltaTime * _stateMachine.RotationDamping);
+            deltaTime * _stateMachine.PlayerConfig.RotationDamping);
     }
 
     protected void Move(Vector3 movement, float deltaTime) //TODO: Possibly rename this to something else. View PlayerDeathState for ambiguity problem

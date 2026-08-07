@@ -26,7 +26,7 @@ public class PlayerChaseCameraState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         Vector3 movement = CalculateMovement();
-        Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
+        Move(movement * _stateMachine.PlayerConfig.FreeLookMovementSpeed, deltaTime);
 
         if (_stateMachine.InputReader.MovementValue == Vector2.zero)
         {

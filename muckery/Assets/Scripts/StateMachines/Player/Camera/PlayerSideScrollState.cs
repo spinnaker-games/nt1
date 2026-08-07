@@ -31,7 +31,7 @@ public class PlayerSideScrollState : PlayerBaseState
         }
 
         Vector3 movement = CalculateMovement();
-        Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
+        Move(movement * _stateMachine.PlayerConfig.FreeLookMovementSpeed, deltaTime);
 
         if (_stateMachine.InputReader.MovementValue == Vector2.zero)
         {

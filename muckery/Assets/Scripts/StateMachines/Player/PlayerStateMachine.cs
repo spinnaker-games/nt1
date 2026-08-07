@@ -5,8 +5,12 @@ using UnityEngine.VFX;
 
 public class PlayerStateMachine : StateMachine
 {
+    
     [field: SerializeField] public Targeter Targeter { get; set; }
     [field: SerializeField] public GameObject PauseMenu { get; set; }
+
+    [field: Header("CONFIG")]
+    [field: SerializeField] public PlayerConfig PlayerConfig { get; set; }
 
     [field: Header("INPUT")]
     [field: Space]
@@ -28,11 +32,6 @@ public class PlayerStateMachine : StateMachine
 
     [field: Header("MOVEMENT")]
     [field: Space]
-    [field: SerializeField] public float FreeLookMovementSpeed { get; set; }
-    [field: SerializeField] public float TargetingMovementSpeed { get; set; }
-    [field: SerializeField] public float RotationDamping { get; set; }
-    [field: SerializeField] public float DodgeDuration { get; set; }
-    [field: SerializeField] public float DodgeDistance { get; set; }
     [field: SerializeField] public LedgeDetector LedgeDetector { get; set; }
 
     [field: Header("PHYSICS")]
