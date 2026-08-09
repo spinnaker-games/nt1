@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PolygonBattleRoyale_01_A
+  m_Name: PolygonBattleRoyale_01_A_ModifiedYellow
   m_Shader: {fileID: -6465566751694194690, guid: 0730dae39bc73f34796280af9875ce14, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -40,7 +40,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo_Map:
-        m_Texture: {fileID: 2800000, guid: 177e7f514292f9247aaff29e2bd7934f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emission_Map:
@@ -112,7 +112,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.9811321, g: 0.4067896, b: 0.23139893, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 10, g: 10, b: 10, a: 1}
     - _Emission_Color: {r: 10.000001, g: 10.000001, b: 10.000001, a: 1}
